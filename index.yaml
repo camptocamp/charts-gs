@@ -11,6 +11,16 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/cadastrapp-0.2.1/cadastrapp-0.2.1.tgz
     version: 0.2.1
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2023-02-17T10:32:23.443305581Z"
+    description: A Helm chart for deploying geOrchestra's cadastrapp
+    digest: 406636dcb15daf7945207014e2e5e86d381d298f9522cf657cd2497941847b74
+    name: cadastrapp
+    type: application
+    urls:
+    - cadastrapp-0.2.1-main-a58e4ed.tgz
+    version: 0.2.1-main-a58e4ed
   geocontrib:
   - apiVersion: v2
     appVersion: 2.3.9
@@ -22,6 +32,16 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/geocontrib-0.1.1/geocontrib-0.1.1.tgz
     version: 0.1.1
+  - apiVersion: v2
+    appVersion: 2.3.9
+    created: "2023-02-17T10:32:23.444208617Z"
+    description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
+    digest: 8a44bc557f2b313768a6471e197fe0c0f6facd3093d106a2a11c1eb3f7a9b6f4
+    name: geocontrib
+    type: application
+    urls:
+    - geocontrib-0.1.1-main-a58e4ed.tgz
+    version: 0.1.1-main-a58e4ed
   sftp:
   - apiVersion: v2
     appVersion: "1.0"
@@ -35,6 +55,16 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2023-02-17T10:32:23.444833343Z"
+    description: A Helm chart for deploying a SFTP stack
+    digest: fb78adb2e7a3f7e0b9f1245b30aeed3206bc2162b21d0ba0fb4382dfe5d59e39
+    name: sftp
+    type: application
+    urls:
+    - sftp-0.1.2-main-a58e4ed.tgz
+    version: 0.1.2-main-a58e4ed
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2023-02-17T09:57:23.715620923Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 1647b6d4e8dbf934f0a7573e01e646389275e7602632b8ff5b835699d301d1ae
@@ -45,7 +75,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-17T11:13:58.915596896+01:00"
+    created: "2023-02-17T10:32:23.444553031Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 0b98594a3d999c629794511cdf4c84386f7a6b985a620ba31ad51be4a149a28e
     name: sftp
@@ -53,4 +83,4 @@ entries:
     urls:
     - sftp-0.1.1-653f962b2.tgz
     version: 0.1.1-653f962b2
-generated: "2023-02-17T10:18:15.092289244Z"
+generated: "2023-02-17T10:32:23.44279646Z"
