@@ -266,6 +266,16 @@ entries:
   vrt-bot:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2023-02-17T15:13:01.026624387Z"
+    description: A Helm chart for deploying vrt-bot
+    digest: d0de0e35201a34c0b0f46f1114d0282a6336ae735c584b1d66b5d38e16064391
+    name: vrt-bot
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/vrt-bot-0.1.0/vrt-bot-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2023-02-17T15:12:53.538355457Z"
     description: A Helm chart for deploying vrt-bot
     digest: e7ee68aea34b52a60698547cf5534d6f1d402e9620845807987a16481c0d91e8
@@ -274,4 +284,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-3b8059a.tgz
     version: 0.1.0-main-3b8059a
-generated: "2023-02-17T15:12:53.52797351Z"
+generated: "2023-02-17T15:13:01.026728988Z"
