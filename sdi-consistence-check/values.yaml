@@ -1,0 +1,13 @@
+---
+cronjobs:
+  - name: wms
+    schedule: TBD
+    image: TBD
+    imagePullPolicy: Always
+    args: []
+    # Those volumes will be available in /mnt
+    # Example :
+    #  - name: apache-nas-data
+    #    persistentVolumeClaim:
+    #      claimName: apache-nas-data
+    volumes: []

@@ -1,0 +1,42 @@
+name: Helm publish on new commit
+
+on:
+  push:
+    branches:
+      - '*'
+      - '!gh-pages'
+
+jobs:
+  publish-on-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: main Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          path: sdi-consistence-check
+      - name: gh-pages Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: 'gh-pages'
+          path: sdi-consistence-check-gh-pages
+      - name: Helm Installation
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.10.2
+      - name: Run script file
+        run: |
+          rm -rf sdi-consistence-check/.git
+        shell: bash
+      - name: Helm Package
+        run: |
+          helm package sdi-consistence-check -d sdi-consistence-check-gh-pages --version $(helm show chart sdi-consistence-check |grep version: | awk '{print $2}')-"$GITHUB_REF_NAME"-"${GITHUB_SHA::7}"
+          cd sdi-consistence-check-gh-pages && helm repo index .
+      - name: Deploy to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: gh-pages
+          build_dir: sdi-consistence-check-gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

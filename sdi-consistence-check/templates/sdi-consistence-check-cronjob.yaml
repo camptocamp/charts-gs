@@ -1,0 +1,50 @@
+{{- range $cronjob := $.Values.cronjobs }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "sdi-consistence-check.fullname" $ }}-{{ $cronjob.name }}-cronjob
+  labels:
+    {{- include "sdi-consistence-check.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: {{ include "sdi-consistence-check.fullname" $ }}-{{ $cronjob.name }}
+    app.georchestra.org: sdi-consistence-check
+spec:
+  schedule: "{{ $cronjob.schedule }}"
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            {{- include "sdi-consistence-check.labels" $ | nindent 12 }}
+            app.kubernetes.io/component: {{ include "sdi-consistence-check.fullname" $ }}-{{ $cronjob.name }}
+            app.georchestra.org: sdi-consistence-check
+        spec:
+          {{- with $cronjob.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          restartPolicy: OnFailure
+          containers:
+            - name: sdi-consistence-check
+              image: {{ $cronjob.image }}
+              imagePullPolicy: {{ $cronjob.imagePullPolicy }}
+              resources: {}
+              volumeMounts:
+                {{- range $cronjob.volumes }}
+                - name: {{ .name }}
+                  mountPath: /mnt/{{ .name }}
+                {{- end }}
+              {{- with  $cronjob.command }}
+              command:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              {{- with $cronjob.args }}
+              args:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+          volumes:
+            {{- $cronjob.volumes | toYaml | nindent 12 }}
+{{- end -}}
