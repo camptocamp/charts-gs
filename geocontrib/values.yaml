@@ -1,0 +1,150 @@
+config_front: |
+  {
+    "BASE_URL": "/geocontrib/",
+    "DOMAIN": "/geocontrib/",
+    "VUE_APP_LOCALE": "fr-FR",
+    "VUE_APP_APPLICATION_NAME": "GéoContrib",
+    "VUE_APP_APPLICATION_ABSTRACT": "GeoContrib",
+    "VUE_APP_LOGO_PATH": "https://example.org/public/logos/logo.png",
+    "VUE_APP_APPLICATION_FAVICO": "https://example.org/favicon.ico",
+    "VUE_APP_DJANGO_BASE": "https://www.example.org",
+    "VUE_APP_DJANGO_API_BASE": "/geocontrib/api/",
+    "VUE_APP_RELOAD_INTERVAL": 15000,
+    "VUE_APP_LOGIN_URL": "/login",
+    "VUE_APP_DISABLE_LOGIN_BUTTON": 1,
+    "DEFAULT_BASE_MAP_SCHEMA_TYPE": "wms",
+    "DEFAULT_BASE_MAP_SERVICE": "https://example.org/mapcache/wms",
+    "DEFAULT_BASE_MAP_OPTIONS": {"format": "image/png", "layers": "relief", "maxZoom": 20, "opacity": 1.0, "attribution": "\u00a9 les contributeurs d\u2019OpenStreetMap", "transparent": true},
+    "DEFAULT_MAP_VIEW" : {
+        "center": [48.68871,5.61989],
+        "zoom": 7
+    },
+    "GEOCODER_PROVIDERS" : {
+        "ADDOK": "addok",
+        "NOMINATIM": "nominatim",
+        "PHOTON": "photon"
+    },
+    "SELECTED_GEOCODER" : {
+        "PROVIDER": "addok"
+    }
+  }
+
+volumes:
+  storage_class_name: default
+  media:
+    pv_name: media_pv
+    size: 2Gi
+  static:
+    pv_name: static_pv
+    size: 2Gi
+
+env_variables:
+    - name: ADMIN_USER_GROUPS
+      value: cn=SUPERUSER,ou=roles,dc=georchestra,dc=org;cn=ADMINISTRATOR,ou=roles,dc=georchestra,dc=org
+    - name: ALLOWED_HOSTS
+      value: geocontrib-frontend-svc,.datagrandest.fr
+    - name: APPLICATION_ABSTRACT
+      value: DataGrandEst
+    - name: APPLICATION_NAME
+      value: GéoContrib
+    - name: APP_ADMIN_EMAIL
+      value: admin-geocontrib@neogeo.fr
+    - name: APP_ADMIN_PWD
+      value: '12345678'
+    - name: APP_ADMIN_USER
+      value: admin
+    - name: BASE_URL
+      value: https://www.example.org
+    - name: DB_HOST
+      value: database
+    - name: DB_NAME
+      value: geocontrib
+    - name: DB_PORT
+      value: '5432'
+    - name: DB_PWD
+      value: geocontrib
+    - name: DB_USER
+      value: geocontrib
+    - name: DEBUG
+      value: 'False'
+    - name: DEFAULT_BASE_MAP_OPTIONS
+      value: |
+       '{"format": "image/png", "layers": "relief", "maxZoom":
+         20, "opacity": 1.0, "attribution": "\u00a9 les contributeurs d\u2019OpenStreetMap
+         - DataGrandEst", "transparent": true}'
+    - name: DEFAULT_BASE_MAP_SCHEMA_TYPE
+      value: wms
+    - name: DEFAULT_BASE_MAP_SERVICE
+      value: https://example.org/mapcache/wms
+    - name: DEFAULT_FROM_EMAIL
+      value: contact@geocontrib.org
+    - name: DEFAULT_MAP_VIEW_CENTER
+      value: '[48.68871,5.61989]'
+    - name: DEFAULT_MAP_VIEW_ZOOM
+      value: '7'
+    - name: DEFAULT_SENDING_FREQUENCY
+      value: instantly
+    - name: DISABLE_LOGIN_BUTTON
+      value: '1'
+    - name: EMAIL_BACKEND
+      value: django.core.mail.backends.smtp.EmailBackend
+    - name: EMAIL_HOST
+      value: smtp
+    - name: EMAIL_HOST_PASSWORD
+      value: ''
+    - name: EMAIL_HOST_USER
+      value: ''
+    - name: EMAIL_PORT
+      value: '25'
+    - name: EMAIL_USE_TLS
+      value: '0'
+    - name: EXCLUDED_USER_GROUPS
+      value: ''
+    - name: EXCLUDED_USER_NAMES
+      value: geoserver_privileged_user
+    - name: EXCLUSIVE_USER_GROUPS
+      value: ''
+    - name: FAVICON_PATH
+      value: https://example.org/portail/sites/default/files/favicon.ico
+    - name: HEADER_UID
+      value: HTTP_SEC_USERNAME
+    - name: IGNORED_PATHS
+      value: geocontrib:logout,
+    - name: LDAP_BINDDN
+      value: cn=admin,dc=georchestra,dc=org
+    - name: LDAP_PASSWD
+      value: secret
+    - name: LDAP_SEARCH_BASE
+      value: ou=users,dc=georchestra,dc=org
+    - name: LDAP_SEARCH_FILTER
+      value: (objectClass=person)
+    - name: LDAP_URI
+      value: ldap://ldap.georchestra-ldap:389
+    - name: LOGIN_URL
+      value: /cas/login
+    - name: LOGO_PATH
+      value: https://example.org/public/logos/logo_datagrandest_couleur.png
+    - name: LOG_LEVEL
+      value: INFO
+    - name: LOG_URL
+      value: /cas/login
+    - name: MAGIC_IS_AVAILABLE
+      value: 'true'
+    - name: PROJECT_COPY_RELATED_AUTHORIZATION
+      value: '0'
+    - name: PROTECTED_USER_NAMES
+      value: admin
+    - name: SECRET_KEY
+      value: z123456789012345678901234567890123456789012345678a
+    - name: SSO_MIDDLEWARE
+      value: plugin_georchestra.auth.middleware.RemoteUserMiddleware
+    - name: SSO_PLUGIN
+      value: plugin_georchestra
+    - name: TIME_SLEEP
+      value: '1'
+    - name: TIME_ZONE
+      value: Europe/Paris
+    - name: URL_PREFIX
+      value: geocontrib/
+    - name: USE_X_FORWARDED_HOST
+      value: '1'

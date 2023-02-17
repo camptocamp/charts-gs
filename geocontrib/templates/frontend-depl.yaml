@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "geocontrib.fullname" . }}-frontend-depl
+  labels:
+    {{- include "geocontrib.labels" . | nindent 4 }}-frontend-depl
+    app.neogeo.fr: geocontrib
+spec:
+  selector:
+    matchLabels:
+      {{- include "geocontrib.selectorLabels" . | nindent 6 }}-frontend-depl
+  template:
+    metadata:
+      labels:
+        {{- include "geocontrib.selectorLabels" . | nindent 8 }}-frontend-depl
+    spec:
+      containers:
+        - name: geocontrib
+          image: neogeo/geocontrib-front:{{ .Chart.AppVersion }}
+          imagePullPolicy: Always
+          command:
+          - /bin/bash
+          - -c
+          - sed -i 's#server geocontrib:5000#server {{ include "geocontrib.fullname" . }}-geocontrib-svc:5000#' /etc/nginx/conf.d/default.conf ;
+            nginx -g 'daemon off ;' ;
+          volumeMounts:
+            - name: geocontrib-config
+              mountPath: /opt/geocontrib/config
+            - name: geocontrib-media
+              mountPath: /opt/geocontrib/media
+            - name: geocontrib-static
+              mountPath: /opt/geocontrib/static
+      volumes:
+        - name: geocontrib-config
+          configMap:
+            name: {{ include "geocontrib.fullname" . }}-config-front-cm
+        - name: geocontrib-media
+          persistentVolumeClaim:
+            claimName: {{ include "geocontrib.fullname" . }}-geocontrib-media-pvc
+        - name: geocontrib-static
+          persistentVolumeClaim:
+            claimName: {{ include "geocontrib.fullname" . }}-geocontrib-static-pvc

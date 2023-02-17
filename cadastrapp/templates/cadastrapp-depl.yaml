@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cadastrapp.fullname" . }}-cadastrapp-depl
+  labels:
+    {{- include "cadastrapp.labels" . | nindent 4 }}
+    app.georchestra.org: cadastrapp
+spec:
+  selector:
+    matchLabels:
+      {{- include "cadastrapp.selectorLabels" . | nindent 6 }}
+      app.georchestra.org: cadastrapp
+  template:
+    metadata:
+      labels:
+        {{- include "cadastrapp.selectorLabels" . | nindent 8 }}
+        app.georchestra.org: cadastrapp
+    spec:
+      {{- with .Values.cadastrapp.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      initContainers:
+      - name: bootstrap-georchestra-datadir
+        image: bitnami/git
+        command:
+        - /bin/sh
+        - -c
+        - mkdir -p /root/.ssh ;
+        {{- if .Values.cadastrapp.datadir.git.ssh_secret }}
+          cp /ssh-secret/ssh-privatekey /root/.ssh/id_rsa ;
+          chmod 0600 /root/.ssh/id_rsa ;
+        {{- end }}
+          git clone {{ .Values.cadastrapp.datadir.git.url }} -b {{ .Values.cadastrapp.datadir.git.ref }} /etc/georchestra
+        env:
+        {{- if .Values.cadastrapp.datadir.git.ssh_secret }}
+        - name: GIT_SSH_COMMAND
+          value: ssh -o "IdentitiesOnly=yes" -o "StrictHostKeyChecking no"
+        {{- end }}
+        volumeMounts:
+        - mountPath: /etc/georchestra
+          name: georchestra-datadir
+        {{- if .Values.cadastrapp.datadir.git.ssh_secret }}
+        - mountPath: /ssh-secret
+          name: ssh-secret
+        {{- end }}
+      - name: init-cadastrapp-webapp
+        image: {{ .Values.cadastrapp.image }}
+        imagePullPolicy: {{ .Values.cadastrapp.imagePullPolicy }}
+        command:
+        - /bin/bash
+        args:
+        - -c
+        - cp -rv /var/lib/jetty/webapps/cadastrapp/* /mnt/cadastrapp ;
+          if [ -f /etc/georchestra/cadastrapp/jetty-env.xml ] ; then
+            cp /etc/georchestra/cadastrapp/jetty-env.xml /mnt/cadastrapp/WEB-INF/jetty-env.xml ;
+          fi ;
+        volumeMounts:
+        - name: georchestra-datadir
+          mountPath: /etc/georchestra
+        - name: cadastrapp-webapp
+          mountPath: /mnt/cadastrapp
+      containers:
+        - name: cadastrapp
+          image: {{ .Values.cadastrapp.image }}
+          imagePullPolicy: {{ .Values.cadastrapp.imagePullPolicy }}
+          ports:
+            - name: http-proxy
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /cadastrapp/services/getConfiguration
+              port: http-proxy
+          readinessProbe:
+            httpGet:
+              path: /cadastrapp/services/getConfiguration
+              port: http-proxy
+          {{- with .Values.cadastrapp.env_variables }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: georchestra-datadir
+              mountPath: /etc/georchestra
+            - name: cadastrapp-webapp
+              mountPath: /var/lib/jetty/webapps/cadastrapp
+      volumes:
+        - name: georchestra-datadir
+          emptyDir: {}
+        - name: cadastrapp-webapp
+          emptyDir: {}
+        {{- if .Values.cadastrapp.datadir.git.ssh_secret }}
+        - name: ssh-secret
+          secret:
+            secretName: {{ .Values.cadastrapp.datadir.git.ssh_secret }}
+            defaultMode: 0400
+        {{- end }}

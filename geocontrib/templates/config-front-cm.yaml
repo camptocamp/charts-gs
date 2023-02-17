@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  config.json: |
+    {{ .Values.config_front | nindent 4 }}
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: {{ include "geocontrib.fullname" . }}-config-front-cm
+  labels:
+    {{- include "geocontrib.labels" . | nindent 4 }}-config-front-cm
+    app.neogeo.fr: geocontrib

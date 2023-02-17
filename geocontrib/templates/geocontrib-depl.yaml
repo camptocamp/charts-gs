@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "geocontrib.fullname" . }}-geocontrib-depl
+  labels:
+    {{- include "geocontrib.labels" . | nindent 4 }}-geocontrib-depl
+    app.neogeo.fr: geocontrib
+spec:
+  selector:
+    matchLabels:
+      {{- include "geocontrib.selectorLabels" . | nindent 6 }}-geocontrib-depl
+  template:
+    metadata:
+      labels:
+        {{- include "geocontrib.selectorLabels" . | nindent 8 }}-geocontrib-depl
+    spec:
+      containers:
+        - name: geocontrib
+          image: neogeo/geocontrib:2.3.9
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+            initialDelaySeconds: 210
+            tcpSocket:
+              port: 5000
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            initialDelaySeconds: 210
+            successThreshold: 1
+            timeoutSeconds: 1
+            tcpSocket:
+              port: 5000
+          {{- with .Values.env_variables }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+            - name: REDIS_HOST
+              value: {{ include "geocontrib.fullname" . }}-redis-svc
+          volumeMounts:
+            - name: geocontrib-config
+              mountPath: /home/apprunner/geocontrib_app/config_front
+            - name: geocontrib-media
+              mountPath: /home/apprunner/geocontrib_app/media
+            - name: geocontrib-static
+              mountPath: /home/apprunner/geocontrib_app/static
+          command:
+            - /bin/bash
+          args:
+            - -c
+            - sed -i 's#5432#${DB_PORT}#' src/docker/geocontrib/docker-entrypoint.d/01_install ;
+              src/docker/geocontrib/docker-entrypoint.sh gunicorn -w 3 -b 0.0.0.0:5000 config.wsgi:application ;
+      volumes:
+        - name: geocontrib-config
+          configMap:
+            name: {{ include "geocontrib.fullname" . }}-config-front-cm
+        - name: geocontrib-media
+          persistentVolumeClaim:
+            claimName: {{ include "geocontrib.fullname" . }}-geocontrib-media-pvc
+        - name: geocontrib-static
+          persistentVolumeClaim:
+            claimName: {{ include "geocontrib.fullname" . }}-geocontrib-static-pvc

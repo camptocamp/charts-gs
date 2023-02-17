@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "geocontrib.fullname" . }}-celery-beat-depl
+  labels:
+    {{- include "geocontrib.labels" . | nindent 4 }}-celery-beat-depl
+    app.neogeo.fr: geocontrib
+spec:
+  selector:
+    matchLabels:
+      {{- include "geocontrib.selectorLabels" . | nindent 6 }}-celery-beat-depl
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "geocontrib.selectorLabels" . | nindent 8 }}-celery-beat-depl
+    spec:
+      containers:
+        - name: celery-beat
+          image: neogeo/geocontrib:{{ .Chart.AppVersion }}
+          imagePullPolicy: Always
+          command:
+          - src/docker/geocontrib/docker-entrypoint.sh 
+          args:
+          - src/docker/geocontrib/start_celery_beat.sh
+          {{- with .Values.env_variables }}
+          env:
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+          - name: REDIS_HOST
+            value: {{ include "geocontrib.fullname" . }}-redis-svc
+          volumeMounts:
+          - name: geocontrib-config
+            mountPath: /home/apprunner/geocontrib_app/config_front
+          - name: geocontrib-media
+            mountPath: /home/apprunner/geocontrib_app/media
+          - name: geocontrib-static
+            mountPath: /home/apprunner/geocontrib_app/static
+      volumes:
+      - name: geocontrib-config
+        configMap:
+          name: {{ include "geocontrib.fullname" . }}-config-front-cm
+      - name: geocontrib-media
+        persistentVolumeClaim:
+          claimName: {{ include "geocontrib.fullname" . }}-geocontrib-media-pvc
+      - name: geocontrib-static
+        persistentVolumeClaim:
+          claimName: {{ include "geocontrib.fullname" . }}-geocontrib-static-pvc

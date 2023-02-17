@@ -1,0 +1,10 @@
+apiVersion: v2
+name: cadastrapp
+description: A Helm chart for deploying geOrchestra's cadastrapp
+
+type: application
+
+version: 0.2.0
+
+# Last version released on https://github.com/georchestra/cadastrapp is 2.0
+appVersion: "2.0.0"

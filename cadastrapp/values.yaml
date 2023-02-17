@@ -1,0 +1,24 @@
+cadastrapp:
+  image: camptocamp/georchestra_cadastrapp:v1.9-1
+  imagePullPolicy: Always
+  # If defined, this will be used to pull the docker image
+  #imagePullSecrets:
+  #  - name: myPullSecret
+  env_variables:
+    - name: JAVA_OPTIONS
+      value: -Duser.language=fr -Duser.country=FR
+    - name: XMX
+      value: 512m
+    - name: CADASTRAPP_JDBC_URL
+      value: jdbc:postgresql://cadastrapp-db.georchestra-cadastrapp:5432/cadastrapp?sslmode=require
+    - name: CADASTRAPP_JDBC_USER
+      value: cadastrapp
+    - name: CADASTRAPP_JDBC_PASSWORD
+      value: cadastrapp
+  datadir:
+    git:
+      url: git@github.com:georchestra/datadir.git
+      ref: "22.0"
+      # the chart expects to have a k8s secret with an entry named "ssh-privatekey"
+      # containing the private key allowed to clone the git repository above.
+      #ssh_secret: mySshSecret

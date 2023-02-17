@@ -1,0 +1,28 @@
+---
+sftp:
+  image: camptocamp/sftp:bullseye-k8s-georchestra
+  imagePullPolicy: Always
+  nodePort: 30022
+  #imagePullSecrets:
+  #- name: secret
+
+# Those volumes will be available in /mnt
+# Example :
+#  - name: geonetwork-datadir
+#    persistentVolumeClaim:
+#      claimName: georchestra-geonetwork-datadir
+  volumes: []
+
+# Developper and customer public keys
+  authorized_keys: ""
+
+# Server keys
+  host_keys:
+    ssh_host_dsa_key: TBD
+    ssh_host_dsa_key.pub: TBD
+    ssh_host_ecdsa_key: TBD
+    ssh_host_ecdsa_key.pub: TBD
+    ssh_host_ed25519_key: TBD
+    ssh_host_ed25519_key.pub: TBD
+    ssh_host_rsa_key: TBD
+    ssh_host_rsa_key.pub: TBD

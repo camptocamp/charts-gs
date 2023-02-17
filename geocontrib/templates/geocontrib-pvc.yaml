@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "geocontrib.fullname" . }}-geocontrib-media-pvc
+  labels:
+    {{- include "geocontrib.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  {{- if .Values.volumes.storage_class_name }}
+  storageClassName: {{ .Values.volumes.storage_class_name }}
+  {{- end }}
+  {{- if .Values.volumes.media.pv_name }}
+  volumeName: {{ .Values.volumes.media.pv_name}}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.volumes.media.size }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "geocontrib.fullname" . }}-geocontrib-static-pvc
+  labels:
+    {{- include "geocontrib.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  {{- if .Values.volumes.storage_class_name }}
+  storageClassName: {{ .Values.volumes.storage_class_name }}
+  {{- end }}
+  {{- if .Values.volumes.static.pv_name }}
+  volumeName: {{ .Values.volumes.static.pv_name}}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.volumes.static.size }}

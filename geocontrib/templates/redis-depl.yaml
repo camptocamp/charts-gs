@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "geocontrib.fullname" . }}-redis-depl
+  labels:
+    {{- include "geocontrib.labels" . | nindent 4 }}-redis-depl
+    app.neogeo.fr: geocontrib
+spec:
+  selector:
+    matchLabels:
+      {{- include "geocontrib.selectorLabels" . | nindent 6 }}-redis-depl
+  template:
+    metadata:
+      labels:
+        {{- include "geocontrib.selectorLabels" . | nindent 8 }}-redis-depl
+    spec:
+      containers:
+        - name: redis
+          image: redis
+          imagePullPolicy: Always
+          livenessProbe:
+            tcpSocket:
+              port: 6379
+          readinessProbe:
+            tcpSocket:
+              port: 6379
