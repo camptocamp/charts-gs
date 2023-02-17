@@ -13,7 +13,17 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-17T10:34:25.711442092Z"
+    created: "2023-02-17T13:31:18.514712517Z"
+    description: A Helm chart for deploying geOrchestra's cadastrapp
+    digest: 2682ced0758e1260c7233317b5b8275cec39cb3fc5d7f141dfa8934e9f227798
+    name: cadastrapp
+    type: application
+    urls:
+    - cadastrapp-0.2.1-main-dec5b02.tgz
+    version: 0.2.1-main-dec5b02
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2023-02-17T13:31:18.513214192Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: 65e53d154a2978e7775c0ca1a7042a81fbd35d341bfecd23797cca49e696b91f
     name: cadastrapp
@@ -23,7 +33,7 @@ entries:
     version: 0.2.1-main-a58e4ed
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-17T10:34:25.711054689Z"
+    created: "2023-02-17T13:31:18.512844086Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: 1940111c4fa1784ff64bc8b80a3c88bca82331bd39037da87ef29a36d0cd2097
     name: cadastrapp
@@ -31,6 +41,17 @@ entries:
     urls:
     - cadastrapp-0.2.1-main-77a3cb3.tgz
     version: 0.2.1-main-77a3cb3
+  datahub:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-17T13:31:18.515036423Z"
+    description: A Helm chart to deploy the datahub application
+    digest: f2f941e05a718d5cf98354913275e167445ee2cc0aadf393ed7dd90671f91533
+    name: datahub
+    type: application
+    urls:
+    - datahub-0.1.0-main-dec5b02.tgz
+    version: 0.1.0-main-dec5b02
   geocontrib:
   - apiVersion: v2
     appVersion: 2.3.9
@@ -44,7 +65,17 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-17T10:34:25.713604908Z"
+    created: "2023-02-17T13:31:18.517367362Z"
+    description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
+    digest: 8a2e9b60aa1db4053ead6539f17cb19ff2223a8bf481c45c9ad531500455cb8c
+    name: geocontrib
+    type: application
+    urls:
+    - geocontrib-0.1.1-main-dec5b02.tgz
+    version: 0.1.1-main-dec5b02
+  - apiVersion: v2
+    appVersion: 2.3.9
+    created: "2023-02-17T13:31:18.516605749Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: 7a259f4237be99439d10ccf7ab24c8d77d17853f523855b55003471b764ea2a6
     name: geocontrib
@@ -54,7 +85,7 @@ entries:
     version: 0.1.1-main-a58e4ed
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-17T10:34:25.7125172Z"
+    created: "2023-02-17T13:31:18.515838636Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: 3be499a9fdb951a4bb810b49a2569c0598634d84b1cb95dbff7d6baa1886c38f
     name: geocontrib
@@ -75,7 +106,17 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-17T10:34:25.714684815Z"
+    created: "2023-02-17T13:31:18.518152475Z"
+    description: A Helm chart for deploying a SFTP stack
+    digest: 254f1a8536d0f9950bf1f750451f6c42e085ce791605abf4fd921a2752f2091d
+    name: sftp
+    type: application
+    urls:
+    - sftp-0.1.2-main-dec5b02.tgz
+    version: 0.1.2-main-dec5b02
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2023-02-17T13:31:18.517907771Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 5c2aeccc4f956571a5beada1a3752409a56c287439b75a3a1f1e550dadccb954
     name: sftp
@@ -85,7 +126,7 @@ entries:
     version: 0.1.2-main-a58e4ed
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-17T10:34:25.714336013Z"
+    created: "2023-02-17T13:31:18.517652966Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 52cb499613b8bfa8194cba0d4c606078db68df9011a986db2f4cf2d1a7e13e36
     name: sftp
@@ -113,4 +154,4 @@ entries:
     urls:
     - sftp-0.1.1-653f962b2.tgz
     version: 0.1.1-653f962b2
-generated: "2023-02-17T10:34:25.710490685Z"
+generated: "2023-02-17T13:31:18.512021473Z"
