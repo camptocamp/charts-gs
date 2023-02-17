@@ -1,0 +1,50 @@
+# Default values for vrt-bot.
+replicaCount: 1
+image: georchestra/vrt-bot:latest
+pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+podAnnotations: {}
+extra_env:
+  - name: ACTIVESCHEMA
+    value: public
+  - name: PGCLIENTENCODING
+    value: utf8
+  - name: PGDATABASE
+    valueFrom:
+      secretKeyRef:
+        name: dev-vrt-bot.dev-vrt-bot
+        key: dbname
+  - name: PGHOST
+    valueFrom:
+      secretKeyRef:
+        name: dev-vrt-bot.dev-vrt-bot
+        key: host
+  - name: PGPASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: dev-vrt-bot.dev-vrt-bot
+        key: password
+  - name: PGPORT
+    valueFrom:
+      secretKeyRef:
+        name: dev-vrt-bot.dev-vrt-bot
+        key: port
+  - name: PGUSER
+    valueFrom:
+      secretKeyRef:
+        name: dev-vrt-bot.dev-vrt-bot
+        key: user
+  - name: SOURCEDIR
+    value: /home/app/apache-nas/vrts
+
+volumes:
+  - name: apache-nas-data
+    persistentVolumeClaim:
+      claimName: apache-nas-data-dev
+
+volumeMounts:
+  - name: apache-nas-data
+    mountPath: /home/app/apache-nas
+
+schedule: "*/15 * * * *"
