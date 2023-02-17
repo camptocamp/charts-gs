@@ -31,7 +31,7 @@ jobs:
           cd charts-gs
           for directory in *; do
             if [ -d "$directory" ]; then
-                helm package "$directory" -d ../gh-pages --version $(helm show chart "$directory" |grep version: | awk '{print $2}')-"$GITHUB_REF_NAME"-"${GITHUB_SHA::7}"
+                helm package "$directory" -d ../gh-pages --version $(helm show chart "$directory" |grep ^version: | awk '{print $2}')-"$GITHUB_REF_NAME"-"${GITHUB_SHA::7}"
             fi
           done
           cd ../gh-pages
