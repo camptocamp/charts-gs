@@ -13,9 +13,9 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-17T10:33:53.045690968Z"
+    created: "2023-02-17T10:34:25.711442092Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
-    digest: 406636dcb15daf7945207014e2e5e86d381d298f9522cf657cd2497941847b74
+    digest: 65e53d154a2978e7775c0ca1a7042a81fbd35d341bfecd23797cca49e696b91f
     name: cadastrapp
     type: application
     urls:
@@ -23,7 +23,7 @@ entries:
     version: 0.2.1-main-a58e4ed
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-17T10:33:53.045338366Z"
+    created: "2023-02-17T10:34:25.711054689Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: 1940111c4fa1784ff64bc8b80a3c88bca82331bd39037da87ef29a36d0cd2097
     name: cadastrapp
@@ -44,9 +44,9 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-17T10:33:53.047694484Z"
+    created: "2023-02-17T10:34:25.713604908Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
-    digest: 8a44bc557f2b313768a6471e197fe0c0f6facd3093d106a2a11c1eb3f7a9b6f4
+    digest: 7a259f4237be99439d10ccf7ab24c8d77d17853f523855b55003471b764ea2a6
     name: geocontrib
     type: application
     urls:
@@ -54,7 +54,7 @@ entries:
     version: 0.1.1-main-a58e4ed
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-17T10:33:53.046712377Z"
+    created: "2023-02-17T10:34:25.7125172Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: 3be499a9fdb951a4bb810b49a2569c0598634d84b1cb95dbff7d6baa1886c38f
     name: geocontrib
@@ -75,9 +75,9 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-17T10:33:53.048690192Z"
+    created: "2023-02-17T10:34:25.714684815Z"
     description: A Helm chart for deploying a SFTP stack
-    digest: fb78adb2e7a3f7e0b9f1245b30aeed3206bc2162b21d0ba0fb4382dfe5d59e39
+    digest: 5c2aeccc4f956571a5beada1a3752409a56c287439b75a3a1f1e550dadccb954
     name: sftp
     type: application
     urls:
@@ -85,7 +85,7 @@ entries:
     version: 0.1.2-main-a58e4ed
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-17T10:33:53.04837069Z"
+    created: "2023-02-17T10:34:25.714336013Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 52cb499613b8bfa8194cba0d4c606078db68df9011a986db2f4cf2d1a7e13e36
     name: sftp
@@ -105,7 +105,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-17T10:33:53.048039887Z"
+    created: "2023-02-17T10:34:25.71397721Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 0b98594a3d999c629794511cdf4c84386f7a6b985a620ba31ad51be4a149a28e
     name: sftp
@@ -113,4 +113,4 @@ entries:
     urls:
     - sftp-0.1.1-653f962b2.tgz
     version: 0.1.1-653f962b2
-generated: "2023-02-17T10:33:53.044747761Z"
+generated: "2023-02-17T10:34:25.710490685Z"
