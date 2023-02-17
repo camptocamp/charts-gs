@@ -44,6 +44,16 @@ entries:
   datahub:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-02-17T13:31:22.46788908Z"
+    description: A Helm chart to deploy the datahub application
+    digest: 807d45ffb055a04c2b700bba79bca2f52799f44746fdc81240183a8c85845c77
+    name: datahub
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/datahub-0.1.0/datahub-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-02-17T13:31:18.515036423Z"
     description: A Helm chart to deploy the datahub application
     digest: f2f941e05a718d5cf98354913275e167445ee2cc0aadf393ed7dd90671f91533
@@ -154,4 +164,4 @@ entries:
     urls:
     - sftp-0.1.1-653f962b2.tgz
     version: 0.1.1-653f962b2
-generated: "2023-02-17T13:31:18.512021473Z"
+generated: "2023-02-17T13:31:22.468198997Z"
