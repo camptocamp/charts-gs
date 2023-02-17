@@ -1,0 +1,36 @@
+apiVersion: v1
+entries:
+  cadastrapp:
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2023-02-17T09:57:23.397161508Z"
+    description: A Helm chart for deploying geOrchestra's cadastrapp
+    digest: a72584067ae99a4e0caf628b9407f2099a1d0ac69c70c5a28a1651e785a98b5b
+    name: cadastrapp
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/cadastrapp-0.2.1/cadastrapp-0.2.1.tgz
+    version: 0.2.1
+  geocontrib:
+  - apiVersion: v2
+    appVersion: 2.3.9
+    created: "2023-02-17T09:57:23.54048522Z"
+    description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
+    digest: 4ad3d5a4b39d3ec195502ea5620c02731ef68e99add32c854d950cc30f7c9118
+    name: geocontrib
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geocontrib-0.1.1/geocontrib-0.1.1.tgz
+    version: 0.1.1
+  sftp:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2023-02-17T09:57:23.715620923Z"
+    description: A Helm chart for deploying a SFTP stack
+    digest: 1647b6d4e8dbf934f0a7573e01e646389275e7602632b8ff5b835699d301d1ae
+    name: sftp
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/sftp-0.1.1/sftp-0.1.1.tgz
+    version: 0.1.1
+generated: "2023-02-17T09:57:23.715630023Z"
