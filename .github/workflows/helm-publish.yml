@@ -24,8 +24,9 @@ jobs:
       - name: Run chart-releaser for publish on new version
         if: github.ref == 'refs/heads/main'
         uses: helm/chart-releaser-action@main
+        working-directory: ./charts-gs
         with:
-          charts_dir: 'charts-gs'
+          charts_dir: '.'
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
