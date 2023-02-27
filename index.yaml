@@ -13,7 +13,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-27T10:30:04.69295394Z"
+    created: "2023-02-27T10:31:19.366606916Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: ac1dfaf324dd6de2a15a44fa3a2da779d978cb94cb0e5dc83bbb3d6f696da898
     name: cadastrapp
@@ -23,7 +23,7 @@ entries:
     version: 0.2.1-main-fcb16ae
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-27T10:30:04.692673437Z"
+    created: "2023-02-27T10:31:19.366343718Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: 3b249e446b2426a5ca1c73575bb7fde336f1a6fca28b155db3d66b36eb02a5a6
     name: cadastrapp
@@ -33,7 +33,7 @@ entries:
     version: 0.2.1-main-e9a7934
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-27T10:30:04.692365233Z"
+    created: "2023-02-27T10:31:19.366053321Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: 2682ced0758e1260c7233317b5b8275cec39cb3fc5d7f141dfa8934e9f227798
     name: cadastrapp
@@ -43,7 +43,7 @@ entries:
     version: 0.2.1-main-dec5b02
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-27T10:30:04.691405821Z"
+    created: "2023-02-27T10:31:19.365788223Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: 61a6a8f3e99260ccca9c2983bc2414cb2167864e2b3b314920bc8cb56c9fe0cd
     name: cadastrapp
@@ -53,7 +53,7 @@ entries:
     version: 0.2.1-main-d3c425e
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-27T10:30:04.691066917Z"
+    created: "2023-02-27T10:31:19.365502326Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: 65e53d154a2978e7775c0ca1a7042a81fbd35d341bfecd23797cca49e696b91f
     name: cadastrapp
@@ -63,7 +63,7 @@ entries:
     version: 0.2.1-main-a58e4ed
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-27T10:30:04.690713112Z"
+    created: "2023-02-27T10:31:19.365221028Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: 325426d606c630e71779dbe1737e820735efe328264157f435d033e2d4c9684e
     name: cadastrapp
@@ -73,7 +73,7 @@ entries:
     version: 0.2.1-main-7b5cf87
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-27T10:30:04.690326907Z"
+    created: "2023-02-27T10:31:19.364935631Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: 1940111c4fa1784ff64bc8b80a3c88bca82331bd39037da87ef29a36d0cd2097
     name: cadastrapp
@@ -83,7 +83,7 @@ entries:
     version: 0.2.1-main-77a3cb3
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-27T10:30:04.689170693Z"
+    created: "2023-02-27T10:31:19.364663933Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: 3a12c952110b06d2b67cbbeced736a04b46d859408b2c5ba98dfd03cf4ee10a5
     name: cadastrapp
@@ -93,7 +93,17 @@ entries:
     version: 0.2.1-main-6e25f61
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-27T10:30:04.688869889Z"
+    created: "2023-02-27T10:31:19.364372836Z"
+    description: A Helm chart for deploying geOrchestra's cadastrapp
+    digest: 5a5f2c8c89c40fd2e2154c21fca2b6c7e69b4cc0a635d79418be4320ca8e935f
+    name: cadastrapp
+    type: application
+    urls:
+    - cadastrapp-0.2.1-main-6213ecf.tgz
+    version: 0.2.1-main-6213ecf
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2023-02-27T10:31:19.364037339Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: e5fb64e293ed523c52d61dd45ebcbd65f11dd0e7cbc5e1556c2283cde75a5ca9
     name: cadastrapp
@@ -103,7 +113,7 @@ entries:
     version: 0.2.1-main-59a00b2
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2023-02-27T10:30:04.688571185Z"
+    created: "2023-02-27T10:31:19.363491443Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: 39b4272641bfb2a7c2f8fe309e411d9c5c2e3cf544b416e40c35b5d78bdf858d
     name: cadastrapp
@@ -124,7 +134,7 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-27T10:30:04.69529797Z"
+    created: "2023-02-27T10:31:19.368903796Z"
     description: A Helm chart to deploy the datahub application
     digest: 5104431c32da263002396e31356e18aaf3692ba872025def7696d1aa45c27a9d
     name: datahub
@@ -134,7 +144,7 @@ entries:
     version: 0.1.0-main-fcb16ae
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-27T10:30:04.695009266Z"
+    created: "2023-02-27T10:31:19.368656398Z"
     description: A Helm chart to deploy the datahub application
     digest: 4566bb7e1b4a0fe6c6c73402754de4783808c277f67fdf6122f3bc2895e18b90
     name: datahub
@@ -144,7 +154,7 @@ entries:
     version: 0.1.0-main-e9a7934
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-27T10:30:04.694726063Z"
+    created: "2023-02-27T10:31:19.3684086Z"
     description: A Helm chart to deploy the datahub application
     digest: f2f941e05a718d5cf98354913275e167445ee2cc0aadf393ed7dd90671f91533
     name: datahub
@@ -154,7 +164,7 @@ entries:
     version: 0.1.0-main-dec5b02
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-27T10:30:04.694434559Z"
+    created: "2023-02-27T10:31:19.368158603Z"
     description: A Helm chart to deploy the datahub application
     digest: 380026d39acea3ec1c8985153b0caf36a0a4809c4c0852f623c38982af70bf98
     name: datahub
@@ -164,7 +174,7 @@ entries:
     version: 0.1.0-main-d3c425e
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-27T10:30:04.694137755Z"
+    created: "2023-02-27T10:31:19.367907805Z"
     description: A Helm chart to deploy the datahub application
     digest: 9ab61504c5b1cc51f8602fd604decf475f14cdc9b7a77308d98f3e5351a0cf34
     name: datahub
@@ -174,7 +184,7 @@ entries:
     version: 0.1.0-main-7b5cf87
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-27T10:30:04.693802551Z"
+    created: "2023-02-27T10:31:19.367655207Z"
     description: A Helm chart to deploy the datahub application
     digest: e3990c1f63a3953753c06eda42046a5c03d9bcf26c094406b5877129eb59a09d
     name: datahub
@@ -184,7 +194,17 @@ entries:
     version: 0.1.0-main-6e25f61
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-27T10:30:04.693520448Z"
+    created: "2023-02-27T10:31:19.367398709Z"
+    description: A Helm chart to deploy the datahub application
+    digest: 5739f443d0cac1f6728fb74dfce609efa0225036efc899fa0370b77882f6d15a
+    name: datahub
+    type: application
+    urls:
+    - datahub-0.1.0-main-6213ecf.tgz
+    version: 0.1.0-main-6213ecf
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-27T10:31:19.367146011Z"
     description: A Helm chart to deploy the datahub application
     digest: bab277267f80aa7d14294c5fa9060c16c49ff7e6b56540d7525eedff09b610cd
     name: datahub
@@ -194,7 +214,7 @@ entries:
     version: 0.1.0-main-59a00b2
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-27T10:30:04.693238544Z"
+    created: "2023-02-27T10:31:19.366879814Z"
     description: A Helm chart to deploy the datahub application
     digest: 0ca2494dc042079439115b89fbb5fbf4395919468ba7fe059e661485b9bd3944
     name: datahub
@@ -215,7 +235,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-27T10:30:04.70476649Z"
+    created: "2023-02-27T10:31:19.378962508Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: 3614083576092a0990fd2d51fa52254718495901106620f521d36518af91b285
     name: geocontrib
@@ -225,7 +245,7 @@ entries:
     version: 0.1.1-main-fcb16ae
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-27T10:30:04.70397848Z"
+    created: "2023-02-27T10:31:19.378200715Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: 702a5acd9b65988d6164bd535aaae2cab1caa544e6ca85598e4659eb4238e49b
     name: geocontrib
@@ -235,7 +255,7 @@ entries:
     version: 0.1.1-main-e9a7934
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-27T10:30:04.702820665Z"
+    created: "2023-02-27T10:31:19.377416722Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: 8a2e9b60aa1db4053ead6539f17cb19ff2223a8bf481c45c9ad531500455cb8c
     name: geocontrib
@@ -245,7 +265,7 @@ entries:
     version: 0.1.1-main-dec5b02
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-27T10:30:04.701249145Z"
+    created: "2023-02-27T10:31:19.376649129Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: 10380e04f6493bc8bccccbf8462a83ed31e9499ca27a7dab436394454bf08770
     name: geocontrib
@@ -255,7 +275,7 @@ entries:
     version: 0.1.1-main-d3c425e
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-27T10:30:04.700146431Z"
+    created: "2023-02-27T10:31:19.375896635Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: 7a259f4237be99439d10ccf7ab24c8d77d17853f523855b55003471b764ea2a6
     name: geocontrib
@@ -265,7 +285,7 @@ entries:
     version: 0.1.1-main-a58e4ed
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-27T10:30:04.699340921Z"
+    created: "2023-02-27T10:31:19.375113442Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: bad5091f231c233624ec3eb15666d2b6d6c4022c0c4125a43e47badc7f6f5781
     name: geocontrib
@@ -275,7 +295,7 @@ entries:
     version: 0.1.1-main-7b5cf87
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-27T10:30:04.69846271Z"
+    created: "2023-02-27T10:31:19.374299749Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: 3be499a9fdb951a4bb810b49a2569c0598634d84b1cb95dbff7d6baa1886c38f
     name: geocontrib
@@ -285,7 +305,7 @@ entries:
     version: 0.1.1-main-77a3cb3
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-27T10:30:04.6976685Z"
+    created: "2023-02-27T10:31:19.372657463Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: 2a49f279c4f5104aa6897e662f05988f836b93c51a460da72175763b779f9e88
     name: geocontrib
@@ -295,7 +315,17 @@ entries:
     version: 0.1.1-main-6e25f61
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-27T10:30:04.69687839Z"
+    created: "2023-02-27T10:31:19.371418074Z"
+    description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
+    digest: c9fe1cef7a270ae8ec2bb8b750b56ee876a0aa195497cfd347bf36ba33c04c30
+    name: geocontrib
+    type: application
+    urls:
+    - geocontrib-0.1.1-main-6213ecf.tgz
+    version: 0.1.1-main-6213ecf
+  - apiVersion: v2
+    appVersion: 2.3.9
+    created: "2023-02-27T10:31:19.370451783Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: c17ecef244cbd6721c57bb7d3d48a366ed504c4eccc2f33f1c68d75cb5495d36
     name: geocontrib
@@ -305,7 +335,7 @@ entries:
     version: 0.1.1-main-59a00b2
   - apiVersion: v2
     appVersion: 2.3.9
-    created: "2023-02-27T10:30:04.69609878Z"
+    created: "2023-02-27T10:31:19.369683389Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: b64436185f6c3c970673f9ba1268ad851264d0a354eca5728d63e2f8e73d448e
     name: geocontrib
@@ -325,7 +355,16 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.706281109Z"
+    created: "2023-02-27T10:31:19.380643894Z"
+    description: A Helm chart sdi-consistency-check cronjob
+    digest: f4b6e8b24a3b89c842e96497647e33c6b708d9c057ce3351a72be404393c2393
+    name: sdi-consistence-check
+    urls:
+    - sdi-consistence-check-0.1.3-main-6213ecf.tgz
+    version: 0.1.3-main-6213ecf
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2023-02-27T10:31:19.380446696Z"
     description: A Helm chart sdi-consistency-check cronjob
     digest: a3c7e1ea04a3bc4707dad25ffebe07f321d0d6e1ec99fe535081d24c873b0ef8
     name: sdi-consistence-check
@@ -334,7 +373,7 @@ entries:
     version: 0.1.2-main-7b5cf87
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.706064106Z"
+    created: "2023-02-27T10:31:19.380232397Z"
     description: A Helm chart sdi-consistency-check cronjob
     digest: b9f4d44e8b89d65828d266f3688c02224b7f1347c402a80844526bad4699ec79
     name: sdi-consistence-check
@@ -343,7 +382,7 @@ entries:
     version: 0.1.1-main-fcb16ae
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.705850804Z"
+    created: "2023-02-27T10:31:19.380031699Z"
     description: A Helm chart sdi-consistency-check cronjob
     digest: 579e7d26b4e1030a8dfffc4080a1f915ad4cee67f638307524bee4445325ce27
     name: sdi-consistence-check
@@ -352,7 +391,7 @@ entries:
     version: 0.1.1-main-d3c425e
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.705636001Z"
+    created: "2023-02-27T10:31:19.379821401Z"
     description: A Helm chart sdi-consistency-check cronjob
     digest: 002e3eaa35f2232fead420dbf9da78dd2670b5a040b1a5aae889943b9f64af88
     name: sdi-consistence-check
@@ -361,7 +400,7 @@ entries:
     version: 0.1.0-main-e9a7934
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.705419598Z"
+    created: "2023-02-27T10:31:19.379622103Z"
     description: A Helm chart sdi-consistency-check cronjob
     digest: 548727ed21293dbebcffd951bb40dd339a35a98a09843c91e4a4b698c903136e
     name: sdi-consistence-check
@@ -370,7 +409,7 @@ entries:
     version: 0.1.0-main-6e25f61
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.705213996Z"
+    created: "2023-02-27T10:31:19.379415705Z"
     description: A Helm chart sdi-consistency-check cronjob
     digest: 62a8985307a69e6dbe8d65f8949eee50511568cd9240ed2e3cffec0baacf8071
     name: sdi-consistence-check
@@ -379,7 +418,7 @@ entries:
     version: 0.1.0-main-59a00b2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.704999593Z"
+    created: "2023-02-27T10:31:19.379202706Z"
     description: A Helm chart sdi-consistency-check cronjob
     digest: 79df819f653522f4708696bf651fed118299a920682e54afa0d68503e97a846a
     name: sdi-consistence-check
@@ -399,7 +438,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.709090745Z"
+    created: "2023-02-27T10:31:19.384663559Z"
     description: A Helm chart for deploying a SFTP stack
     digest: f902b12e6a91515da99e4255ab702b4b969c1f2abb21254271ccb4602ab67ab6
     name: sftp
@@ -409,7 +448,7 @@ entries:
     version: 0.1.2-main-fcb16ae
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.708822941Z"
+    created: "2023-02-27T10:31:19.384348562Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 78d8b12c6a6b0dca0528c6f7e20d4b3c3df31190096dffb56bf57c8c8958ca87
     name: sftp
@@ -419,7 +458,7 @@ entries:
     version: 0.1.2-main-e9a7934
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.708555638Z"
+    created: "2023-02-27T10:31:19.384028564Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 254f1a8536d0f9950bf1f750451f6c42e085ce791605abf4fd921a2752f2091d
     name: sftp
@@ -429,7 +468,7 @@ entries:
     version: 0.1.2-main-dec5b02
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.708300735Z"
+    created: "2023-02-27T10:31:19.383707767Z"
     description: A Helm chart for deploying a SFTP stack
     digest: ea8381617e360627d1e00a818dbdee7b6b7ef9e3754817159422ad80aab2f36d
     name: sftp
@@ -439,7 +478,7 @@ entries:
     version: 0.1.2-main-d3c425e
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.708035131Z"
+    created: "2023-02-27T10:31:19.383244171Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 5c2aeccc4f956571a5beada1a3752409a56c287439b75a3a1f1e550dadccb954
     name: sftp
@@ -449,7 +488,7 @@ entries:
     version: 0.1.2-main-a58e4ed
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.707692227Z"
+    created: "2023-02-27T10:31:19.382932974Z"
     description: A Helm chart for deploying a SFTP stack
     digest: c49db0048232c9fa35c0a6decc7287d8ac3fec6b8ca36113e741b853d7194c59
     name: sftp
@@ -459,7 +498,7 @@ entries:
     version: 0.1.2-main-7b5cf87
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.707417324Z"
+    created: "2023-02-27T10:31:19.382621977Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 52cb499613b8bfa8194cba0d4c606078db68df9011a986db2f4cf2d1a7e13e36
     name: sftp
@@ -469,7 +508,7 @@ entries:
     version: 0.1.2-main-77a3cb3
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.70713932Z"
+    created: "2023-02-27T10:31:19.382303079Z"
     description: A Helm chart for deploying a SFTP stack
     digest: bdbdb479dd76211f15f5f94e4612549455925bb0219a65ffea36b3b40c41915b
     name: sftp
@@ -479,7 +518,17 @@ entries:
     version: 0.1.2-main-6e25f61
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.706859616Z"
+    created: "2023-02-27T10:31:19.381842583Z"
+    description: A Helm chart for deploying a SFTP stack
+    digest: a7de4eb484dee9dd7dc16fae2ca0270658f9f6f68c06bfb41fb64ef7361906ad
+    name: sftp
+    type: application
+    urls:
+    - sftp-0.1.2-main-6213ecf.tgz
+    version: 0.1.2-main-6213ecf
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2023-02-27T10:31:19.381512786Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 2282c945cdd0b27e656676e75dfa158ec665df54546c07626f288fcc8020e57e
     name: sftp
@@ -489,7 +538,7 @@ entries:
     version: 0.1.2-main-59a00b2
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-27T10:30:04.706540612Z"
+    created: "2023-02-27T10:31:19.380915691Z"
     description: A Helm chart for deploying a SFTP stack
     digest: ecc78b3004b555971e3f84767e57d9cf9a52716852819806e5d9ece20b7286dd
     name: sftp
@@ -530,7 +579,7 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-02-27T10:30:04.711520175Z"
+    created: "2023-02-27T10:31:19.386968439Z"
     description: A Helm chart for deploying vrt-bot
     digest: 71cd948aea916deea09b7e8107e8396eb8e012b4da7f068f3c21747799af5ec2
     name: vrt-bot
@@ -540,7 +589,7 @@ entries:
     version: 0.1.0-main-fcb16ae
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-02-27T10:30:04.710812166Z"
+    created: "2023-02-27T10:31:19.386666541Z"
     description: A Helm chart for deploying vrt-bot
     digest: 5f5499f8cb0004c5f3cd5b3cc388dfb91c7856518dcae6f84b82af317de028a4
     name: vrt-bot
@@ -550,7 +599,7 @@ entries:
     version: 0.1.0-main-e9a7934
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-02-27T10:30:04.710455662Z"
+    created: "2023-02-27T10:31:19.386357544Z"
     description: A Helm chart for deploying vrt-bot
     digest: 07fb0d3cc7ce768c44e2d87eceea8f718a11c905dba6a09c7bec9ae957254744
     name: vrt-bot
@@ -560,7 +609,7 @@ entries:
     version: 0.1.0-main-d3c425e
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-02-27T10:30:04.710116258Z"
+    created: "2023-02-27T10:31:19.386021147Z"
     description: A Helm chart for deploying vrt-bot
     digest: ccc297b847de97c695c58282e9249c0f39bab0fdcf7a708b04f3ea45c98abe54
     name: vrt-bot
@@ -570,7 +619,7 @@ entries:
     version: 0.1.0-main-7b5cf87
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-02-27T10:30:04.709768453Z"
+    created: "2023-02-27T10:31:19.38570395Z"
     description: A Helm chart for deploying vrt-bot
     digest: 75966348e131d6e5b9f105d27228b8cc1dd772d2cff6173602f62b1998f38e50
     name: vrt-bot
@@ -580,7 +629,17 @@ entries:
     version: 0.1.0-main-6e25f61
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-02-27T10:30:04.709427549Z"
+    created: "2023-02-27T10:31:19.385382652Z"
+    description: A Helm chart for deploying vrt-bot
+    digest: f671f4667d02ab7cf3ba638748ac61427654d26f24c75e4eb7840dffc184054b
+    name: vrt-bot
+    type: application
+    urls:
+    - vrt-bot-0.1.0-main-6213ecf.tgz
+    version: 0.1.0-main-6213ecf
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2023-02-27T10:31:19.385040755Z"
     description: A Helm chart for deploying vrt-bot
     digest: e7ee68aea34b52a60698547cf5534d6f1d402e9620845807987a16481c0d91e8
     name: vrt-bot
@@ -588,4 +647,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-3b8059a.tgz
     version: 0.1.0-main-3b8059a
-generated: "2023-02-27T10:31:17.392325629Z"
+generated: "2023-02-27T10:31:19.362877549Z"
