@@ -14,7 +14,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          path: charts-gs
 
       - name: Helm Installation
         uses: azure/setup-helm@v3
@@ -24,7 +23,6 @@ jobs:
       - name: Run chart-releaser for publish on new version
         if: github.ref == 'refs/heads/main'
         uses: helm/chart-releaser-action@main
-        working-directory: ./charts-gs
         with:
           charts_dir: '.'
         env:
@@ -35,7 +33,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: 'gh-pages'
-          path: gh-pages
+          path: /tmp/gh-pages
 
       - name: Helm Package all the charts using commit ID and remove chart packages older than 6 months
         shell: bash
@@ -43,10 +41,10 @@ jobs:
           cd charts-gs
           for directory in *; do
             if [ -d "$directory" ]; then
-                helm package "$directory" -d ../gh-pages --version $(helm show chart "$directory" |grep ^version: | awk '{print $2}')-"$GITHUB_REF_NAME"-"${GITHUB_SHA::7}"
+                helm package "$directory" -d /tmp/gh-pages --version $(helm show chart "$directory" |grep ^version: | awk '{print $2}')-"$GITHUB_REF_NAME"-"${GITHUB_SHA::7}"
             fi
           done
-          cd ../gh-pages
+          cd /tmp/gh-pages
           find . -type f -mtime +180 -delete
           helm repo index . --merge index.yaml
 
@@ -54,6 +52,6 @@ jobs:
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
-          build_dir: gh-pages
+          build_dir: /tmp/gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
