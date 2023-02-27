@@ -1,4 +1,4 @@
-name: Helm publish on new commit
+name: Helm publish on new commit and new version
 
 on:
   push:
@@ -7,24 +7,35 @@ on:
       - '!gh-pages'
 
 jobs:
-  chart-publish-on-commit:
+  chart-publish:
     runs-on: ubuntu-latest
     steps:
-      - name: main Checkout
+      - name: Checkout main branch
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           path: charts-gs
-      - name: gh-pages Checkout
+
+      - name: Helm Installation
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.10.2
+
+      - name: Run chart-releaser for publish on new version
+        if: github.ref == 'refs/heads/main'
+        uses: helm/chart-releaser-action@main
+        with:
+          charts_dir: 'charts-gs'
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Checkout gh-pages branch
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: 'gh-pages'
           path: gh-pages
-      - name: Helm Installation
-        uses: azure/setup-helm@v3
-        with:
-          version: v3.10.2
+
       - name: Helm Package all the charts using commit ID and remove chart packages older than 6 months
         shell: bash
         run: |
@@ -37,7 +48,8 @@ jobs:
           cd ../gh-pages
           find . -type f -mtime +180 -delete
           helm repo index . --merge index.yaml
-      - name: Deploy to GitHub Pages
+
+      - name: Deploy to GitHub Pages the charts based on the commit ID
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
