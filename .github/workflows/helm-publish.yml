@@ -33,12 +33,12 @@ jobs:
         with:
           fetch-depth: 0
           ref: 'gh-pages'
-          path: /tmp/gh-pages
+          path: gh-pages
 
       - name: Helm Package all the charts using commit ID and remove chart packages older than 6 months
         shell: bash
         run: |
-          cd charts-gs
+          mv gh-pages /tmp/gh-pages
           for directory in *; do
             if [ -d "$directory" ]; then
                 helm package "$directory" -d /tmp/gh-pages --version $(helm show chart "$directory" |grep ^version: | awk '{print $2}')-"$GITHUB_REF_NAME"-"${GITHUB_SHA::7}"
@@ -47,11 +47,13 @@ jobs:
           cd /tmp/gh-pages
           find . -type f -mtime +180 -delete
           helm repo index . --merge index.yaml
+          cd $GITHUB_WORKSPACE
+          mv /tmp/gh-pages .
 
       - name: Deploy to GitHub Pages the charts based on the commit ID
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
-          build_dir: /tmp/gh-pages
+          build_dir: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
