@@ -343,6 +343,17 @@ entries:
     urls:
     - geocontrib-0.1.1-main-3b8059a.tgz
     version: 0.1.1-main-3b8059a
+  geoserver-loadbalanced:
+  - apiVersion: v2
+    appVersion: 22.0.4
+    created: "2023-02-28T08:40:17.63498162Z"
+    description: A Helm chart for deploying geoserver-loadbalanced
+    digest: 72bb72c831c5126b7263fa22e38f40b79781c99d0d0cfbd2ecf69e1525aebad1
+    name: geoserver-loadbalanced
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geoserver-loadbalanced-0.1.0/geoserver-loadbalanced-0.1.0.tgz
+    version: 0.1.0
   sdi-consistence-check:
   - apiVersion: v1
     appVersion: "1.0"
@@ -647,4 +658,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-3b8059a.tgz
     version: 0.1.0-main-3b8059a
-generated: "2023-02-27T10:31:19.362877549Z"
+generated: "2023-02-28T08:40:17.635234722Z"
