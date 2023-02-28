@@ -1,0 +1,33 @@
+---
+geoserver:
+  # This is the url to the service provided by the geOrchestra helm chart
+  master_svc_url: georchestra-geoserver-svc:8080
+  docker_image: registry.com/org/client-configuration/geoserver:22.0.4
+  # pull_secret: ghcr-registry-secret
+  replicas: 1
+  jetty_monitoring: false
+  git:
+    repository_url: git@github.com:org/georchestra-client-configuration.git
+    branch: k8s-master
+  reloader:
+    docker_image: python:3.9
+    http_headers: "{ 'sec-username': 'superadmin', 'sec-roles': 'ROLE_ADMINISTRATOR', 'Accept': 'application/xml' }"
+  extra_environment: []
+
+gs_datadir_sync:
+  # docker_pull_secret: dockerhub-registry-secret
+  gs_datadir_volume_spec:
+    persistentVolumeClaim:
+      claimName: georchestra-geoserver-datadir
+  extra_environment: []
+
+nginx:
+  image:
+    repository: docker.io
+    name: nginx
+    tag: '1.23.3'
+  absolute_redirect: 'off'
+
+database:
+  auth:
+    existingSecret: mysecret

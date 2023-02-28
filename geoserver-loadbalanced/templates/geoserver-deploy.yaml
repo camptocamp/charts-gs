@@ -1,0 +1,197 @@
+{{- if gt .Values.geoserver.replicas 0.0 -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "georchestra-geoserver.fullname" . }}-geoserver-slaves
+  labels:
+    {{- include "georchestra-geoserver.labels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ include "georchestra-geoserver.fullname" . }}-geoserver-slaves
+spec:
+  replicas: {{ .Values.geoserver.replicas }}
+  selector:
+    matchLabels:
+      {{- include "georchestra-geoserver.labels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ include "georchestra-geoserver.fullname" . }}-geoserver-slaves
+  template:
+    metadata:
+      annotations:
+        configHash: {{ (toJson .Values) | sha256sum | quote }}
+      {{- if .Values.geoserver.jetty_monitoring }}
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "9103"
+        prometheus.io/scrape: "true"
+      {{- end }}
+      labels:
+        {{- include "georchestra-geoserver.labels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ include "georchestra-geoserver.fullname" . }}-geoserver-slaves
+    spec:
+      volumes:
+        - name: geoserver-datadir
+          {{- with .Values.gs_datadir_sync.gs_datadir_volume_spec }}
+          {{ . | toYaml | nindent 10 }}
+          {{- end }}
+        - name: geoserver-cm
+          configMap:
+            name: {{ include "georchestra-geoserver.fullname" . }}-geoserver-slaves-cm
+        - name: geoserver-monitoring-cm
+          configMap:
+            name: {{ include "georchestra-geoserver.fullname" . }}-monitoring-cm
+        - name: ssh-secret
+          secret:
+            defaultMode: 256
+            secretName: georchestra-datadir-ssh-deploy-key
+        - name: georchestra-datadir
+          emptyDir: {}
+        - name: geoserver-webapp
+          emptyDir: {}
+        - name: geoserver-tiles
+          persistentVolumeClaim:
+            claimName: georchestra-geoserver-tiles
+        - name: geoserver-geodata
+          persistentVolumeClaim:
+            claimName: georchestra-geoserver-geodata
+      {{- with .Values.geoserver.pull_secret }}
+      imagePullSecrets:
+      - name: {{ . }}
+      {{- end }}
+      initContainers:
+      - name: bootstrap-georchestra-datadir
+        command:
+          - /bin/sh
+          - -c
+          - mkdir -p /root/.ssh ;
+            cp /ssh-secret/ssh-privatekey /root/.ssh/id_rsa ;
+            chmod 0600 /root/.ssh/id_rsa ;
+            if [ ! -f /etc/georchestra/default.properties ] ; then
+              git clone {{ .Values.geoserver.git.repository_url }} -b {{ .Values.geoserver.git.branch }} /etc/georchestra ;
+            fi ;
+        env:
+        - name: GIT_SSH_COMMAND
+          value: ssh -o "IdentitiesOnly=yes" -o "StrictHostKeyChecking no"
+        image: bitnami/git
+        imagePullPolicy: Always
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/georchestra
+          name: georchestra-datadir
+        - mountPath: /ssh-secret
+          name: ssh-secret
+      - name: prepare-geoserver-webapp
+        command:
+        - /bin/sh
+        - -c
+        - cp -r /var/lib/jetty/webapps/geoserver/* /mnt/geoserver_webapp ;
+          if [ -f /mnt/georchestra_datadir/geoserver/jetty-env.xml ] ;
+            then cp /mnt/georchestra_datadir/geoserver/jetty-env.xml /mnt/geoserver_webapp/WEB-INF/jetty-env.xml ;
+          fi ;
+        image: {{ .Values.geoserver.docker_image }}
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /mnt/georchestra_datadir
+          name: georchestra-datadir
+        - mountPath: /mnt/geoserver_webapp
+          name: geoserver-webapp
+      containers:
+      - name: geoserver-slave
+        env:
+        {{- include "georchestra.database-georchestra-envs" . | nindent 10 }}
+        {{- with .Values.geoserver.extra_environment }}
+        {{- . | toYaml | nindent 8 }}
+        {{- end }}
+        image: {{ .Values.geoserver.docker_image }}
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /geoserver/gwc/service/wmts?SERVICE=WMTS&REQUEST=GetCapabilities
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        ports:
+        - containerPort: 8080
+          name: http-proxy
+          protocol: TCP
+        resources: {}
+        startupProbe:
+          failureThreshold: 5
+          periodSeconds: 40
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+          - mountPath: /etc/georchestra
+            name: georchestra-datadir
+          - mountPath: /mnt/geoserver_geodata
+            name: geoserver-geodata
+          - mountPath: /mnt/geoserver_datadir
+            name: geoserver-datadir
+          - mountPath: /var/lib/jetty/webapps/geoserver
+            name: geoserver-webapp
+          - mountPath: /mnt/geoserver_tiles
+            name: geoserver-tiles
+      - name: geoserver-reload
+        image: {{ .Values.geoserver.reloader.docker_image }}
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: geoserver-datadir
+          mountPath: /mnt/geoserver_datadir
+        - name: geoserver-cm
+          mountPath: /mnt/geoserver-cm
+        command:
+        - /bin/sh
+        - -c
+        args:
+        - >-
+          pip install requests ;
+          exec python -u /mnt/geoserver-cm/sync.py
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /proc/1/status
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /proc/1/status
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 10
+      {{- if .Values.geoserver.jetty_monitoring }}
+      - name: jmx-collectd
+        image: camptocamp/jmx-collectd:bullseye
+        volumeMounts:
+        - mountPath: /collectd-template
+          name: geoserver-monitoring-cm
+        ports:
+        - containerPort: 9103
+          name: prometheus
+        command:
+        - /bin/sh
+        - -c
+        - mkdir /etc/collectd/collectd.conf.d/ ;
+          cat /collectd-template/collectd-jmx-jetty.conf | sed "s/localhost/$(hostname)/g" > /etc/collectd/collectd.conf.d/jmx.conf ;
+          collectd -f
+      {{- end }}
+{{- end -}}

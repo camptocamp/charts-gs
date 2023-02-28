@@ -1,0 +1,80 @@
+{{- if gt .Values.geoserver.replicas 0.0 -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "georchestra-geoserver.fullname" . }}-geoserver-lb
+  labels:
+    {{- include "georchestra-geoserver.labels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ include "georchestra-geoserver.fullname" . }}-geoserver-lb
+spec:
+  selector:
+    matchLabels:
+      {{- include "georchestra-geoserver.labels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ include "georchestra-geoserver.fullname" . }}-geoserver-lb
+  template:
+    metadata:
+      annotations:
+        configHash: {{ (toJson .Values) | sha256sum | quote }}
+      labels:
+        {{- include "georchestra-geoserver.labels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ include "georchestra-geoserver.fullname" . }}-geoserver-lb
+    spec:
+      initContainers:
+        - name: prepare-nginx-configuration
+          image: {{ .Values.nginx.image.repository }}/{{ .Values.nginx.image.name }}:{{ .Values.nginx.image.tag }}
+          command:
+          - /bin/sh
+          - '-c'
+          args:
+          - >-
+              cp -R /etc/nginx/* /mnt/nginx-config ;
+              cp -f /mnt/nginx-custom/nginx.conf /mnt/nginx-config/nginx.conf ;
+              cp -f /mnt/nginx-custom/default.conf /mnt/nginx-config/conf.d/default.conf ;
+          volumeMounts:
+            - name: etc-nginx
+              mountPath: /mnt/nginx-config
+              readOnly: false
+            - name: etc-nginx-customizations
+              mountPath: /mnt/nginx-custom
+      containers:
+        - name: geoserver-lb
+          image: {{ .Values.nginx.image.repository }}/{{ .Values.nginx.image.name }}:{{ .Values.nginx.image.tag }}
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+          - name: etc-nginx
+            mountPath: /etc/nginx
+          - name: var-cache-nginx
+            mountPath: /var/cache/nginx
+          - name: var-run
+            mountPath: /var/run
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          livenessProbe:
+            failureThreshold: 10
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            periodSeconds: 10
+            timeoutSeconds: 10
+      volumes:
+      - name: etc-nginx-customizations
+        configMap:
+          name: {{ include "georchestra-geoserver.fullname" . }}-geoserver-lb-cm
+      - name: var-cache-nginx
+        emptyDir: {}
+      - name: var-run
+        emptyDir: {}
+      - name: etc-nginx
+        emptyDir: {}
+
+
+{{- end }}
