@@ -16,6 +16,7 @@ geoserver:
 
 gs_datadir_sync:
   # docker_pull_secret: dockerhub-registry-secret
+  docker_image: camptocamp/geoserver-datadir-sync:latest
   gs_datadir_volume_spec:
     persistentVolumeClaim:
       claimName: georchestra-geoserver-datadir
