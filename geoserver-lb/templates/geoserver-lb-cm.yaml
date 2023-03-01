@@ -9,7 +9,7 @@ data:
       server {{ .Values.geoserver.master_svc_url }};
     }
     upstream gs-backend {
-      server {{ include "georchestra-geoserver.fullname" . }}-geoserver-slaves-svc:8080;
+      server {{ include "georchestra-geoserver.fullname" . }}-slaves:8080;
     }
     server {
         listen       8080;
