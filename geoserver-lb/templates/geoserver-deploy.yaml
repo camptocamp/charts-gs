@@ -101,6 +101,36 @@ spec:
       - name: geoserver-slave
         env:
         {{- include "georchestra.database-georchestra-envs" . | nindent 8 }}
+        - name: GEODATA_PGHOST
+          valueFrom:
+            secretKeyRef:
+                name: {{ .Values.database.geodata.auth.existingSecret }}
+                key: host
+                optional: false
+        - name: GEODATA_PGPORT
+          valueFrom:
+            secretKeyRef:
+                name: {{ .Values.database.geodata.auth.existingSecret }}
+                key: port
+                optional: false
+        - name: GEODATA_PGDATABASE
+          valueFrom:
+            secretKeyRef:
+                name: {{ .Values.database.geodata.auth.existingSecret }}
+                key: dbname
+                optional: false
+        - name: GEODATA_PGUSER
+          valueFrom:
+            secretKeyRef:
+                name: {{ .Values.database.geodata.auth.existingSecret }}
+                key: user
+                optional: false
+        - name: GEODATA_PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+                name: {{ .Values.database.geodata.auth.existingSecret }}
+                key: password
+                optional: false
         {{- with .Values.geoserver.extra_environment }}
         {{- . | toYaml | nindent 8 }}
         {{- end }}

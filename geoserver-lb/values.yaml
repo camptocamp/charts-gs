@@ -32,3 +32,6 @@ nginx:
 database:
   auth:
     existingSecret: mysecret
+  geodata:
+    auth:
+      existingSecret: mysecret
