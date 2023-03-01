@@ -100,7 +100,7 @@ spec:
       containers:
       - name: geoserver-slave
         env:
-        {{- include "georchestra.database-georchestra-envs" . | nindent 10 }}
+        {{- include "georchestra.database-georchestra-envs" . | nindent 8 }}
         {{- with .Values.geoserver.extra_environment }}
         {{- . | toYaml | nindent 8 }}
         {{- end }}
