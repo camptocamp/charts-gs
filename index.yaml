@@ -496,6 +496,16 @@ entries:
   geoserver-lb:
   - apiVersion: v2
     appVersion: 22.0.4
+    created: "2023-03-01T15:50:37.240594329Z"
+    description: A Helm chart for deploying geoserver loadbalanced
+    digest: 900f4800cdd4e4195aea7133e271811f8d0853013f6a44fc871c38e150435157
+    name: geoserver-lb
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geoserver-lb-0.2.0/geoserver-lb-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 22.0.4
     created: "2023-03-01T09:40:28.569993722Z"
     description: A Helm chart for deploying geoserver loadbalanced
     digest: 907b565c099cedd432ccb14fa788f9d81e2f9efe3e397043c22003745fb66109
@@ -1044,4 +1054,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-03-01T09:40:30.699295448Z"
+generated: "2023-03-01T15:50:37.240928135Z"
