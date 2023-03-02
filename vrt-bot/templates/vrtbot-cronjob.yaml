@@ -23,6 +23,14 @@ spec:
           {{- end }}
           volumes:
           {{- .Values.volumes | toYaml | nindent 10 }}
+          initContainers:
+            - name: create-sourcedir
+              image: busybox
+              command: ['sh', '-c', "mkdir -p $SOURCEDIR; chown www-data:www-data $SOURCEDIR"]
+              volumeMounts:
+              {{- .Values.volumeMounts | toYaml | nindent 14 }}
+              env:
+              {{- .Values.extra_env | toYaml | nindent 14 }}
           containers:
             - name: vrt-bot
               image: "{{ .Values.image }}"
