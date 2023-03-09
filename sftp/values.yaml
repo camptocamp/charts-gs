@@ -2,7 +2,6 @@
 sftp:
   image: camptocamp/sftp:bullseye-k8s-georchestra
   imagePullPolicy: Always
-  nodePort: 30022
   #imagePullSecrets:
   #- name: secret
 
