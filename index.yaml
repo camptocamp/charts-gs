@@ -833,6 +833,16 @@ entries:
   sftp:
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2023-03-09T15:30:47.587801964Z"
+    description: A Helm chart for deploying a SFTP stack
+    digest: 7b07914cc6e7e8b56f99af0bafec3c299c535b891f5fb38fb8937ae0a58e5aaa
+    name: sftp
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/sftp-0.1.3/sftp-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2023-02-17T10:18:15.092275643Z"
     description: A Helm chart for deploying a SFTP stack
     digest: d78f212cefa79cf64b692c45665efb15caf0e58e3c4c8e106371055d3b7fdbc7
@@ -1202,4 +1212,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-03-02T10:09:45.161926742Z"
+generated: "2023-03-09T15:30:47.588410264Z"
