@@ -45,6 +45,9 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: CONFIG_DIRECTORY_OVERRIDE
+              value: "{{ .Values.config_directory_override }}"
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
