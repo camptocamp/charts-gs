@@ -5,6 +5,8 @@ image:
   tag: master
   pullPolicy: Always
 
+config_directory_override: {}
+
 podAnnotations: {}
 
 podSecurityContext: {}
