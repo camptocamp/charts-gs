@@ -5,7 +5,7 @@ image:
   tag: master
   pullPolicy: Always
 
-config_directory_override: {}
+config_directory_override: '/etc/georchestra/datahub/conf'
 
 podAnnotations: {}
 
@@ -37,3 +37,9 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+datadir:
+  git:
+    url: {}
+    ref: {}
+    ssh_secret: {}
