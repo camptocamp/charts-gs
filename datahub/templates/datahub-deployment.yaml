@@ -19,8 +19,10 @@ spec:
         {{- include "helm-datahub.selectorLabels" . | nindent 8 }}
         org.geonetwork.service/name: {{ include "helm-datahub.fullname" . }}-datahub-deployment
     spec:
+      {{- if .Values.datadir.git.url }}
       initContainers:
       {{- include "datahub.bootstrap_georchestra_datadir" $ | nindent 6 }}
+      {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
