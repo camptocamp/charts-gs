@@ -3,7 +3,7 @@ name: Helm publish on new commit and new version
 on:
   push:
     branches:
-      - '*'
+      - 'main'
       - '!gh-pages'
 
 jobs:
