@@ -264,6 +264,16 @@ entries:
   datahub:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-03-14T15:50:22.665300023Z"
+    description: A Helm chart to deploy the datahub application
+    digest: 705b098c840dceae01f166f5e91da3abf15af3b7d2345616bb9def846b98c984
+    name: datahub
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/datahub-0.2.0/datahub-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-03-14T09:39:52.849701954Z"
     description: A Helm chart to deploy the datahub application
     digest: 900e40441bb0fac19c5c0ce1ab101adb7515096f169786c0021910d615ecce53
@@ -1695,4 +1705,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-03-14T09:39:52.833719805Z"
+generated: "2023-03-14T15:50:22.66693715Z"
