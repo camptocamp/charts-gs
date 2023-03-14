@@ -19,6 +19,10 @@ spec:
         {{- include "helm-datahub.selectorLabels" . | nindent 8 }}
         org.geonetwork.service/name: {{ include "helm-datahub.fullname" . }}-datahub-deployment
     spec:
+      {{- if .Values.datadir.git.url }}
+      initContainers:
+      {{- include "datahub.bootstrap_georchestra_datadir" $ | nindent 6 }}
+      {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -45,6 +49,21 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: CONFIG_DIRECTORY_OVERRIDE
+              value: "{{ .Values.config_directory_override }}"
+          volumeMounts:
+            - name: georchestra-datadir
+              mountPath: /etc/georchestra
+      volumes:
+        - name: georchestra-datadir
+          emptyDir: {}
+        {{- if .Values.datadir.git.ssh_secret }}
+        - name: ssh-secret
+          secret:
+            secretName: {{ .Values.datadir.git.ssh_secret }}
+            defaultMode: 0400
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
