@@ -9,7 +9,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{- include "georchestra-geoserver.labels" . | nindent 6 }}
+      {{- include "georchestra-geoserver.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: {{ include "georchestra-geoserver.fullname" . }}-geoserver-lb
   template:
     metadata:
@@ -47,6 +47,10 @@ spec:
             mountPath: /var/cache/nginx
           - name: var-run
             mountPath: /var/run
+          {{- range .Values.geoserver.extra_volumes }}
+          - name: {{ .name }}
+            mountPath: {{ .mountPath }}
+          {{- end }}
           resources:
             requests:
               memory: "64Mi"
@@ -75,6 +79,12 @@ spec:
         emptyDir: {}
       - name: etc-nginx
         emptyDir: {}
+      {{- range .Values.geoserver.extra_volumes }}
+      - name: {{ .name }}
+        persistentVolumeClaim:
+          claimName: {{ .claimName }}
+      {{- end }}
+
 
 
 {{- end }}

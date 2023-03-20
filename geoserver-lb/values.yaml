@@ -13,6 +13,7 @@ geoserver:
     docker_image: python:3.9
     http_headers: "{ 'sec-username': 'superadmin', 'sec-roles': 'ROLE_ADMINISTRATOR', 'Accept': 'application/xml' }"
   extra_environment: []
+  extra_volumes: []
 
 gs_datadir_sync:
   # docker_pull_secret: dockerhub-registry-secret

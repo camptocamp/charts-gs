@@ -10,7 +10,7 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    {{- include "georchestra-geoserver.labels" . | nindent 4 }}
+    {{- include "georchestra-geoserver.selectorLabels" . | nindent 4 }}
     app.kubernetes.io/component: {{ include "georchestra-geoserver.fullname" . }}-geoserver-lb
   sessionAffinity: None
   type: ClusterIP

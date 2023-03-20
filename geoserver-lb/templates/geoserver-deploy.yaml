@@ -10,7 +10,7 @@ spec:
   replicas: {{ .Values.geoserver.replicas }}
   selector:
     matchLabels:
-      {{- include "georchestra-geoserver.labels" . | nindent 6 }}
+      {{- include "georchestra-geoserver.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: {{ include "georchestra-geoserver.fullname" . }}-geoserver-slaves
   template:
     metadata:
@@ -51,6 +51,11 @@ spec:
         - name: geoserver-geodata
           persistentVolumeClaim:
             claimName: georchestra-geoserver-geodata
+        {{- range .Values.geoserver.extra_volumes }}
+        - name: {{ .name }}
+          persistentVolumeClaim:
+            claimName: {{ .claimName }}
+        {{- end }}
       {{- with .Values.geoserver.pull_secret }}
       imagePullSecrets:
       - name: {{ . }}
@@ -170,6 +175,10 @@ spec:
             name: geoserver-webapp
           - mountPath: /mnt/geoserver_tiles
             name: geoserver-tiles
+          {{- range .Values.geoserver.extra_volumes }}
+          - name: {{ .name }}
+            mountPath: {{ .mountPath }}
+          {{- end }}
       - name: geoserver-reload
         image: {{ .Values.geoserver.reloader.docker_image }}
         imagePullPolicy: IfNotPresent
