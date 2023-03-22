@@ -34,7 +34,7 @@ spec:
               mountPath: /etc/ssh/ssh_host_keys
           {{- range .Values.sftp.volumes }}
             - name: {{ .name }}
-              mountPath: /mnt/{{ .name }}
+              mountPath: /mnt/{{ .mountPath }}
           {{- end }}
           command:
             - /bin/bash
@@ -57,7 +57,9 @@ spec:
           name: {{ include "sftp.fullname" . }}-sftp-hostkeys-cm
       - name: etc-hostkeys
         emptyDir: {}
-      {{- if .Values.sftp.volumes }}
-      {{- .Values.sftp.volumes | toYaml | nindent 6 }}
+      {{- range .Values.sftp.volumes }}
+      - name: {{ .name }}
+        persistentVolumeClaim:
+          claimName: {{ .persistentVolumeClaimName }}
       {{- end }}
 status: {}

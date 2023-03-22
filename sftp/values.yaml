@@ -8,6 +8,7 @@ sftp:
 # Those volumes will be available in /mnt
 # Example :
 #  - name: geonetwork-datadir
+#    mountPath: geonetwork_datadir # you can omit the /mnt/
 #    persistentVolumeClaim:
 #      claimName: georchestra-geonetwork-datadir
   volumes: []
