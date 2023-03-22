@@ -60,6 +60,6 @@ spec:
       {{- range .Values.sftp.volumes }}
       - name: {{ .name }}
         persistentVolumeClaim:
-          claimName: {{ .persistentVolumeClaimName }}
+          claimName: {{ .persistentVolumeClaim.claimName }}
       {{- end }}
 status: {}
