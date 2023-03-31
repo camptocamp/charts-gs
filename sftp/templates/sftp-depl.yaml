@@ -25,6 +25,10 @@ spec:
           image: {{ .Values.sftp.image }}
           imagePullPolicy: {{ .Values.sftp.imagePullPolicy }}
           resources: {}
+          {{- with .Values.sftp.lifecycle }}
+          lifecycle:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - name: authorized-keys
               mountPath: /tmp/dotssh
@@ -32,9 +36,8 @@ spec:
               mountPath: /tmp/hostkeys
             - name: etc-hostkeys
               mountPath: /etc/ssh/ssh_host_keys
-          {{- range .Values.sftp.volumes }}
-            - name: {{ .name }}
-              mountPath: /mnt/{{ .mountPath }}
+          {{- if .Values.sftp.extraVolumeMounts }}
+          {{- .Values.sftp.extraVolumeMounts | toYaml | nindent 12 }}
           {{- end }}
           command:
             - /bin/bash
@@ -57,9 +60,7 @@ spec:
           name: {{ include "sftp.fullname" . }}-sftp-hostkeys-cm
       - name: etc-hostkeys
         emptyDir: {}
-      {{- range .Values.sftp.volumes }}
-      - name: {{ .name }}
-        persistentVolumeClaim:
-          claimName: {{ .persistentVolumeClaim.claimName }}
+      {{- if .Values.sftp.extraVolumes }}
+      {{- .Values.sftp.extraVolumes | toYaml | nindent 6 }}
       {{- end }}
 status: {}
