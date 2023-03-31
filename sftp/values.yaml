@@ -13,7 +13,7 @@ sftp:
   #imagePullSecrets:
   #- name: secret
 
-  volumes: []
+  extraVolumes: []
    # - mountPath: /usr/share/nginx/html
    #   name: volume-pvc
 
