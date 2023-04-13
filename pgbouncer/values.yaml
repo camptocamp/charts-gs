@@ -78,6 +78,7 @@ imagePullSecrets: []
 ##
 image:
   registry: ""
+  # only work with bitnami/pgbouncer
   repository: bitnami/pgbouncer
   tag: 1.18.0
   pullPolicy: IfNotPresent
