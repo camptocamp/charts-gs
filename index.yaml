@@ -1185,6 +1185,16 @@ entries:
     urls:
     - geoserver-loadbalanced-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
+  pgbouncer:
+  - apiVersion: v1
+    appVersion: 1.0.0
+    created: "2023-04-13T15:31:54.206461503Z"
+    description: A Helm chart installing pgbouncer in kubernetes
+    digest: e1575bf7f2819f22ff13367f7adbcfd81839bf8cc71a9a75c27a5b3aefcff78c
+    name: pgbouncer
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/pgbouncer-1.2.1/pgbouncer-1.2.1.tgz
+    version: 1.2.1
   sdi-consistence-check:
   - apiVersion: v1
     appVersion: "1.0"
@@ -2090,4 +2100,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-03-31T11:11:12.202812541Z"
+generated: "2023-04-13T15:31:54.207711216Z"
