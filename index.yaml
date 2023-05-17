@@ -1358,6 +1358,15 @@ entries:
   pgbouncer:
   - apiVersion: v1
     appVersion: 1.18.0
+    created: "2023-05-17T08:56:13.625271294Z"
+    description: A Helm chart installing pgbouncer in kubernetes
+    digest: e60d3ca7ad5dec1677987dbb98771c5bd077ad1e893812c26846cf8d8eacaca4
+    name: pgbouncer
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/pgbouncer-1.4.1/pgbouncer-1.4.1.tgz
+    version: 1.4.1
+  - apiVersion: v1
+    appVersion: 1.18.0
     created: "2023-05-17T08:50:37.430622356Z"
     description: A Helm chart installing pgbouncer in kubernetes
     digest: 40a6a92ed5abac259a49259fc57845c7cff030262fb01023eb4814b9dfa1ac0f
@@ -2440,4 +2449,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-05-17T08:50:39.323764327Z"
+generated: "2023-05-17T08:56:13.626421314Z"
