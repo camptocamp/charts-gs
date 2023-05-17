@@ -85,7 +85,6 @@ spec:
                       echo "$(cat dbname) = host={{ .Values.config.postgresql.host }} port={{ .Values.config.postgresql.port }} dbname=$(cat dbname) user=$(cat user) password=$(cat password)" >> /opt/bitnami/pgbouncer/conf/databases.txt
                     done;
                   fi;
-                  echo "* = host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT" >> /opt/bitnami/pgbouncer/conf/databases.txt;
                   kill -1 1
         env:
           - name: POSTGRESQL_HOST
