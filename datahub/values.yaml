@@ -5,7 +5,21 @@ image:
   tag: master
   pullPolicy: Always
 
-config_directory_override: '/etc/georchestra/datahub/conf'
+configuration:
+  # The directory name is the directory from the root of the git repository
+  # If the datahub config is located in the /conf directory then write conf
+  # in config_directory_override.
+  override_directories:
+    config_directory_override: "conf"
+    assets_directory_override: "assets"
+  git:
+    url: {}
+    ref: {}
+    ssh_secret: {}
+
+extra_environment: []
+  # - name: GN4_API_URL
+  #   value: "https://gn4.custom/geonetwork/srv/api"
 
 podAnnotations: {}
 
@@ -45,9 +59,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-datadir:
-  git:
-    url: {}
-    ref: {}
-    ssh_secret: {}
