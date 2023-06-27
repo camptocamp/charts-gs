@@ -1206,6 +1206,16 @@ entries:
   geoserver-datadir-sync:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-06-27T15:06:11.002530895Z"
+    description: Automatic geoserver datadir volume backup and restore to/from github
+    digest: 4232a5ec039b606944dd07873ac3ad71c06914277ec447a6658fc2a81218239f
+    name: geoserver-datadir-sync
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geoserver-datadir-sync-0.1.1/geoserver-datadir-sync-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-06-27T14:24:48.22729922Z"
     description: Automatic geoserver datadir volume backup and restore to/from github
     digest: 4b8ec4f306e9e3b2b0aa143e6bef28d816c14c85e04285e9ad2f986d7477bcd4
@@ -2908,4 +2918,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-06-27T14:58:22.204703998Z"
+generated: "2023-06-27T15:06:11.003498098Z"
