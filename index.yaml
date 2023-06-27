@@ -384,6 +384,16 @@ entries:
   datahub:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-06-27T14:24:47.926049385Z"
+    description: A Helm chart to deploy the datahub application
+    digest: 6214f6e0c082f30fbbd773618da88d10322c6a931fd614ef2e061dab04914f76
+    name: datahub
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/datahub-0.3.0/datahub-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-05-17T14:51:29.862748052Z"
     description: A Helm chart to deploy the datahub application
     digest: cdc9075859b5dc0733169880041a8e3576cab5676006857793c38f7c9fac76f2
@@ -1133,6 +1143,17 @@ entries:
     urls:
     - geocontrib-0.1.1-datahub-integration-datadir-crepel-test-09e33a5.tgz
     version: 0.1.1-datahub-integration-datadir-crepel-test-09e33a5
+  geoserver-datadir-sync:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-06-27T14:24:48.22729922Z"
+    description: Automatic geoserver datadir volume backup and restore to/from github
+    digest: 4b8ec4f306e9e3b2b0aa143e6bef28d816c14c85e04285e9ad2f986d7477bcd4
+    name: geoserver-datadir-sync
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geoserver-datadir-sync-0.1.0/geoserver-datadir-sync-0.1.0.tgz
+    version: 0.1.0
   geoserver-lb:
   - apiVersion: v2
     appVersion: 22.0.4
@@ -2701,4 +2722,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-05-17T14:51:29.832266698Z"
+generated: "2023-06-27T14:24:48.229213338Z"
