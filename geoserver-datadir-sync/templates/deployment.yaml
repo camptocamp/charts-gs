@@ -32,7 +32,7 @@ spec:
           - name: GIT_RSA_DEPLOY_KEY_FILE
             value: /tmp/secrets/geoserver_datadir_deploy_key
           {{- with .Values.extra_environment }}
-            {{- . | toYaml | nindent 12 }}
+            {{- . | toYaml | nindent 10 }}
           {{- end }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
