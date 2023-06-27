@@ -14,14 +14,10 @@ geoserver:
     http_headers: "{ 'sec-username': 'superadmin', 'sec-roles': 'ROLE_ADMINISTRATOR', 'Accept': 'application/xml' }"
   extra_environment: []
   extra_volumes: []
-
-gs_datadir_sync:
-  # docker_pull_secret: dockerhub-registry-secret
-  docker_image: camptocamp/geoserver-datadir-sync:latest
-  gs_datadir_volume_spec:
-    persistentVolumeClaim:
-      claimName: georchestra-geoserver-datadir
-  extra_environment: []
+  volumes:
+    geoserverDatadir:
+      persistentVolumeClaim:
+        claimName: georchestra-geoserver-datadir
 
 nginx:
   image:

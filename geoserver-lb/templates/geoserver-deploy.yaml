@@ -28,7 +28,7 @@ spec:
     spec:
       volumes:
         - name: geoserver-datadir
-          {{- with .Values.gs_datadir_sync.gs_datadir_volume_spec }}
+          {{- with .Values.geoserver.geoserverDatadir }}
           {{ . | toYaml | nindent 10 }}
           {{- end }}
         - name: geoserver-cm
