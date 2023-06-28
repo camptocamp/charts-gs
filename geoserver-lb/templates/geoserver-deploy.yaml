@@ -28,7 +28,7 @@ spec:
     spec:
       volumes:
         - name: geoserver-datadir
-          {{- with .Values.geoserver.geoserverDatadir }}
+          {{- with .Values.geoserver.volumes.geoserverDatadir | required ".Values.geoserver.volumes.geoserverDatadir is required." }}
           {{ . | toYaml | nindent 10 }}
           {{- end }}
         - name: geoserver-cm
