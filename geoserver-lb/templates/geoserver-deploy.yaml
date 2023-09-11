@@ -92,6 +92,9 @@ spec:
           if [ -f /mnt/georchestra_datadir/geoserver/jetty-env.xml ] ;
             then cp /mnt/georchestra_datadir/geoserver/jetty-env.xml /mnt/geoserver_webapp/WEB-INF/jetty-env.xml ;
           fi ;
+          if [ -f /mnt/georchestra_datadir/geoserver/web.xml ] ; then
+            cp /mnt/georchestra_datadir/geoserver/web.xml /mnt/geoserver_webapp/WEB-INF/web.xml ;
+          fi ;
         image: {{ .Values.geoserver.docker_image }}
         imagePullPolicy: IfNotPresent
         resources: {}
