@@ -1367,6 +1367,16 @@ entries:
   geoserver-lb:
   - apiVersion: v2
     appVersion: 22.0.4
+    created: "2023-09-11T16:20:50.4077591Z"
+    description: A Helm chart for deploying geoserver loadbalanced
+    digest: 64524ab91bd96a47f0cb6f52871e46ecb26eb09e4507cdfedf2583a2cb315b76
+    name: geoserver-lb
+    type: application
+    urls:
+    - geoserver-lb-0.4.2.tgz
+    version: 0.4.2
+  - apiVersion: v2
+    appVersion: 22.0.4
     created: "2023-06-28T10:11:00.724658734Z"
     description: A Helm chart for deploying geoserver loadbalanced
     digest: 5762221ae3f94fe3eb370055077c4510278ba2f6a52cda02d4ea0ad6ff27ae85
@@ -3192,4 +3202,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-09-11T16:20:00.535065958Z"
+generated: "2023-09-11T16:20:50.410393328Z"
