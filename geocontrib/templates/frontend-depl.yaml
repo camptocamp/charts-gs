@@ -15,8 +15,8 @@ spec:
         {{- include "geocontrib.selectorLabels" . | nindent 8 }}-frontend-depl
     spec:
       containers:
-        - name: geocontrib
-          image: neogeo/geocontrib-front:{{ .Chart.AppVersion }}
+        - name: frontend
+          image: {{ .Values.frontend.image }}
           imagePullPolicy: Always
           command:
           - /bin/bash

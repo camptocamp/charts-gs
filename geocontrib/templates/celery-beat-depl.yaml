@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: celery-beat
-          image: neogeo/geocontrib:{{ .Chart.AppVersion }}
+          image: {{ .Values.geocontrib.image }}
           imagePullPolicy: Always
           command:
           - src/docker/geocontrib/docker-entrypoint.sh 

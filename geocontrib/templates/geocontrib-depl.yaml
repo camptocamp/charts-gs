@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: geocontrib
-          image: {{ .Values.image }}
+          image: {{ .Values.geocontrib.image }}
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
