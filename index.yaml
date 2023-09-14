@@ -905,6 +905,16 @@ entries:
   geocontrib:
   - apiVersion: v2
     appVersion: 2.3.9
+    created: "2023-09-14T15:02:53.539200524Z"
+    description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
+    digest: b1aba373b3dc5c1bc5b2627840eb220aebb43698762d197e74eb0b208b54bfbd
+    name: geocontrib
+    type: application
+    urls:
+    - geocontrib-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 2.3.9
     created: "2023-02-17T09:57:23.54048522Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: 4ad3d5a4b39d3ec195502ea5620c02731ef68e99add32c854d950cc30f7c9118
@@ -3378,4 +3388,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-09-14T15:01:42.878169433Z"
+generated: "2023-09-14T15:02:53.541315837Z"
