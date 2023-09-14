@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: geocontrib
-          image: neogeo/geocontrib:2.3.9
+          image: {{ .Values.image }}
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

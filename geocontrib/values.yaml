@@ -1,3 +1,5 @@
+image: neogeo/geocontrib:3.3.1
+
 config_front: |
   {
     "BASE_URL": "/geocontrib/",
@@ -86,6 +88,10 @@ env_variables:
       value: instantly
     - name: DISABLE_LOGIN_BUTTON
       value: '1'
+    - name: DISPLAY_FORBIDDEN_PROJECTS
+      value: 'true'
+    - name: DISPLAY_FORBIDDEN_PROJECTS_DEFAULT
+      value: 'true'
     - name: EMAIL_BACKEND
       value: django.core.mail.backends.smtp.EmailBackend
     - name: EMAIL_HOST
