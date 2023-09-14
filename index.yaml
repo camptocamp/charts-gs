@@ -924,6 +924,16 @@ entries:
     version: 0.1.0-datahub-integration-datadir-crepel-test-09e33a5
   geocontrib:
   - apiVersion: v2
+    appVersion: 3.3.1
+    created: "2023-09-14T15:12:37.440641531Z"
+    description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
+    digest: 13e35e3184591643a29b11480728837e96a5e4bafeeee1a191fd72ab3bbafa4b
+    name: geocontrib
+    type: application
+    urls:
+    - geocontrib-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
     appVersion: 2.3.9
     created: "2023-09-14T15:02:57.154426831Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
@@ -3476,4 +3486,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-09-14T15:02:57.042462048Z"
+generated: "2023-09-14T15:12:37.444460057Z"
