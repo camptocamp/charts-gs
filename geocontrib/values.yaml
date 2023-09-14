@@ -1,8 +1,8 @@
 geocontrib:
-  image: neogeo/geocontrib:4.2.0
+  image: neogeo/geocontrib:5.0.2
 
 frontend:
-  image: neogeo/geocontrib-front:4.2.0
+  image: neogeo/geocontrib-front:5.0.2
 
 config_front: |
   {
