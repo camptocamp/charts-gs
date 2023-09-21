@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUTPUT_DIR=`dirname $0`/../ssh_host_keys
+OUTPUT_DIR=`dirname $0`/../ssh_host_files
 mkdir -p ${OUTPUT_DIR}
 
 for type in rsa dsa ecdsa ed25519; do
