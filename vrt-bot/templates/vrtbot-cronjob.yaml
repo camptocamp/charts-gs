@@ -6,6 +6,9 @@ metadata:
     {{- include "vrt-bot.labels" . | nindent 4 }}
 spec:
   schedule: {{ .Values.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 3
   jobTemplate:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -17,6 +20,7 @@ spec:
     spec:
       template:
         spec:
+          parallelism: 1
           {{- with .Values.imagePullSecrets }}
           imagePullSecrets:
             {{- toYaml . | nindent 12 }}
