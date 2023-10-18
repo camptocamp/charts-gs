@@ -3546,6 +3546,16 @@ entries:
   vrt-bot:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2023-10-18T08:31:42.615099262Z"
+    description: A Helm chart for deploying vrt-bot
+    digest: a9165da579eca6b8a99b36d7d263ccc6f6dc3e622bf7cffa80c172a9d644dbe2
+    name: vrt-bot
+    type: application
+    urls:
+    - vrt-bot-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2023-03-02T10:09:41.741240929Z"
     description: A Helm chart for deploying vrt-bot
     digest: 4b241a806b31a8a5e02b9b8ad169706d9cf78b23e1bacc45942b147f69433e5e
@@ -4034,4 +4044,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-10-18T08:31:23.689158687Z"
+generated: "2023-10-18T08:31:42.616773186Z"
