@@ -2580,6 +2580,19 @@ entries:
   mviewer:
   - apiVersion: v2
     appVersion: "3.9"
+    created: "2023-10-26T17:53:35.047381853Z"
+    description: A Helm chart to deploy the mviewer stack
+    digest: eeb94044e726f122a4ab29dc4f4e0c63dd2f302d392e46b8f2412f7a2e7b2d8c
+    maintainers:
+    - name: geOrchestra
+      url: https://www.georchestra.org
+    name: mviewer
+    type: application
+    urls:
+    - mviewer-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: "3.9"
     created: "2023-10-26T16:56:25.362602724Z"
     description: A Helm chart to deploy the mviewer stack
     digest: 1aed451d0c96b1bae6500c6f60d577262b5a7dc6bc5b5ed37f81a722e34d2b7c
@@ -4601,4 +4614,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-10-26T16:56:25.22532388Z"
+generated: "2023-10-26T17:53:35.049480784Z"
