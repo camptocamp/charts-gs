@@ -2,7 +2,7 @@ apiVersion: v2
 name: mviewer
 description: A Helm chart to deploy the mviewer stack
 type: application
-version: 0.2.3
+version: 0.2.4
 appVersion: "3.9"
 maintainers:
   - name: geOrchestra

@@ -64,7 +64,7 @@ spec:
               mountPath: /usr/share/nginx/html/apps
           {{- else if .Values.mviewer.extraVolumeMounts }}
           volumeMounts:
-          {{- .Values.mviewer.extraVolumeMounts | toYaml | nindent 6 }}
+          {{- .Values.mviewer.extraVolumeMounts | toYaml | nindent 10 }}
           {{- end }}
       {{- if .Values.mviewer.configuration.git.url }}
       volumes:
