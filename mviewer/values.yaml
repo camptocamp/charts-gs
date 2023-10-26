@@ -42,13 +42,13 @@ mviewer:
   #    exec:
   #      command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
 
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
 
   nodeSelector: {}
 
@@ -103,13 +103,13 @@ mviewerstudio:
   #    exec:
   #      command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
 
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
 
   nodeSelector: {}
 
