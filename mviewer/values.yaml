@@ -1,0 +1,73 @@
+replicaCount: 1
+
+image:
+  repository: mviewer/mviewer
+  tag: latest
+  pullPolicy: Always
+
+configuration:
+  git:
+    url: {}
+    ref: {}
+    ssh_secret: {}
+
+ingress:
+  enabled: true
+  annotations: {}
+  # kubernetes.io/ingress.class: nginx
+  # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: mymviewer.org
+      paths:
+        - "/mymviewer"
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - mymviewer.org
+  
+  # define a custom incressClassName, like "traefik" or "nginx"
+  className: ""
+
+extra_environment: []
+  # - name: MY_ENV
+  #   value: myvalue
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+  annotations: {}
+
+#lifecycle:
+#  postStart:
+#    exec:
+#      command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
+#  preStop:
+#    exec:
+#      command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
