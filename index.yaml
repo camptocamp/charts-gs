@@ -2397,6 +2397,20 @@ entries:
     urls:
     - geoserver-loadbalanced-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
+  mviewer:
+  - apiVersion: v2
+    appVersion: "3.9"
+    created: "2023-10-26T09:39:06.860530839Z"
+    description: A Helm chart to deploy the mviewer application
+    digest: 50890c3f9288966be77dab4d56cf8ac46871a14192a5838edb6f2dda6a5a9b0d
+    maintainers:
+    - name: geOrchestra
+      url: https://www.georchestra.org
+    name: mviewer
+    type: application
+    urls:
+    - mviewer-0.1.0.tgz
+    version: 0.1.0
   pgbouncer:
   - apiVersion: v1
     appVersion: 1.18.0
@@ -4241,4 +4255,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-10-26T08:43:14.558577398Z"
+generated: "2023-10-26T09:39:06.862353351Z"
