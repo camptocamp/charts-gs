@@ -1,0 +1,77 @@
+{{- if .Values.mviewerstudio.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "helm-mviewer.fullname" . }}-mviewerstudio-deployment
+  labels:
+    {{- include "helm-mviewer.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.mviewerstudio.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "helm-mviewer.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.mviewerstudio.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "helm-mviewer.selectorLabels" . | nindent 8 }}
+        application/name: {{ include "helm-mviewer.fullname" . }}-mviewerstudio-deployment
+    spec:
+      {{- with .Values.mviewerstudio.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.mviewerstudio.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.mviewerstudio.securityContext | nindent 12 }}
+          image: "{{ .Values.mviewerstudio.image.repository }}:{{ .Values.mviewerstudio.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.mviewerstudio.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          {{- with .Values.mviewerstudio.lifecycle }}
+          lifecycle:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.mviewerstudio.resources | nindent 12 }}
+          {{- with .Values.mviewerstudio.extra_environment }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.mviewerstudio.extraVolumesMounts }}
+          volumeMounts:
+          {{- .Values.mviewerstudio.extraVolumesMounts | toYaml | nindent 6 }}
+          {{- end }}
+      {{- if .Values.mviewerstudio.extraVolumes }}
+      volumes:
+      {{- .Values.mviewerstudio.extraVolumes | toYaml | nindent 6 }}
+      {{- end }}
+      {{- with .Values.mviewerstudio.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mviewerstudio.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mviewerstudio.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

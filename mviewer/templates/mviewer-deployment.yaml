@@ -1,3 +1,4 @@
+{{- if .Values.mviewer.enabled -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,13 +6,13 @@ metadata:
   labels:
     {{- include "helm-mviewer.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.mviewer.replicaCount }}
   selector:
     matchLabels:
       {{- include "helm-mviewer.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
+      {{- with .Values.mviewer.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -19,22 +20,22 @@ spec:
         {{- include "helm-mviewer.selectorLabels" . | nindent 8 }}
         application/name: {{ include "helm-mviewer.fullname" . }}-mviewer-deployment
     spec:
-      {{- if .Values.configuration.git.url }}
+      {{- if .Values.mviewer.configuration.git.url }}
       initContainers:
       {{- include "mviewer.bootstrap_mviewer_configuration" $ | nindent 6 }}
       {{- end }}
-      {{- with .Values.imagePullSecrets }}
+      {{- with .Values.mviewer.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.mviewer.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+            {{- toYaml .Values.mviewer.securityContext | nindent 12 }}
+          image: "{{ .Values.mviewer.image.repository }}:{{ .Values.mviewer.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.mviewer.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 80
@@ -47,37 +48,46 @@ spec:
             httpGet:
               path: /
               port: http
-          {{- with .Values.lifecycle }}
+          {{- with .Values.mviewer.lifecycle }}
           lifecycle:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.extra_environment }}
+            {{- toYaml .Values.mviewer.resources | nindent 12 }}
+          {{- with .Values.mviewer.extra_environment }}
           env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if .Values.mviewer.configuration.git.url }}
           volumeMounts:
             - name: mviewer-configuration
-              mountPath: /etc/mviewer
+              mountPath: /usr/share/nginx/html/apps
+          {{- else if .Values.mviewer.extraVolumesMounts }}
+          volumeMounts:
+          {{- .Values.mviewer.extraVolumesMounts | toYaml | nindent 6 }}
+          {{- end }}
+      {{- if .Values.mviewer.configuration.git.url }}
       volumes:
         - name: mviewer-configuration
           emptyDir: {}
-        {{- if .Values.configuration.git.ssh_secret }}
         - name: ssh-secret
           secret:
-            secretName: {{ .Values.configuration.git.ssh_secret }}
+            secretName: {{ .Values.mviewer.configuration.git.ssh_secret }}
             defaultMode: 0400
-        {{- end }}
-      {{- with .Values.nodeSelector }}
+      {{- else if .Values.mviewer.extraVolumes }}
+      volumes:
+      {{- .Values.mviewer.mviewer.extraVolumes | toYaml | nindent 6 }}
+      {{- end }}
+      {{- with .Values.mviewer.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.affinity }}
+      {{- with .Values.mviewer.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+      {{- with .Values.mviewer.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{- end }}

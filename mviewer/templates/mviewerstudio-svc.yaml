@@ -1,0 +1,17 @@
+{{- if .Values.mviewerstudio.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "helm-mviewer.fullname" . }}-mviewerstudio-svc
+  labels:
+    {{- include "helm-mviewer.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.mviewerstudio.service.type }}
+  ports:
+    - port: {{ .Values.mviewerstudio.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    application/name: {{ include "helm-mviewer.fullname" . }}-mviewerstudio-deployment
+{{- end }}

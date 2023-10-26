@@ -1,15 +1,136 @@
-replicaCount: 1
+mviewer:
+  enabled: true
+  replicaCount: 1
 
-image:
-  repository: mviewer/mviewer
-  tag: latest
-  pullPolicy: Always
+  image:
+    repository: mviewer/mviewer
+    tag: latest
+    pullPolicy: Always
 
-configuration:
-  git:
-    url: {}
-    ref: {}
-    ssh_secret: {}
+  configuration:
+    git:
+      url: {}
+      ref: {}
+      ssh_secret: {}
+
+  extra_environment: []
+  # - name: MY_ENV
+  #   value: myvalue
+
+  podAnnotations: {}
+
+  podSecurityContext: {}
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  service:
+    type: ClusterIP
+    port: 80
+    annotations: {}
+
+  #lifecycle:
+  #  postStart:
+  #    exec:
+  #      command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
+  #  preStop:
+  #    exec:
+  #      command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
+
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  extraVolumes: []
+   # - mountPath: /usr/share/nginx/html
+   #   name: volume-pvc
+
+  extraVolumeMounts: []
+   # - name: volume-pvc
+   #   persistentVolumeClaim:
+   #     claimName: persitent-volume-claim
+
+mviewerstudio:
+  enabled: false
+  replicaCount: 1
+
+  image:
+    repository: mviewer/mviewerstudio
+    tag: python-latest
+    pullPolicy: Always
+
+  configuration:
+    git:
+      url: {}
+      ref: {}
+      ssh_secret: {}
+
+  extra_environment: []
+  # - name: MY_ENV
+  #   value: myvalue
+
+  podAnnotations: {}
+
+  podSecurityContext: {}
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  service:
+    type: ClusterIP
+    port: 80
+    annotations: {}
+
+  #lifecycle:
+  #  postStart:
+  #    exec:
+  #      command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
+  #  preStop:
+  #    exec:
+  #      command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
+
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  extraVolumes: []
+   # - mountPath: /usr/share/nginx/html
+   #   name: volume-pvc
+
+  extraVolumeMounts: []
+   # - name: volume-pvc
+   #   persistentVolumeClaim:
+   #     claimName: persitent-volume-claim
 
 ingress:
   enabled: true
@@ -17,57 +138,14 @@ ingress:
   # kubernetes.io/ingress.class: nginx
   # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: mymviewer.org
-      paths:
-        - "/mymviewer"
+    - host: mviewer.mydomain.org
   tls: []
-  #  - secretName: chart-example-tls
+  # You can import TLS secrets using
+  # kubectl create secret tls testsecret --key key.pem --cert cert.pem
+  # Then specify the TLS secret name below.
+  #  - secretName: testsecret
   #    hosts:
-  #      - mymviewer.org
-  
+  #      - mviewer.mydomain.org
   # define a custom incressClassName, like "traefik" or "nginx"
   className: ""
 
-extra_environment: []
-  # - name: MY_ENV
-  #   value: myvalue
-
-podAnnotations: {}
-
-podSecurityContext: {}
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
-service:
-  type: ClusterIP
-  port: 80
-  annotations: {}
-
-#lifecycle:
-#  postStart:
-#    exec:
-#      command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
-#  preStop:
-#    exec:
-#      command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
-
-resources:
-  limits:
-    cpu: 100m
-    memory: 128Mi
-  requests:
-    cpu: 100m
-    memory: 128Mi
-
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}

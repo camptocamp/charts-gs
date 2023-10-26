@@ -1,6 +1,5 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "helm-mviewer.fullname" . -}}
-{{- $svcPort := .Values.service.port -}}
 {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1
 {{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
@@ -33,24 +32,44 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.ingress.hosts }}
+    {{- range .Values.ingress.hosts | default (list "") }}
+    {{- if $.Values.ingress.hosts }}
     - host: {{ .host | quote }}
+    {{- else }}
+    - host: {{ $.Values.fqdn | quote }}
+    {{- end }}
       http:
         paths:
-          {{- range .paths }}
-          - path: {{ . }}
+          {{- if $.Values.mviewer.enabled }}
+          - path: /mviewer
             {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
             pathType: Prefix
             {{- end }}
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: {{ $fullName }}-mviewer-svc
+                name: {{ include "helm-mviewer.fullname" $ }}-mviewer-svc
                 port:
-                  number: {{ $svcPort }}
+                  number: 80
               {{- else }}
-              serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
+              serviceName: {{ include "helm-mviewer.fullname" $ }}-mviewer-svc
+              servicePort: 80
+              {{- end }}
+          {{- end }}
+          {{- if $.Values.mviewerstudio.enabled }}
+          - path: /mviewer
+            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
+            pathType: Prefix
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ include "helm-mviewer.fullname" $ }}-mviewerstudio-svc
+                port:
+                  number: 8000
+              {{- else }}
+              serviceName: {{ include "helm-mviewer.fullname" $ }}-mviewerstudio-svc
+              servicePort: 8000
               {{- end }}
           {{- end }}
     {{- end }}

@@ -1,5 +1,7 @@
 # Mviewer
 
+TODO: UPDATE README
+
 mviewer est une application cartographique initiée et développée par la Région Bretagne, sous le nom de Kartenn (carte en breton).
 
 Le code source de cette application est librement réutilisable depuis 2014.
@@ -9,6 +11,7 @@ De nombreuses collectivités mais également des entreprises, le secteur de la r
 ## Source Code
 
 * https://github.com/mviewer/mviewer
+* https://github.com/mviewer/mviewerstudio
 
 ## Requirements
 
