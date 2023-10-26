@@ -74,12 +74,6 @@ mviewerstudio:
     tag: python-latest
     pullPolicy: Always
 
-  configuration:
-    git:
-      url: {}
-      ref: {}
-      ssh_secret: {}
-
   extra_environment: []
   # - name: MY_ENV
   #   value: myvalue

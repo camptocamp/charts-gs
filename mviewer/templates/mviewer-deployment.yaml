@@ -76,7 +76,7 @@ spec:
             defaultMode: 0400
       {{- else if .Values.mviewer.extraVolumes }}
       volumes:
-      {{- .Values.mviewer.mviewer.extraVolumes | toYaml | nindent 6 }}
+      {{- .Values.mviewer.extraVolumes | toYaml | nindent 6 }}
       {{- end }}
       {{- with .Values.mviewer.nodeSelector }}
       nodeSelector:
