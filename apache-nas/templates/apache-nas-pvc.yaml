@@ -8,7 +8,9 @@ spec:
   accessModes:
   - ReadWriteOnce
   storageClassName: {{ .Values.nas.volume.storage_class_name }}
+  {{- if .Values.nas.volume.pv_name  }}
   volumeName: {{ .Values.nas.volume.pv_name }}
+  {{- end }}
   resources:
     requests:
       storage: {{ .Values.nas.volume.storage_size }}
