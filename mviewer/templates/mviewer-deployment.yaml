@@ -62,9 +62,9 @@ spec:
           volumeMounts:
             - name: mviewer-configuration
               mountPath: /usr/share/nginx/html/apps
-          {{- else if .Values.mviewer.extraVolumesMounts }}
+          {{- else if .Values.mviewer.extraVolumeMounts }}
           volumeMounts:
-          {{- .Values.mviewer.extraVolumesMounts | toYaml | nindent 6 }}
+          {{- .Values.mviewer.extraVolumeMounts | toYaml | nindent 6 }}
           {{- end }}
       {{- if .Values.mviewer.configuration.git.url }}
       volumes:

@@ -54,9 +54,9 @@ spec:
           env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if .Values.mviewerstudio.extraVolumesMounts }}
+          {{- if .Values.mviewerstudio.extraVolumeMounts }}
           volumeMounts:
-          {{- .Values.mviewerstudio.extraVolumesMounts | toYaml | nindent 6 }}
+          {{- .Values.mviewerstudio.extraVolumeMounts | toYaml | nindent 6 }}
           {{- end }}
       {{- if .Values.mviewerstudio.extraVolumes }}
       volumes:
