@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.camptocamp.com/name: apache-nas
+  name: apache-nas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.camptocamp.com/name: apache-nas
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.camptocamp.com/name: apache-nas
+    spec:
+      containers:
+      - image: {{ .Values.docker_image }}
+        name: apache-nas
+        resources: {}
+        {{- with .Values.env_variables }}
+        env:
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        volumeMounts:
+          - name: apache-nas-data
+            mountPath: /var/www/html
+        command:
+          - /bin/bash
+        args:
+          - -c
+          - apt update ;
+            apt install -y libpq-dev ssmtp ;
+            sed -i "s/mailhub=mail/mailhub=georchestra-smtp-svc/" /etc/ssmtp/ssmtp.conf ;
+            sed -i 's/#FromLineOverride=YES/FromLineOverride=YES/' /etc/ssmtp/ssmtp.conf ;
+            printf "[mail function]\nsendmail_path = /usr/sbin/ssmtp -t\n" > /usr/local/etc/php/conf.d/sendmail.ini ;
+            docker-php-ext-install pgsql pdo_pgsql ;
+            apt-get clean ;
+            rm -rf /var/lib/apt/lists/* ;
+            groupmod --gid 999 www-data ;
+            usermod --non-unique --uid 999 --gid 999 www-data ;
+            chown -R www-data /run/apache2 /run/lock/apache2 /var/cache/apache2/mod_cache_disk /var/log/apache2 ;
+            printf "upload_max_filesize=50M\npost_max_size=50M\n" > /usr/local/etc/php/conf.d/upload-size-customizations.ini ;
+            a2enmod rewrite ;
+            exec apache2-foreground
+      volumes:
+        - name: apache-nas-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.nas.volume.pvc_name }}
+status: {}

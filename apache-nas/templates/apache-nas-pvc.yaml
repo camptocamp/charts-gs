@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.nas.volume.pvc_name }}
+  labels:
+    app.camptocamp.com/name: apache-nas
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: {{ .Values.nas.volume.storage_class_name }}
+  volumeName: {{ .Values.nas.volume.pv_name }}
+  resources:
+    requests:
+      storage: {{ .Values.nas.volume.storage_size }}
