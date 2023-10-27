@@ -4,13 +4,14 @@ kind: Deployment
 metadata:
   name: {{ include "helm-mviewer.fullname" . }}-mviewerstudio-deployment
   labels:
-    {{- include "helm-mviewer.labels" . | nindent 4 }}-mviewerstudio
+    {{- include "helm-mviewer.labels" . | nindent 4 }}
     application/name: {{ include "helm-mviewer.fullname" . }}-mviewerstudio-deployment
 spec:
   replicas: {{ .Values.mviewerstudio.replicaCount }}
   selector:
     matchLabels:
-      {{- include "helm-mviewer.selectorLabels" . | nindent 6 }}
+      {{- include "helm-mviewer.selectorLabels" . | nindent 6 }}-mviewerstudio
+      application/name: {{ include "helm-mviewer.fullname" . }}-mviewerstudio-deployment
   template:
     metadata:
       {{- with .Values.mviewerstudio.podAnnotations }}
