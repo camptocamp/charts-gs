@@ -5,6 +5,7 @@ metadata:
   name: {{ include "helm-mviewer.fullname" . }}-mviewerstudio-deployment
   labels:
     {{- include "helm-mviewer.labels" . | nindent 4 }}
+    application/name: {{ include "helm-mviewer.fullname" . }}-mviewerstudio-deployment
 spec:
   replicas: {{ .Values.mviewerstudio.replicaCount }}
   selector:
