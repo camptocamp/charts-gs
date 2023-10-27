@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: {{ include "helm-mviewer.fullname" . }}-mviewer-deployment
   labels:
-    {{- include "helm-mviewer.labels" . | nindent 4 }}
+    {{- include "helm-mviewer.labels" . | nindent 4 }}-mviewer
     application/name: {{ include "helm-mviewer.fullname" . }}-mviewer-deployment
 spec:
   replicas: {{ .Values.mviewer.replicaCount }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "helm-mviewer.selectorLabels" . | nindent 8 }}
+        {{- include "helm-mviewer.selectorLabels" . | nindent 8 }}-mviewer
         application/name: {{ include "helm-mviewer.fullname" . }}-mviewer-deployment
     spec:
       {{- if .Values.mviewer.configuration.git.url }}
