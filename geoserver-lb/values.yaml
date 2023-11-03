@@ -32,3 +32,9 @@ database:
   geodata:
     auth:
       existingSecret: mysecret
+  datafeeder:
+    auth:
+      existingSecret: mysecret
+  gwc:
+    auth:
+      existingSecret: mysecret
