@@ -139,6 +139,66 @@ spec:
                 name: {{ .Values.database.geodata.auth.existingSecret }}
                 key: password
                 optional: false
+        - name: DF_PGHOST
+          valueFrom:
+            secretKeyRef:
+                name: {{ .Values.database.datafeeder.auth.existingSecret }}
+                key: host
+                optional: false
+        - name: DF_PGDATABASE
+          valueFrom:
+            secretKeyRef:
+                name: {{ .Values.database.datafeeder.auth.existingSecret }}
+                key: dbname
+                optional: false
+        - name: DF_PGPORT
+          valueFrom:
+            secretKeyRef:
+                name: {{ .Values.database.datafeeder.auth.existingSecret }}
+                key: port
+                optional: false
+        - name: DF_PGUSER
+          valueFrom:
+            secretKeyRef:
+                name: {{ .Values.database.datafeeder.auth.existingSecret }}
+                key: user
+                optional: false
+        - name: DF_PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+                name: {{ .Values.database.datafeeder.auth.existingSecret }}
+                key: password
+                optional: false
+        - name: GWC_PGHOST
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.database.gwc.auth.existingSecret }}
+              key: host
+              optional: false
+        - name: GWC_PGPORT
+          valueFrom:
+             secretKeyRef:
+                name: {{ .Values.database.gwc.auth.existingSecret }}
+                key: port
+                optional: false
+        - name: GWC_PGDATABASE
+          valueFrom:
+            secretKeyRef:
+                name: {{ .Values.database.gwc.auth.existingSecret }}
+                key: dbname
+                optional: false
+        - name: GWC_PGUSERNAME
+          valueFrom:
+            secretKeyRef:
+                name: {{ .Values.database.gwc.auth.existingSecret }}
+                key: user
+                optional: false
+        - name: GWC_PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+                name: {{ .Values.database.gwc.auth.existingSecret }}
+                key: password
+                optional: false
         {{- with .Values.geoserver.extra_environment }}
         {{- . | toYaml | nindent 8 }}
         {{- end }}
