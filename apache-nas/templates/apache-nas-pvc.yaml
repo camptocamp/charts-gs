@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.nas.volume.pvc_name }}
   labels:
     app.camptocamp.com/name: apache-nas
+    helm.sh/resource-policy: "keep"
 spec:
   accessModes:
   - ReadWriteOnce
