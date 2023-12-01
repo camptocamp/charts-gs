@@ -36,9 +36,18 @@ job:
 configuration:
   keepLastBackups: "10"
   ldapTarget:
+    # the url to the ldap kubernetes service
     service: "ldap://georchestra-ldap-svc:389"
+    # ldap secret - the password set in helm chart georchestra for adminPassword
     secret: "secret"
-    baseDC: "dc=georchestra,dc=org"
+    # same as helm chart georchestra values
+    baseDn: "dc=georchestra,dc=org"
+    adminDn: "cn=admin,dc=georchestra,dc=org"
+    usersRdn: "ou=users"
+    pendingusersRdn: "ou=pendingusers"
+    rolesRdn: "ou=roles"
+    orgsRdn: "ou=orgs"
+    pendingorgs: "ou=pendingorgs"
 
 persistence:
   ## Persistent Volume Storage Class
