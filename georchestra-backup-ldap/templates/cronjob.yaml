@@ -11,10 +11,10 @@ spec:
   successfulJobsHistoryLimit: {{ $job.successfulJobsHistoryLimit }}
   jobTemplate:
     spec:
-      metadata:
-        labels:
-          {{- include "georchestra-backup-ldap.labels" . | nindent 12 }}
       template:
+        metadata:
+          labels:
+            {{- include "georchestra-backup-ldap.labels" . | nindent 12 }}
         spec:
           {{- with $job.imagePullSecrets }}
           imagePullSecrets:
