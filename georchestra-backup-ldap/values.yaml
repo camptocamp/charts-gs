@@ -47,7 +47,7 @@ configuration:
     pendingusersRdn: "ou=pendingusers"
     rolesRdn: "ou=roles"
     orgsRdn: "ou=orgs"
-    pendingorgs: "ou=pendingorgs"
+    pendingorgsRdn: "ou=pendingorgs"
 
 persistence:
   ## Persistent Volume Storage Class
