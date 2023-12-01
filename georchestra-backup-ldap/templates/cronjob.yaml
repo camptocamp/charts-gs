@@ -1,0 +1,63 @@
+{{- $job := .Values.job -}}
+{{- $ldapTargetConfiguration := .Values.configuration.ldapTarget -}}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "georchestra-backup-ldap.fullname" . }}
+  labels:
+    {{- include "georchestra-backup-ldap.labels" . | nindent 4 }}
+spec:
+  schedule: {{ $job.schedule | quote }}
+  successfulJobsHistoryLimit: {{ $job.successfulJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      metadata:
+        labels:
+          {{- include "georchestra-backup-ldap.labels" . | nindent 12 }}
+      template:
+        spec:
+          {{- with $job.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $job.securityContext }}
+          securityContext:
+            {{ toYaml . | indent 12 }}
+          {{- end }}
+          containers:
+          - name: {{ .Chart.Name }}
+            image: "{{ $job.image.repository }}:{{ $job.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ $job.image.pullPolicy }}
+            volumeMounts:
+              - mountPath: /backup
+                name: backup
+            command: ["/bin/bash"]
+            args:
+              - -c
+              - /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "cn=admin,{{ $ldapTargetConfiguration.baseDC }}" -w {{ $ldapTargetConfiguration.secret }} -b "ou=users,{{ $ldapTargetConfiguration.baseDC }}" > /backup/ldap-$(date +"%s").ldif
+              - /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "cn=admin,{{ $ldapTargetConfiguration.baseDC }}" -w {{ $ldapTargetConfiguration.secret }} -b "ou=pendingusers,{{ $ldapTargetConfiguration.baseDC }}" >> /backup/ldap-$(date +"%s").ldif
+              - /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "cn=admin,{{ $ldapTargetConfiguration.baseDC }}" -w {{ $ldapTargetConfiguration.secret }} -b "ou=orgs,{{ $ldapTargetConfiguration.baseDC }}" >> /backup/ldap-$(date +"%s").ldif
+              - /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "cn=admin,{{ $ldapTargetConfiguration.baseDC }}" -w {{ $ldapTargetConfiguration.secret }} -b "ou=pendingorgs,{{ $ldapTargetConfiguration.baseDC }}" >> /backup/ldap-$(date +"%s").ldif
+              - /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "cn=admin,{{ $ldapTargetConfiguration.baseDC }}" -w {{ $ldapTargetConfiguration.secret }} -b "ou=roles,{{ $ldapTargetConfiguration.baseDC }}" >> /backup/ldap-$(date +"%s").ldif
+              - rm `ls -t /backup | awk 'NR>{{ .Values.configuration.keepLastBackups }}'`
+            {{- with $job.resources }}
+            resources:
+              {{ toYaml . | indent 14 }}
+            {{- end }}
+          restartPolicy: {{ $job.restartPolicy }}
+          volumes:
+            - name: "backup"
+              persistentVolumeClaim:
+                claimName: {{ include "georchestra-backup-ldap.fullname" . }}-pvc
+          {{- with $job.nodeSelector }}
+          nodeSelector:
+            {{ toYaml . | indent 12 }}
+          {{- end }}
+          {{- with $job.affinity }}
+          affinity:
+            {{ toYaml . | indent 12 }}
+          {{- end }}
+          {{- with $job.tolerations }}
+          tolerations:
+            {{ toYaml . | indent 12 }}
+          {{- end }}
