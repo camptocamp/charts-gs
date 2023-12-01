@@ -2454,6 +2454,17 @@ entries:
     urls:
     - geocontrib-0.1.1-datahub-integration-datadir-crepel-test-09e33a5.tgz
     version: 0.1.1-datahub-integration-datadir-crepel-test-09e33a5
+  georchestra-backup-ldap:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-12-01T10:44:58.002408795Z"
+    description: A Helm chart for backup ldap
+    digest: 003c28c41024069de1844cf956709e62eb6439707c6b287aac5d674bfd23970c
+    name: georchestra-backup-ldap
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/georchestra-backup-ldap-0.1.0/georchestra-backup-ldap-0.1.0.tgz
+    version: 0.1.0
   geoserver-datadir-sync:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -6540,4 +6551,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2023-11-16T16:35:56.588706546Z"
+generated: "2023-12-01T10:44:58.004435661Z"
