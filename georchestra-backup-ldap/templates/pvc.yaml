@@ -11,10 +11,6 @@ spec:
     {{- range .Values.persistence.accessModes }}
     - {{ . | quote }}
     {{- end }}
-  storageClassName: ""
-  selector:
-    matchLabels:
-      {{- include "georchestra-backup-ldap.selectorLabels" . | nindent 6 }}
   resources:
     requests:
       storage: {{ .Values.persistence.size }}
