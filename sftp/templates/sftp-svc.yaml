@@ -6,10 +6,13 @@ metadata:
     {{- include "sftp.labels" . | nindent 4 }}
     app.georchestra.org: sftp
 spec:
-  type: ClusterIP
+  type: {{ .Values.sftp.service.type }}
   ports:
     - port: 22
       protocol: TCP
       targetPort: 22
+      {{- if .Values.sftp.service.nodePort }}
+      nodePort: {{ .Values.sftp.service.nodePort }}
+      {{- end }}
   selector:
     {{- include "sftp.selectorLabels" . | nindent 4 }}

@@ -1,5 +1,8 @@
 ---
 sftp:
+  service:
+    type: "ClusterIP" # or NodePort or LoadBalancer
+  #  nodePort: 30022 # when type NodePort
   image: camptocamp/sftp:bullseye-k8s-georchestra
   imagePullPolicy: Always
   #lifecycle:
