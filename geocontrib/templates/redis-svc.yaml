@@ -7,7 +7,7 @@ metadata:
 spec:
   ports:
     - port: 6379
-      targetPort: 6378
+      targetPort: 6379
       protocol: TCP
   selector:
     {{- include "geocontrib.selectorLabels" . | nindent 4 }}-redis-depl
