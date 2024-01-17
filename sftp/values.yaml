@@ -15,7 +15,9 @@ sftp:
 
   #imagePullSecrets:
   #- name: secret
-
+  
+  customHostname: "{{ .Release.Name }}-{{ .Release.Namespace }}"
+  
   extraVolumes: []
    # - mountPath: /usr/share/nginx/html
    #   name: volume-pvc
