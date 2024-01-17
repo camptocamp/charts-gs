@@ -51,6 +51,7 @@ spec:
               chmod 600 /home/sftp/.ssh/authorized_keys ;
               chown sftp:sftp /home/sftp/.ssh/authorized_keys ;
               /usr/sbin/sshd -D -e ;
+      hostname: {{ .Release.Name -}} - {{- .Release.Namespace }}
       volumes:
       - name: authorized-keys
         configMap:
