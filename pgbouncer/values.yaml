@@ -89,6 +89,7 @@ image:
 service:
   type: ClusterIP
   port: 5432
+  # nodePort: 30543 # when type NodePort
   annotations: {}
 
 ## Labels to add to the pod metadata
