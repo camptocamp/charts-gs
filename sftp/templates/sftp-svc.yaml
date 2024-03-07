@@ -7,8 +7,11 @@ metadata:
     app.georchestra.org: sftp
 spec:
   type: {{ .Values.sftp.service.type }}
+  {{- if .Values.sftp.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.sftp.service.externalTrafficPolicy }}
+  {{- end }}
   ports:
-    - port: 22
+    - port: {{ .Values.sftp.service.port }}
       protocol: TCP
       targetPort: 22
       {{- if .Values.sftp.service.nodePort }}

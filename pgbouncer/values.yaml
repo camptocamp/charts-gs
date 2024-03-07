@@ -89,6 +89,8 @@ image:
 service:
   type: ClusterIP
   port: 5432
+  # Set to local if want to preserve source IP for NodePort or LoadBalancer
+  # externalTrafficPolicy: Cluster
   # nodePort: 30543 # when type NodePort
   annotations: {}
 
