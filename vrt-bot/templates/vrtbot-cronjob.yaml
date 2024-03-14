@@ -30,6 +30,8 @@ spec:
             - name: create-sourcedir
               image: "{{ .Values.image }}"
               command: ['sh', '-c', "mkdir -p $SOURCEDIR; chown app:app $SOURCEDIR"]
+              securityContext:
+                runAsUser: 0
               volumeMounts:
               {{- .Values.volumeMounts | toYaml | nindent 14 }}
               env:
