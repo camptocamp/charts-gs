@@ -384,6 +384,16 @@ entries:
   cadastrapp:
   - apiVersion: v2
     appVersion: 2.0.0
+    created: "2024-03-14T09:54:33.318800819Z"
+    description: A Helm chart for deploying geOrchestra's cadastrapp
+    digest: 0d4ebed24bd05c077ab82742089af1740642b109b24407f7ec5e6dd1b43997ac
+    name: cadastrapp
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/cadastrapp-0.2.2/cadastrapp-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
+    appVersion: 2.0.0
     created: "2023-02-17T09:57:23.397161508Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: a72584067ae99a4e0caf628b9407f2099a1d0ac69c70c5a28a1651e785a98b5b
@@ -3817,6 +3827,16 @@ entries:
     - geoserver-datadir-sync-0.1.0-main-5234e50.tgz
     version: 0.1.0-main-5234e50
   geoserver-lb:
+  - apiVersion: v2
+    appVersion: 22.0.4
+    created: "2024-03-14T09:54:33.47075681Z"
+    description: A Helm chart for deploying geoserver loadbalanced
+    digest: 731643c9f73cfd10740dbcb9d867b957f57ccad6e7fabd314a7d34d0cc5417bd
+    name: geoserver-lb
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geoserver-lb-0.5.1/geoserver-lb-0.5.1.tgz
+    version: 0.5.1
   - apiVersion: v2
     appVersion: 22.0.4
     created: "2023-11-03T10:14:33.279566052Z"
@@ -8514,4 +8534,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2024-03-14T09:52:57.377527854Z"
+generated: "2024-03-14T09:54:33.473440557Z"
