@@ -4,7 +4,7 @@ description: A Helm chart for deploying geOrchestra's cadastrapp
 
 type: application
 
-version: 0.2.1
+version: 0.2.2
 
 # Last version released on https://github.com/georchestra/cadastrapp is 2.0
 appVersion: "2.0.0"

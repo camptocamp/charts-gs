@@ -31,6 +31,7 @@ spec:
           cp /ssh-secret/ssh-privatekey /root/.ssh/id_rsa ;
           chmod 0600 /root/.ssh/id_rsa ;
         {{- end }}
+          rm -Rf /etc/georchestra
           git clone {{ .Values.cadastrapp.datadir.git.url }} -b {{ .Values.cadastrapp.datadir.git.ref }} /etc/georchestra
         env:
         {{- if .Values.cadastrapp.datadir.git.ssh_secret }}
