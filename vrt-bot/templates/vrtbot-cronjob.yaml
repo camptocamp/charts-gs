@@ -29,7 +29,7 @@ spec:
           initContainers:
             - name: create-sourcedir
               image: busybox
-              command: ['sh', '-c', "mkdir -p $SOURCEDIR; chown www-data:www-data $SOURCEDIR"]
+              command: ['sh', '-c', "mkdir -p $SOURCEDIR; chown 999:1000 $SOURCEDIR"]
               volumeMounts:
               {{- .Values.volumeMounts | toYaml | nindent 14 }}
               env:
