@@ -51,10 +51,8 @@ spec:
         - name: geoserver-geodata
           persistentVolumeClaim:
             claimName: georchestra-geoserver-geodata
-        {{- range .Values.geoserver.extra_volumes }}
-        - name: {{ .name }}
-          persistentVolumeClaim:
-            claimName: {{ .claimName }}
+        {{- if .Values.geoserver.extra_volumes }}
+          {{ .Values.geoserver.extra_volumes | toYaml | nindent 6 }}
         {{- end }}
       {{- with .Values.geoserver.pull_secret }}
       imagePullSecrets:
@@ -239,9 +237,8 @@ spec:
             name: geoserver-webapp
           - mountPath: /mnt/geoserver_tiles
             name: geoserver-tiles
-          {{- range .Values.geoserver.extra_volumes }}
-          - name: {{ .name }}
-            mountPath: {{ .mountPath }}
+          {{- if .Values.geoserver.extra_volumeMounts }}
+            {{ .Values.geoserver.extra_volumeMounts | toYaml | nindent 10 }}
           {{- end }}
       - name: geoserver-reload
         image: {{ .Values.geoserver.reloader.docker_image }}
