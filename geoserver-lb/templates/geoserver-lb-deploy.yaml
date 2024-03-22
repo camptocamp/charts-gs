@@ -47,9 +47,8 @@ spec:
             mountPath: /var/cache/nginx
           - name: var-run
             mountPath: /var/run
-          {{- range .Values.geoserver.extra_volumes }}
-          - name: {{ .name }}
-            mountPath: {{ .mountPath }}
+          {{- if .Values.geoserver.extra_volumes }}
+            {{ .Values.geoserver.extra_volumes | toYaml | nindent 8 }}
           {{- end }}
           resources:
             requests:
@@ -79,10 +78,8 @@ spec:
         emptyDir: {}
       - name: etc-nginx
         emptyDir: {}
-      {{- range .Values.geoserver.extra_volumes }}
-      - name: {{ .name }}
-        persistentVolumeClaim:
-          claimName: {{ .claimName }}
+      {{- if .Values.geoserver.extra_volumeMounts }}
+        {{ .Values.geoserver.extra_volumeMounts | toYaml | nindent 10 }}
       {{- end }}
 
 

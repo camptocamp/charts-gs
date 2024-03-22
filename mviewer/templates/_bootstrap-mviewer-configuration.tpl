@@ -9,6 +9,7 @@
     cp /ssh-secret/ssh-privatekey /root/.ssh/id_rsa ;
     chmod 0600 /root/.ssh/id_rsa ;
     {{- end }}
+    rm -Rf /usr/share/nginx/html/apps ;
     git clone --depth 1 --single-branch {{ .Values.configuration.git.url }} -b {{ .Values.configuration.git.ref }} /usr/share/nginx/html/apps ;
   {{- if .Values.configuration.git.ssh_secret }}
   env:
