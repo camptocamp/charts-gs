@@ -204,14 +204,7 @@ spec:
         image: {{ .Values.geoserver.docker_image }}
         imagePullPolicy: Always
         livenessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /geoserver/gwc/service/wmts?SERVICE=WMTS&REQUEST=GetCapabilities
-            port: 8080
-            scheme: HTTP
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 5
+        {{- .Values.geoserver.livenessProbe | toYaml | nindent 10 }}
         ports:
         - containerPort: 8080
           name: http-proxy

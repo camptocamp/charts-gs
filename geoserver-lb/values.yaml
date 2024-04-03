@@ -3,6 +3,15 @@ geoserver:
   # This is the url to the service provided by the geOrchestra helm chart
   master_svc_url: georchestra-geoserver-svc:8080
   docker_image: registry.com/org/client-configuration/geoserver:22.0.4
+  livenessProbe:
+    httpGet:
+      path: /geoserver/gwc/service/wmts?SERVICE=WMTS&REQUEST=GetCapabilities
+      port: 8080
+      scheme: HTTP
+    periodSeconds: 10
+    failureThreshold: 3
+    successThreshold: 1
+    timeoutSeconds: 5
   # pull_secret: ghcr-registry-secret
   replicas: 1
   jetty_monitoring: false
