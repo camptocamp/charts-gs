@@ -21,3 +21,6 @@ Please read here what is PostgreSQL HBA: https://www.postgresql.org/docs/current
 This will allow us to configure the permissions for our virtual PgBouncer users.
 
 For that uncomment `config.hba` and configure the file based on the documentation linked above.
+
+## Notes
+- You do need to specify the user and their password in the user list for the user to work.
