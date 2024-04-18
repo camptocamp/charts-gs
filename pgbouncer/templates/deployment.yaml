@@ -82,7 +82,7 @@ spec:
                   then
                     for db_name in /etc/secrets-db/*; do
                       cd $db_name
-                      echo "$(cat dbname) = host={{ .Values.config.postgresql.host }} port={{ .Values.config.postgresql.port }} dbname=$(cat dbname) user=$(cat user) password=$(cat password)" >> /opt/bitnami/pgbouncer/conf/databases.txt
+                      echo "$(cat dbname) = host={{ .Values.config.postgresql.host }} port={{ .Values.config.postgresql.port }} dbname=$(cat dbname)" >> /opt/bitnami/pgbouncer/conf/databases.txt
                     done;
                   fi;
                   kill -1 1
