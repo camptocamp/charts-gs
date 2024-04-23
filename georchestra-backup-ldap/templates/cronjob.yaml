@@ -11,6 +11,7 @@ spec:
   successfulJobsHistoryLimit: {{ $job.successfulJobsHistoryLimit }}
   jobTemplate:
     spec:
+      ttlSecondsAfterFinished: 86400
       template:
         metadata:
           labels:
