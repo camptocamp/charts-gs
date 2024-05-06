@@ -3,7 +3,7 @@ nas:
   volume:
     #pv_name: c2c-com-apache-nas-data
     pvc_name: apache-nas-data
-    storage_class_name: local
+    #storage_class_name: local
     storage_size: 5Gi
 
 env_variables: []
