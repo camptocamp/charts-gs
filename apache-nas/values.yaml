@@ -5,6 +5,8 @@ nas:
     pvc_name: apache-nas-data
     #storage_class_name: local
     storage_size: 5Gi
+    accessModes:
+    - ReadWriteOnce
 
 env_variables: []
 

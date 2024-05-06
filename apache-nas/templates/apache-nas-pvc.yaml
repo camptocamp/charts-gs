@@ -7,7 +7,9 @@ metadata:
     helm.sh/resource-policy: "keep"
 spec:
   accessModes:
-  - ReadWriteOnce
+    {{- range .Values.nas.volume.accessModes }}
+    - {{ . | quote }}
+    {{- end }}
   {{- if .Values.nas.volume.storage_class_name  }}
   storageClassName: {{ .Values.nas.volume.storage_class_name }}
   {{- else }}
