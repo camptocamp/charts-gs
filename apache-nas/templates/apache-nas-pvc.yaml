@@ -10,6 +10,8 @@ spec:
   - ReadWriteOnce
   {{- if .Values.nas.volume.storage_class_name  }}
   storageClassName: {{ .Values.nas.volume.storage_class_name }}
+  {{- else }}
+  storageClassName: ""
   {{- end }}
   {{- if .Values.nas.volume.pv_name  }}
   volumeName: {{ .Values.nas.volume.pv_name }}
