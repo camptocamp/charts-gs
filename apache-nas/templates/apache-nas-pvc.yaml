@@ -10,10 +10,11 @@ spec:
     {{- range .Values.nas.volume.accessModes }}
     - {{ . | quote }}
     {{- end }}
-  {{- if .Values.nas.volume.storage_class_name  }}
-  storageClassName: {{ .Values.nas.volume.storage_class_name }}
-  {{- else }}
+  # disable automatic provisioning
+  {{- if (eq "-" .Values.nas.volume.storage_class_name) }}
   storageClassName: ""
+  {{- else if .Values.nas.volume.storage_class_name  }}
+  storageClassName: {{ .Values.nas.volume.storage_class_name }}
   {{- end }}
   {{- if .Values.nas.volume.pv_name  }}
   volumeName: {{ .Values.nas.volume.pv_name }}
