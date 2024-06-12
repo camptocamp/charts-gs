@@ -17,6 +17,18 @@ spec:
         - name: apache
           image: ghcr.io/camptocamp/inrae-docker-images/apache-mod-mellon:2.4
           imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 10
+            timeoutSeconds: 5
           volumeMounts:
           - name: virtualhost-config
             mountPath: /etc/apache2/sites-available/000-default.conf
