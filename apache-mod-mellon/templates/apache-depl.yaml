@@ -37,8 +37,8 @@ spec:
             mountPath: /etc/mod-mellon-config
       volumes:
       - name: mod-mellon-config
-        configMap:
-          name: {{ include "apache-mod-mellon.fullname" . }}-mod-mellon
+        secret:
+          secretName: {{ include "apache-mod-mellon.fullname" . }}-mod-mellon
       - name: virtualhost-config
         configMap:
           name: {{ include "apache-mod-mellon.fullname" . }}-virtualhost
