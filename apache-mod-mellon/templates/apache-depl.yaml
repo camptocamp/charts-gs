@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "apache-mod-mellon.fullname" . }}-apache-depl
+  labels:
+    {{- include "apache-mod-mellon.labels" . | nindent 4 }}-apache-depl
+spec:
+  selector:
+    matchLabels:
+      {{- include "apache-mod-mellon.selectorLabels" . | nindent 6 }}-apache-depl
+  template:
+    metadata:
+      labels:
+        {{- include "apache-mod-mellon.selectorLabels" . | nindent 8 }}-apache-depl
+    spec:
+      containers:
+        - name: apache
+          image: ghcr.io/camptocamp/inrae-docker-images/apache-mod-mellon:2.4
+          imagePullPolicy: Always
+          volumeMounts:
+          - name: virtualhost-config
+            mountPath: /etc/apache2/sites-available/000-default.conf
+            subPath: 000-default.conf
+          - name: mod-mellon-config
+            mountPath: /etc/mod-mellon-config
+      volumes:
+      - name: mod-mellon-config
+        configMap:
+          name: {{ include "apache-mod-mellon.fullname" . }}-mod-mellon
+      - name: virtualhost-config
+        configMap:
+          name: {{ include "apache-mod-mellon.fullname" . }}-virtualhost
+

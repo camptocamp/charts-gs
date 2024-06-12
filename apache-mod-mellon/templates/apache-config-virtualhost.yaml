@@ -1,0 +1,104 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+  labels:
+    {{- include "apache-mod-mellon.labels" . | nindent 4 }}-apache
+  name: {{ include "apache-mod-mellon.fullname" . }}-virtualhost
+data:
+  000-default.conf: |
+    <VirtualHost *:80>
+        ServerName {{ .Values.hostname }}
+        UseCanonicalName On
+        ProxyTimeout 300
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+
+        ErrorLog /dev/stderr
+        CustomLog /dev/stdout combined
+
+        <Location />
+            Options -Indexes
+
+            MellonEnable "info"
+            MellonSecureCookie On
+            MellonUser eppn
+            MellonMergeEnvVars On
+            MellonSubjectConfirmationDataAddressCheck Off
+            MellonSPPrivateKeyFile  /etc/mod-mellon-config/mellon.key
+            MellonSPCertFile        /etc/mod-mellon-config/mellon.cert
+            MellonSPentityId        {{ .Values.mellon_config.entity_id }}
+            MellonOrganizationName "{{ .Values.mellon_config.organization_url }}"
+            MellonOrganizationURL "{{ .Values.mellon_config.organization_url }}"
+            MellonIdPMetadataFile /etc/mod-mellon-config/metadata-idps.xml
+            MellonDiscoveryURL     "{{ .Values.mellon_config.discovery_url }}"
+            MellonIdPCAFile        /etc/mod-mellon-config/metadata-signing-cert.pem
+            MellonIdPPublicKeyFile /etc/mod-mellon-config/metadata-signing-cert.pem
+            MellonProbeDiscoveryTimeout 1
+            MellonSetEnv "MAIL" "{{ .Values.mellon_config.set_env.mail }}"
+            MellonSetEnv "EPPN" "{{ .Values.mellon_config.set_env.eppn }}"
+            MellonSetEnv "CN" "{{ .Values.mellon_config.set_env.cn }}"
+            MellonSetEnv "O" "{{ .Values.mellon_config.set_env.o }}"
+            MellonSetEnv "SN" "{{ .Values.mellon_config.set_env.sn }}"
+            MellonSetEnv "GIVEN_NAME" "{{ .Values.mellon_config.set_env.given_name }}"
+
+            MellonEndpointPath /mellon
+
+            # it is this proxy's responsability to make sure the value of these headers are legit
+            # See a list of headers used by geOrchestra here:
+            # https://github.com/georchestra/georchestra/blob/master/commons/src/main/java/org/georchestra/commons/security/SecurityHeaders.java#L41-L67
+            RequestHeader unset sec-georchestra-preauthenticated
+            RequestHeader unset sec-mellon-name-id
+            RequestHeader unset sec-username
+            RequestHeader unset sec-name
+            RequestHeader unset sec-givenname
+            RequestHeader unset sec-email
+            RequestHeader unset sec-org
+            RequestHeader unset sec-proxy
+            RequestHeader unset sec-user
+            RequestHeader unset sec-organization
+            RequestHeader unset sec-userid
+            RequestHeader unset sec-lastupdated
+            RequestHeader unset sec-roles
+            RequestHeader unset sec-firstname
+            RequestHeader unset sec-lastname
+            RequestHeader unset sec-tel
+            RequestHeader unset sec-orgid
+            RequestHeader unset sec-orgname
+            RequestHeader unset sec-org-lastupdated
+            RequestHeader unset imp-roles
+            RequestHeader unset imp-username
+
+            {{ .Values.apache_auth_headers_type }} set sec-georchestra-preauthenticated true "expr=-n env('MELLON_NAME_ID')"
+            {{ .Values.apache_auth_headers_type }} set sec-mellon-name-id "expr={base64}%{base64:%{env:MELLON_NAME_ID}}" "expr=-n env('MELLON_NAME_ID')"
+            {{ .Values.apache_auth_headers_type }} set preauth-username "expr={base64}%{base64:%{env:MELLON_EPPN}}" "expr=-n env('MELLON_EPPN')"
+            {{ .Values.apache_auth_headers_type }} set preauth-email "expr={base64}%{base64:%{env:MELLON_MAIL}}" "expr=-n env('MELLON_MAIL')"
+            {{ .Values.apache_auth_headers_type }} set preauth-org "expr={base64}%{base64:%{env:MELLON_O}}" "expr=-n env('MELLON_O')"
+            {{ .Values.apache_auth_headers_type }} set preauth-firstname "expr={base64}%{base64:%{env:MELLON_GIVEN_NAME}}" "expr=-n env('MELLON_GIVEN_NAME')"
+            {{ .Values.apache_auth_headers_type }} set preauth-lastname "expr={base64}%{base64:%{env:MELLON_SN}}" "expr=-n env('MELLON_SN')"
+
+            {{- if .Values.georchestra_proxypass_endpoint -}}
+            ProxyPass "{{ .Values.georchestra_proxypass_endpoint }}"
+            ProxyPassReverse "{{ .Values.georchestra_proxypass_endpoint }}"
+            ProxyPreserveHost On
+            {{- end }}
+
+            RewriteEngine on
+            RewriteCond %{QUERY_STRING} ^$
+            RewriteCond %{REQUEST_METHOD}  =GET
+            RewriteCond %{REQUEST_URI}  ^/login$
+            RewriteRule /login /login/mellon [R,L]
+            RewriteCond %{ENV:MELLON_NAME_ID} !^$
+            RewriteRule /logout /mellon/logout?ReturnTo={{ .Values.hostname }}
+
+        </Location>
+
+        <Location /login/mellon>
+            AuthType Mellon
+            MellonEnable auth
+            Require valid-user
+            RewriteEngine on
+            RewriteRule (.*) / [R]
+        </Location>
+
+    </VirtualHost>

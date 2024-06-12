@@ -1,0 +1,6 @@
+apiVersion: v2
+name: apache-mod-mellon
+description: A Helm chart for deploying an Apache HTTPd configured with the mod_mellon
+type: application
+version: 0.2.0
+appVersion: "1.16.0"
