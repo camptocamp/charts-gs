@@ -21,6 +21,14 @@ data:
     #
     # Example:
     # LoadModule foo_module modules/mod_foo.so
+		LoadModule mpm_event_module modules/mod_mpm_event.so
+		LoadModule authn_file_module modules/mod_authn_file.so
+		LoadModule authn_core_module modules/mod_authn_core.so
+		LoadModule authz_host_module modules/mod_authz_host.so
+		LoadModule authz_groupfile_module modules/mod_authz_groupfile.so
+		LoadModule authz_user_module modules/mod_authz_user.so
+		LoadModule authz_core_module modules/mod_authz_core.so
+		LoadModule access_compat_module modules/mod_access_compat.so
     LoadModule auth_mellon_module modules/mod_auth_mellon.so
     LoadModule reqtimeout_module modules/mod_reqtimeout.so
     LoadModule filter_module modules/mod_filter.so
@@ -33,8 +41,6 @@ data:
     LoadModule status_module modules/mod_status.so
     LoadModule autoindex_module modules/mod_autoindex.so
     LoadModule dir_module modules/mod_dir.so
-    LoadModule mpm_event_module modules/mod_mpm_event.so
-
     <IfModule unixd_module>
     #
     # If you wish httpd to run as a different user or group, you must run
