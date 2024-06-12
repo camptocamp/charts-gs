@@ -41,6 +41,7 @@ data:
     LoadModule status_module modules/mod_status.so
     LoadModule autoindex_module modules/mod_autoindex.so
     LoadModule dir_module modules/mod_dir.so
+    LoadModule rewrite_module modules/mod_rewrite.so
     <IfModule unixd_module>
     #
     # If you wish httpd to run as a different user or group, you must run
