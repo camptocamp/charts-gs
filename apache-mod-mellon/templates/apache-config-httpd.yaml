@@ -1,0 +1,255 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+  labels:
+    {{- include "apache-mod-mellon.labels" . | nindent 4 }}-apache
+  name: {{ include "apache-mod-mellon.fullname" . }}-httpd
+data:
+  httpd.conf: |
+    ServerRoot "/usr/local/apache2"
+    Listen 80
+
+    #
+    # Dynamic Shared Object (DSO) Support
+    #
+    # To be able to use the functionality of a module which was built as a DSO you
+    # have to place corresponding `LoadModule' lines at this location so the
+    # directives contained in it are actually available _before_ they are used.
+    # Statically compiled modules (those listed by `httpd -l') do not need
+    # to be loaded here.
+    #
+    # Example:
+    # LoadModule foo_module modules/mod_foo.so
+    LoadModule auth_mellon_module modules/mod_auth_mellon.so
+    LoadModule reqtimeout_module modules/mod_reqtimeout.so
+    LoadModule filter_module modules/mod_filter.so
+    LoadModule log_config_module modules/mod_log_config.so
+    LoadModule env_module modules/mod_env.so
+    LoadModule headers_module modules/mod_headers.so
+    LoadModule setenvif_module modules/mod_setenvif.so
+    LoadModule version_module modules/mod_version.so
+    LoadModule unixd_module modules/mod_unixd.so
+    LoadModule status_module modules/mod_status.so
+    LoadModule autoindex_module modules/mod_autoindex.so
+    LoadModule dir_module modules/mod_dir.so
+
+    <IfModule unixd_module>
+    #
+    # If you wish httpd to run as a different user or group, you must run
+    # httpd as root initially and it will switch.  
+    #
+    # User/Group: The name (or #number) of the user/group to run httpd as.
+    # It is usually good practice to create a dedicated user and group for
+    # running httpd, as with most system services.
+    #
+    User www-data
+    Group www-data
+
+    </IfModule>
+
+    # 'Main' server configuration
+    #
+    # The directives in this section set up the values used by the 'main'
+    # server, which responds to any requests that aren't handled by a
+    # <VirtualHost> definition.  These values also provide defaults for
+    # any <VirtualHost> containers you may define later in the file.
+    #
+    # All of these directives may appear inside <VirtualHost> containers,
+    # in which case these default settings will be overridden for the
+    # virtual host being defined.
+    #
+
+    #
+    # ServerAdmin: Your address, where problems with the server should be
+    # e-mailed.  This address appears on some server-generated pages, such
+    # as error documents.  e.g. admin@your-domain.com
+    #
+    ServerAdmin you@example.com
+
+    #
+    # ServerName gives the name and port that the server uses to identify itself.
+    # This can often be determined automatically, but we recommend you specify
+    # it explicitly to prevent problems during startup.
+    #
+    # If your host doesn't have a registered DNS name, enter its IP address here.
+    #
+    #ServerName www.example.com:80
+
+    #
+    # Deny access to the entirety of your server's filesystem. You must
+    # explicitly permit access to web content directories in other 
+    # <Directory> blocks below.
+    #
+    <Directory />
+        AllowOverride none
+        Require all denied
+    </Directory>
+
+    #
+    # Note that from this point forward you must specifically allow
+    # particular features to be enabled - so if something's not working as
+    # you might expect, make sure that you have specifically enabled it
+    # below.
+    #
+
+    #
+    # DocumentRoot: The directory out of which you will serve your
+    # documents. By default, all requests are taken from this directory, but
+    # symbolic links and aliases may be used to point to other locations.
+    #
+    DocumentRoot "/usr/local/apache2/htdocs"
+    <Directory "/usr/local/apache2/htdocs">
+        #
+        # Possible values for the Options directive are "None", "All",
+        # or any combination of:
+        #   Indexes Includes FollowSymLinks SymLinksifOwnerMatch ExecCGI MultiViews
+        #
+        # Note that "MultiViews" must be named *explicitly* --- "Options All"
+        # doesn't give it to you.
+        #
+        # The Options directive is both complicated and important.  Please see
+        # http://httpd.apache.org/docs/2.4/mod/core.html#options
+        # for more information.
+        #
+        Options Indexes FollowSymLinks
+
+        #
+        # AllowOverride controls what directives may be placed in .htaccess files.
+        # It can be "All", "None", or any combination of the keywords:
+        #   AllowOverride FileInfo AuthConfig Limit
+        #
+        AllowOverride None
+
+        #
+        # Controls who can get stuff from this server.
+        #
+        Require all granted
+    </Directory>
+
+    #
+    # DirectoryIndex: sets the file that Apache will serve if a directory
+    # is requested.
+    #
+    <IfModule dir_module>
+        DirectoryIndex index.html
+    </IfModule>
+
+    #
+    # The following lines prevent .htaccess and .htpasswd files from being 
+    # viewed by Web clients. 
+    #
+    <Files ".ht*">
+        Require all denied
+    </Files>
+
+    #
+    # ErrorLog: The location of the error log file.
+    # If you do not specify an ErrorLog directive within a <VirtualHost>
+    # container, error messages relating to that virtual host will be
+    # logged here.  If you *do* define an error logfile for a <VirtualHost>
+    # container, that host's errors will be logged there and not here.
+    #
+    ErrorLog /proc/self/fd/2
+
+    #
+    # LogLevel: Control the number of messages logged to the error_log.
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    #
+    LogLevel warn
+
+    <IfModule log_config_module>
+        LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+        LogFormat "%h %l %u %t \"%r\" %>s %b" common
+
+        <IfModule logio_module>
+          # You need to enable mod_logio.c to use %I and %O
+          LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %I %O" combinedio
+        </IfModule>
+        CustomLog /proc/self/fd/1 common
+    </IfModule>
+
+    <Location />
+        Options -Indexes
+
+        MellonEnable "info"
+        MellonSecureCookie On
+        MellonUser eppn
+        MellonMergeEnvVars On
+        MellonSubjectConfirmationDataAddressCheck Off
+        MellonSPPrivateKeyFile  /etc/mod-mellon-config/mellon.key
+        MellonSPCertFile        /etc/mod-mellon-config/mellon.cert
+        MellonSPentityId        {{ .Values.mellon_config.entity_id }}
+        MellonOrganizationName "{{ .Values.mellon_config.organization_url }}"
+        MellonOrganizationURL "{{ .Values.mellon_config.organization_url }}"
+        MellonIdPMetadataFile /etc/mod-mellon-config/metadata-idps.xml
+        MellonDiscoveryURL     "{{ .Values.mellon_config.discovery_url }}"
+        MellonIdPCAFile        /etc/mod-mellon-config/metadata-signing-cert.pem
+        MellonIdPPublicKeyFile /etc/mod-mellon-config/metadata-signing-cert.pem
+        MellonProbeDiscoveryTimeout 1
+        MellonSetEnv "MAIL" "{{ .Values.mellon_config.set_env.mail }}"
+        MellonSetEnv "EPPN" "{{ .Values.mellon_config.set_env.eppn }}"
+        MellonSetEnv "CN" "{{ .Values.mellon_config.set_env.cn }}"
+        MellonSetEnv "O" "{{ .Values.mellon_config.set_env.o }}"
+        MellonSetEnv "SN" "{{ .Values.mellon_config.set_env.sn }}"
+        MellonSetEnv "GIVEN_NAME" "{{ .Values.mellon_config.set_env.given_name }}"
+
+        MellonEndpointPath /mellon
+
+        # it is this proxy's responsability to make sure the value of these headers are legit
+        # See a list of headers used by geOrchestra here:
+        # https://github.com/georchestra/georchestra/blob/master/commons/src/main/java/org/georchestra/commons/security/SecurityHeaders.java#L41-L67
+        RequestHeader unset sec-georchestra-preauthenticated
+        RequestHeader unset sec-mellon-name-id
+        RequestHeader unset sec-username
+        RequestHeader unset sec-name
+        RequestHeader unset sec-givenname
+        RequestHeader unset sec-email
+        RequestHeader unset sec-org
+        RequestHeader unset sec-proxy
+        RequestHeader unset sec-user
+        RequestHeader unset sec-organization
+        RequestHeader unset sec-userid
+        RequestHeader unset sec-lastupdated
+        RequestHeader unset sec-roles
+        RequestHeader unset sec-firstname
+        RequestHeader unset sec-lastname
+        RequestHeader unset sec-tel
+        RequestHeader unset sec-orgid
+        RequestHeader unset sec-orgname
+        RequestHeader unset sec-org-lastupdated
+        RequestHeader unset imp-roles
+        RequestHeader unset imp-username
+
+        {{ .Values.apache_auth_headers_type }} set sec-georchestra-preauthenticated true "expr=-n env('MELLON_NAME_ID')"
+        {{ .Values.apache_auth_headers_type }} set sec-mellon-name-id "expr={base64}%{base64:%{env:MELLON_NAME_ID}}" "expr=-n env('MELLON_NAME_ID')"
+        {{ .Values.apache_auth_headers_type }} set preauth-username "expr={base64}%{base64:%{env:MELLON_EPPN}}" "expr=-n env('MELLON_EPPN')"
+        {{ .Values.apache_auth_headers_type }} set preauth-email "expr={base64}%{base64:%{env:MELLON_MAIL}}" "expr=-n env('MELLON_MAIL')"
+        {{ .Values.apache_auth_headers_type }} set preauth-org "expr={base64}%{base64:%{env:MELLON_O}}" "expr=-n env('MELLON_O')"
+        {{ .Values.apache_auth_headers_type }} set preauth-firstname "expr={base64}%{base64:%{env:MELLON_GIVEN_NAME}}" "expr=-n env('MELLON_GIVEN_NAME')"
+        {{ .Values.apache_auth_headers_type }} set preauth-lastname "expr={base64}%{base64:%{env:MELLON_SN}}" "expr=-n env('MELLON_SN')"
+
+        {{- if .Values.georchestra_proxypass_endpoint -}}
+        ProxyPass "{{ .Values.georchestra_proxypass_endpoint }}"
+        ProxyPassReverse "{{ .Values.georchestra_proxypass_endpoint }}"
+        ProxyPreserveHost On
+        {{- end }}
+
+        RewriteEngine on
+        RewriteCond %{QUERY_STRING} ^$
+        RewriteCond %{REQUEST_METHOD}  =GET
+        RewriteCond %{REQUEST_URI}  ^/login$
+        RewriteRule /login /login/mellon [R,L]
+        RewriteCond %{ENV:MELLON_NAME_ID} !^$
+        RewriteRule /logout /mellon/logout?ReturnTo={{ .Values.hostname }}
+
+    </Location>
+
+    <Location /login/mellon>
+        AuthType Mellon
+        MellonEnable auth
+        Require valid-user
+        RewriteEngine on
+        RewriteRule (.*) / [R]
+    </Location>

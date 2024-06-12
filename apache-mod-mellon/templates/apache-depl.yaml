@@ -33,16 +33,16 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 5
           volumeMounts:
-          - name: virtualhost-config
-            mountPath: /usr/local/apache2/conf/extra/000-default.conf
-            subPath: 000-default.conf
+          - name: httpd-config
+            mountPath: /usr/local/apache2/conf/httpd.conf
+            subPath: httpd.conf
           - name: mod-mellon-config
             mountPath: /etc/mod-mellon-config
       volumes:
       - name: mod-mellon-config
         secret:
           secretName: {{ include "apache-mod-mellon.fullname" . }}-mod-mellon
-      - name: virtualhost-config
+      - name: httpd-config
         configMap:
-          name: {{ include "apache-mod-mellon.fullname" . }}-virtualhost
+          name: {{ include "apache-mod-mellon.fullname" . }}-httpd
 
