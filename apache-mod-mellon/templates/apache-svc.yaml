@@ -7,7 +7,7 @@ metadata:
 spec:
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: http
       protocol: TCP
   selector:
     {{- include "apache-mod-mellon.selectorLabels" . | nindent 4 }}-apache-depl
