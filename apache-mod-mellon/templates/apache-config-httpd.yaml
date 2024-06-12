@@ -33,6 +33,7 @@ data:
     LoadModule status_module modules/mod_status.so
     LoadModule autoindex_module modules/mod_autoindex.so
     LoadModule dir_module modules/mod_dir.so
+    LoadModule mpm_event_module modules/mod_mpm_event.so
 
     <IfModule unixd_module>
     #
