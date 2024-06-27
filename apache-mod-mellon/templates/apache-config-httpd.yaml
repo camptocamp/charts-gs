@@ -238,6 +238,8 @@ data:
         {{ .Values.apache_auth_headers_type }} set preauth-org "expr={base64}%{base64:%{env:MELLON_O}}" "expr=-n env('MELLON_O')"
         {{ .Values.apache_auth_headers_type }} set preauth-firstname "expr={base64}%{base64:%{env:MELLON_GIVEN_NAME}}" "expr=-n env('MELLON_GIVEN_NAME')"
         {{ .Values.apache_auth_headers_type }} set preauth-lastname "expr={base64}%{base64:%{env:MELLON_SN}}" "expr=-n env('MELLON_SN')"
+        {{ .Values.apache_auth_headers_type }} set preauth-provider "{{ .Values.mellon_config.provider_id }}"
+        {{ .Values.apache_auth_headers_type }} set preauth-provider-id "expr={base64}%{base64:%{env:MELLON_SN}}" "expr=-n env('MELLON_SN')"
 
         {{- if .Values.georchestra_proxypass_endpoint -}}
         ProxyPass "{{ .Values.georchestra_proxypass_endpoint }}"
@@ -261,6 +263,8 @@ data:
         RewriteCond %{HTTP:preauth-org}  !^$ [NC,OR]
         RewriteCond %{HTTP:preauth-firstname}  !^$ [NC,OR]
         RewriteCond %{HTTP:preauth-lastname}  !^$ [NC,OR]
+        RewriteCond %{HTTP:preauth-provider}  !^$ [NC,OR]
+        RewriteCond %{HTTP:preauth-provider-id}  !^$ [NC,OR]
         RewriteCond %{HTTP:sec-mellon-name-id}  !^$ [NC,OR]
         RewriteCond %{HTTP:sec-georchestra-preauthenticated}  !^$ [NC]
         RewriteRule . - [R=403,L]
