@@ -2,9 +2,14 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Values.nas.volume.pvc_name }}
+  {{- with .Values.nas.volume.annotations }}
+  annotations:
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+  {{- end }}
   labels:
     app.camptocamp.com/name: apache-nas
-    helm.sh/resource-policy: "keep"
 spec:
   accessModes:
     {{- range .Values.nas.volume.accessModes }}
