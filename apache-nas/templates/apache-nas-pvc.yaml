@@ -5,7 +5,7 @@ metadata:
   {{- with .Values.nas.volume.annotations }}
   annotations:
     {{- range $key, $value := . }}
-    {{ $key }}: {{ $value }}
+    {{ $key }}: "{{ $value }}"
     {{- end }}
   {{- end }}
   labels:
