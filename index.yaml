@@ -3,6 +3,16 @@ entries:
   apache-mod-mellon:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-07-10T08:24:54.872918504Z"
+    description: A Helm chart for deploying an Apache HTTPd configured with the mod_mellon
+    digest: f428723f70e54e101f7b75819314f2eaccc6bc1d2d9d496ad2ec217e4bc45e4d
+    name: apache-mod-mellon
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/apache-mod-mellon-1.1.1/apache-mod-mellon-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-06-27T11:48:14.08458018Z"
     description: A Helm chart for deploying an Apache HTTPd configured with the mod_mellon
     digest: bd3fd29c13407d4a2f0d970d5b08c67ecc651ae76174984a1c773176056dbe4b
@@ -11528,4 +11538,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2024-07-05T09:26:25.083856539Z"
+generated: "2024-07-10T08:24:54.87620215Z"
