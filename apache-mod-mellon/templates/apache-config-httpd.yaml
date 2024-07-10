@@ -239,7 +239,7 @@ data:
         {{ .Values.apache_auth_headers_type }} set preauth-firstname "expr={base64}%{base64:%{env:MELLON_GIVEN_NAME}}" "expr=-n env('MELLON_GIVEN_NAME')"
         {{ .Values.apache_auth_headers_type }} set preauth-lastname "expr={base64}%{base64:%{env:MELLON_SN}}" "expr=-n env('MELLON_SN')"
         {{ .Values.apache_auth_headers_type }} set preauth-provider "{{ .Values.mellon_config.provider_id }}"
-        {{ .Values.apache_auth_headers_type }} set preauth-provider-id "expr={base64}%{base64:%{env:MELLON_SN}}" "expr=-n env('MELLON_SN')"
+        {{ .Values.apache_auth_headers_type }} set preauth-provider-id "expr={base64}%{base64:%{env:MELLON_EPPN}}" "expr=-n env('MELLON_EPPN')"
 
         {{- if .Values.georchestra_proxypass_endpoint -}}
         ProxyPass "{{ .Values.georchestra_proxypass_endpoint }}"
