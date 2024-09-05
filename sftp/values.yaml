@@ -30,7 +30,9 @@ sftp:
    #   persistentVolumeClaim:
    #     claimName: persitent-volume-claim
 
-# Developper and customer public keys
+  tolerations: []
+
+  # Developper and customer public keys
   authorized_keys: ""
 
 # Server keys
