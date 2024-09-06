@@ -12,4 +12,6 @@ nas:
 
 env_variables: []
 
+tolerations: []
+
 docker_image: php:7.4-apache

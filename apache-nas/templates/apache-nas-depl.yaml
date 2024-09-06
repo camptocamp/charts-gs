@@ -50,4 +50,8 @@ spec:
         - name: apache-nas-data
           persistentVolumeClaim:
             claimName: {{ .Values.nas.volume.pvc_name }}
+      {{- if .Values.tolerations }}
+      tolerations:
+        {{- .Values.tolerations | toYaml | nindent 6 }}
+      {{- end }}
 status: {}
