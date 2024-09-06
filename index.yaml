@@ -7749,6 +7749,17 @@ entries:
     urls:
     - mviewer-0.1.0-main-d17ecf5.tgz
     version: 0.1.0-main-d17ecf5
+  opendata-ogc-features:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2024-09-06T11:56:44.68503387Z"
+    description: Helm chart for data-api (opendata-ogc-features)
+    digest: 0ed3a65aadf69987889eda9e55b217ff756c256fc162f643fdaf9712af2ed993
+    name: opendata-ogc-features
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/opendata-ogc-features-0.0.2/opendata-ogc-features-0.0.2.tgz
+    version: 0.0.2
   pgbouncer:
   - apiVersion: v1
     appVersion: 1.18.0
@@ -11951,4 +11962,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2024-09-06T06:51:17.733352828Z"
+generated: "2024-09-06T11:56:44.688000716Z"
