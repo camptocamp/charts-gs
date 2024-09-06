@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.mel.fr/name: opendata-ogc-features
+  name: opendata-ogc-features-depl
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.mel.fr/name: opendata-ogc-features
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.mel.fr/name: opendata-ogc-features
+    spec:
+      containers:
+      - image: {{ .Values.docker.image }}:{{ .Values.docker.tag }}
+        name: opendata-ogc-features
+        imagePullPolicy: {{.Values.docker.imagePullPolicy }}
+        env:
+        - name: MANAGEMENT_SERVER_PORT
+          value: "8081"
+        {{- with .Values.environment }}
+        {{- . | toYaml | nindent 8 }}
+        {{- end }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.livenessProbeHttpUrl }}
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 4
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8081
+          initialDelaySeconds: 60
+          periodSeconds: 10
+      {{- if .Values.tolerations }}
+      tolerations:
+        {{- .Values.tolerations | toYaml | nindent 6 }}
+      {{- end }}

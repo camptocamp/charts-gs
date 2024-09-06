@@ -1,0 +1,46 @@
+---
+replicaCount: 1
+# Should be set in coherence with the SERVER_SERVLET_CONTEXT_PATH variable
+livenessProbeHttpUrl: /data/ogcapi/
+docker:
+  image: georchestra/data-api
+  tag: latest
+  imagePullPolicy: Always
+  # tag: latest
+environment:
+  - name: SPRING_PROFILES_ACTIVE
+    value: postgis
+  - name: LOGGING_LEVEL_COM_CAMPTOCAMP
+    value: DEBUG
+  - name: LOGGING_LEVEL_ORG_GEOTOOLS
+    value: DEBUG
+  # See also the ingress in k8s-extra for this one, as
+  # parameters have to match
+  - name: SERVER_SERVLET_CONTEXT_PATH
+    value: /data
+  - name: POSTGRES_HOST
+    valueFrom:
+      secretKeyRef:
+        key: host
+        name: db-credentials-test-geodata
+  - name: POSTGRES_PORT
+    valueFrom:
+      secretKeyRef:
+        key: port
+        name: db-credentials-test-geodata
+  - name: POSTGRES_DB
+    valueFrom:
+      secretKeyRef:
+        key: dbname
+        name: db-credentials-test-geodata
+  - name: POSTGRES_USER
+    valueFrom:
+      secretKeyRef:
+        key: user
+        name: db-credentials-test-geodata
+  - name: POSTGRES_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: password
+        name: db-credentials-test-geodata
+tolerations: []
