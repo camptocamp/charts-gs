@@ -22,25 +22,25 @@ environment:
     valueFrom:
       secretKeyRef:
         key: host
-        name: db-credentials-test-geodata
+        name: georchestra-database-geodata-secret
   - name: POSTGRES_PORT
     valueFrom:
       secretKeyRef:
         key: port
-        name: db-credentials-test-geodata
+        name: georchestra-database-geodata-secret
   - name: POSTGRES_DB
     valueFrom:
       secretKeyRef:
         key: dbname
-        name: db-credentials-test-geodata
+        name: georchestra-database-geodata-secret
   - name: POSTGRES_USER
     valueFrom:
       secretKeyRef:
         key: user
-        name: db-credentials-test-geodata
+        name: georchestra-database-geodata-secret
   - name: POSTGRES_PASSWORD
     valueFrom:
       secretKeyRef:
         key: password
-        name: db-credentials-test-geodata
+        name: georchestra-database-geodata-secret
 tolerations: []
