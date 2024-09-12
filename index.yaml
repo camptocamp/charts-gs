@@ -7938,6 +7938,16 @@ entries:
   opendata-ogc-features:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2024-09-12T11:18:08.762372728Z"
+    description: Helm chart for data-api (opendata-ogc-features)
+    digest: 3db39b0c654ca870f88110a279ee6e91de29bcb2235830898f9839eee9b77341
+    name: opendata-ogc-features
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/opendata-ogc-features-0.0.4/opendata-ogc-features-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2024-09-06T12:03:44.73485579Z"
     description: Helm chart for data-api (opendata-ogc-features)
     digest: 300ced517962e37c6486ddeef232a3a5205ad0427143927551afe81e1e602723
@@ -12254,4 +12264,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2024-09-06T12:03:48.135561221Z"
+generated: "2024-09-12T11:18:08.765755033Z"
