@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app.mel.fr/name: opendata-ogc-features
+    app.kubernetes.io/name: opendata-ogc-features
   name: opendata-ogc-features-depl
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -27,6 +27,10 @@ spec:
         {{- with .Values.environment }}
         {{- . | toYaml | nindent 8 }}
         {{- end }}
+        {{- if .Values.ogcFeatConfig }}
+        - name: JAVA_TOOL_OPTIONS
+          value: "-Ddataapi.configdir=/etc"
+        {{- end }}
         livenessProbe:
           httpGet:
             path: {{ .Values.livenessProbeHttpUrl }}
@@ -40,6 +44,15 @@ spec:
             port: 8081
           initialDelaySeconds: 60
           periodSeconds: 10
+      {{- if .Values.ogcFeatConfig }}
+        volumeMounts:
+          - mountPath: /etc/data-api/
+            name: ogc-feat-config
+      volumes:
+      - name: ogc-feat-config
+        configMap:
+          name: ogc-feat-config-cm
+      {{- end }}
       {{- if .Values.tolerations }}
       tolerations:
         {{- .Values.tolerations | toYaml | nindent 6 }}

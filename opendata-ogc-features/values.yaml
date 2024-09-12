@@ -44,3 +44,4 @@ environment:
         key: password
         name: georchestra-database-geodata-secret
 tolerations: []
+ogcFeatConfig: {}

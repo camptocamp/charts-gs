@@ -4,6 +4,6 @@ description: Helm chart for data-api (opendata-ogc-features)
 
 type: application
 
-version: 0.0.3
+version: 0.0.4
 
 appVersion: "1.0.0"
