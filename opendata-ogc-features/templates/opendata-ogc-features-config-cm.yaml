@@ -3,9 +3,10 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   annotations:
-  labels: opendata-ogc-features
+  labels:
+  - app.kubernetes.io/component: opendata-ogc-features
   name: ogc-feat-config-cm
 data:
   application.yaml: |
-    {{- .Values.ogcFeatConfig | nindent 4 }}
+    {{- .Values.ogcFeatConfig |  nindent 4 }}
 {{- end }}
