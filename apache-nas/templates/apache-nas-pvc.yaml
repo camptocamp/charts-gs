@@ -9,7 +9,7 @@ metadata:
     {{- end }}
   {{- end }}
   labels:
-    app.camptocamp.com/name: apache-nas
+    app.kubernetes.io/name: apache-nas
 spec:
   accessModes:
     {{- range .Values.nas.volume.accessModes }}

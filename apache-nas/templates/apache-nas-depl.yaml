@@ -1,21 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
-    app.camptocamp.com/name: apache-nas
+    app.kubernetes.io/name: apache-nas
   name: apache-nas
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.camptocamp.com/name: apache-nas
-  strategy: {}
+      app.kubernetes.io/name: apache-nas
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        app.camptocamp.com/name: apache-nas
+        app.kubernetes.io/name: apache-nas
     spec:
       containers:
       - image: {{ .Values.docker_image }}
@@ -28,6 +25,9 @@ spec:
         volumeMounts:
           - name: apache-nas-data
             mountPath: /var/www/html
+        {{- if .Values.nas.extraVolumeMounts }}
+        {{- .Values.nas.extraVolumeMounts | toYaml | nindent 10 }}
+        {{- end }}
         command:
           - /bin/bash
         args:
@@ -50,8 +50,10 @@ spec:
         - name: apache-nas-data
           persistentVolumeClaim:
             claimName: {{ .Values.nas.volume.pvc_name }}
+      {{- if .Values.nas.extraVolumes }}
+      {{- .Values.nas.extraVolumes | toYaml | nindent 8 }}
+      {{- end }}
       {{- if .Values.tolerations }}
       tolerations:
         {{- .Values.tolerations | toYaml | nindent 6 }}
       {{- end }}
-status: {}
