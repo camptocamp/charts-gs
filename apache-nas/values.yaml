@@ -9,6 +9,8 @@ nas:
     - ReadWriteOnce
     annotations:
       helm.sh/resource-policy: keep
+  extraVolumeMounts: []
+  extraVolumes: []
 
 env_variables: []
 
