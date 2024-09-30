@@ -24,13 +24,14 @@ job:
     # requests:
     #   cpu: 100m
     #   memory: 128Mi
-  securityContext: {}
+  podSecurityContext: {}
     # capabilities:
     #   drop:
     #   - ALL
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1000
+  securityContext: {}
   imagePullSecrets: []
 
 configuration:

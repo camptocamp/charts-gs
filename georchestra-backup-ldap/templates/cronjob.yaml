@@ -19,11 +19,11 @@ spec:
         spec:
           {{- with $job.imagePullSecrets }}
           imagePullSecrets:
-            {{- toYaml . | nindent 12 }}
+            {{- toYaml . | nindent 10 }}
           {{- end }}
-          {{- with $job.securityContext }}
+          {{- with $job.podSecurityContext }}
           securityContext:
-            {{ toYaml . | indent 12 }}
+            {{ toYaml . | nindent 10 }}
           {{- end }}
           containers:
           - name: {{ .Chart.Name }}
@@ -43,7 +43,11 @@ spec:
               cd /backup && rm `ls -t | awk 'NR>{{ .Values.configuration.keepLastBackups }}'`
             {{- with $job.resources }}
             resources:
-              {{ toYaml . | indent 14 }}
+              {{ toYaml . | nindent 12 }}
+            {{- end }}
+            {{- with $job.securityContext }}
+            securityContext:
+              {{ toYaml . | nindent 12 }}
             {{- end }}
           restartPolicy: {{ $job.restartPolicy }}
           volumes:
@@ -52,13 +56,13 @@ spec:
                 claimName: {{ include "georchestra-backup-ldap.fullname" . }}-pvc
           {{- with $job.nodeSelector }}
           nodeSelector:
-            {{ toYaml . | indent 12 }}
+            {{ toYaml . | nindent 10 }}
           {{- end }}
           {{- with $job.affinity }}
           affinity:
-            {{ toYaml . | indent 12 }}
+            {{ toYaml . | nindent 10 }}
           {{- end }}
           {{- with $job.tolerations }}
           tolerations:
-            {{ toYaml . | indent 12 }}
+            {{ toYaml . | nindent 10 }}
           {{- end }}
