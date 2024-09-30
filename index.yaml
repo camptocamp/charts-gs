@@ -4568,6 +4568,16 @@ entries:
   georchestra-backup-ldap:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2024-09-30T13:35:18.911838247Z"
+    description: A Helm chart for backup ldap
+    digest: 9ff40ef03c74f71a021c92541a3e301a598fb0b64da905635abfe48dd288dcaf
+    name: georchestra-backup-ldap
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/georchestra-backup-ldap-0.2.0/georchestra-backup-ldap-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2024-04-23T09:34:14.447851404Z"
     description: A Helm chart for backup ldap
     digest: 7f23a2bb77a2cb4cfddf55ed919d504d100e799a5cd6d6b81b325085277383ff
@@ -12556,4 +12566,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2024-09-26T09:07:47.990738323Z"
+generated: "2024-09-30T13:35:18.91646642Z"
