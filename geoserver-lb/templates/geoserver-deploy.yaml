@@ -209,7 +209,8 @@ spec:
         - containerPort: 8080
           name: http-proxy
           protocol: TCP
-        resources: {}
+        resources:
+          {{- toYaml .Values.geoserver.resources | nindent 10 }}
         startupProbe:
           failureThreshold: 5
           periodSeconds: 40

@@ -3,6 +3,12 @@ geoserver:
   # This is the url to the service provided by the geOrchestra helm chart
   master_svc_url: georchestra-geoserver-svc:8080
   docker_image: registry.com/org/client-configuration/geoserver:22.0.4
+  resources:
+    requests:
+      memory: "2048Mi"
+      cpu: "100m"
+    limits:
+      memory: "8192Mi"
   livenessProbe:
     httpGet:
       path: /geoserver/gwc/service/wmts?SERVICE=WMTS&REQUEST=GetCapabilities
@@ -29,6 +35,11 @@ geoserver:
         claimName: georchestra-geoserver-datadir
 
 nginx:
+  resources:
+    requests:
+      memory: "64Mi"
+    limits:
+      memory: "128Mi"
   image:
     repository: docker.io
     name: nginx
