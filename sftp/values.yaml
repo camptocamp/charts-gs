@@ -6,9 +6,9 @@ sftp:
   #  nodePort: 30022 # when type NodePort
   #  Set to local if want to preserve source IP for NodePort or LoadBalancer
   #  externalTrafficPolicy: Cluster
-  image: camptocamp/sftp:bullseye-k8s-georchestra
+  image: ghcr.io/camptocamp/georchestra-docker-images/sftp-server:latest
   imagePullPolicy: Always
-  #lifecycle:
+  lifecycle: {}
   #  postStart:
   #    exec:
   #      command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
@@ -16,7 +16,7 @@ sftp:
   #    exec:
   #      command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
 
-  #imagePullSecrets:
+  imagePullSecrets: []
   #- name: secret
   
   customHostname: "{{ .Release.Name }}-{{ .Release.Namespace }}"
