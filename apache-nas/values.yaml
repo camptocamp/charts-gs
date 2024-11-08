@@ -16,4 +16,4 @@ env_variables: []
 
 tolerations: []
 
-docker_image: php:7.4-apache
+docker_image: ghcr.io/camptocamp/georchestra-docker-images/apache-nas:1.0.0-8.3
