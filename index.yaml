@@ -3,6 +3,16 @@ entries:
   acceptance-tests:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2024-11-08T11:20:59.138933609Z"
+    description: A Helm chart for launching "tests non regression"
+    digest: c525f4cec8d0ba30b7d4a1c751d53fdd41abf83b83601807b10e38b594b3f0ef
+    name: acceptance-tests
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/acceptance-tests-0.3.0/acceptance-tests-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2024-11-08T11:11:55.335497381Z"
     description: A Helm chart for launching "tests non regression"
     digest: c167affda6c7802ffb0f24134c10dcec8c21a78c77561fd0b8786c4286d2896a
@@ -12,6 +22,16 @@ entries:
     - https://github.com/camptocamp/charts-gs/releases/download/acceptance-tests-0.2.0/acceptance-tests-0.2.0.tgz
     version: 0.2.0
   apache-mod-mellon:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-11-08T11:20:59.259020225Z"
+    description: A Helm chart for deploying an Apache HTTPd configured with the mod_mellon
+    digest: a4f3d0286f4e1e12ee1ba8f3e066d2c2130443aa1fdb448b279cbb0375e8bf46
+    name: apache-mod-mellon
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/apache-mod-mellon-1.3.0/apache-mod-mellon-1.3.0.tgz
+    version: 1.3.0
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2024-11-08T11:11:55.49439163Z"
@@ -283,6 +303,16 @@ entries:
     - apache-mod-mellon-0.2.0-main-4a44e2f.tgz
     version: 0.2.0-main-4a44e2f
   apache-nas:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-11-08T11:20:59.355750532Z"
+    description: A Helm chart for deploying a Apache-httpd server
+    digest: e2fdc1572e545e57d30722e6292cc9dfdc70a62ed6eea6d7f8bc0546036d87a3
+    name: apache-nas
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/apache-nas-1.1.0/apache-nas-1.1.0.tgz
+    version: 1.1.0
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2024-11-08T11:11:55.649874922Z"
@@ -1074,6 +1104,16 @@ entries:
     - apache-nas-0.1.0-main-062214b.tgz
     version: 0.1.0-main-062214b
   cadastrapp:
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2024-11-08T11:20:59.454058939Z"
+    description: A Helm chart for deploying geOrchestra's cadastrapp
+    digest: 8a036eefb638a4ce56b4a280bbead5b65d524c65ee63e589a2b358b589a5c512
+    name: cadastrapp
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/cadastrapp-1.1.0/cadastrapp-1.1.0.tgz
+    version: 1.1.0
   - apiVersion: v2
     appVersion: 2.0.0
     created: "2024-11-08T11:11:55.81257381Z"
@@ -3508,6 +3548,16 @@ entries:
   geocontrib:
   - apiVersion: v2
     appVersion: 5.0.2
+    created: "2024-11-08T11:20:59.53884978Z"
+    description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
+    digest: d577230fe7d1d4cdfcd8c81ef96d700d379667953127ba48e65243314d067239
+    name: geocontrib
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geocontrib-1.1.0/geocontrib-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 5.0.2
     created: "2024-11-08T11:11:55.962058048Z"
     description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: f6f80b41b8e4d3892ac945ab62bb99a931e7fb169dacbc04e05499c85ac4f1ea
@@ -4769,6 +4819,16 @@ entries:
   georchestra-backup-ldap:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2024-11-08T11:20:59.651527326Z"
+    description: A Helm chart for backup ldap
+    digest: 9e5b5fcf3e02c2bb6b7ff397736f2932987b4c33fc29a90562e76bb8b8822172
+    name: georchestra-backup-ldap
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/georchestra-backup-ldap-1.1.0/georchestra-backup-ldap-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2024-11-08T11:11:56.095316674Z"
     description: A Helm chart for backup ldap
     digest: 01bfbda5f3bd4563f080f534577583277a4b8e525a05b0fe49913bc338891c9f
@@ -5338,6 +5398,16 @@ entries:
     - georchestra-backup-ldap-0.1.0-main-7822e1d.tgz
     version: 0.1.0-main-7822e1d
   geoserver-datadir-sync:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2024-11-08T11:20:59.74460541Z"
+    description: Automatic geoserver datadir volume backup and restore to/from github
+    digest: bb4bde6591adc44daa42a68c940d7e9739e4443aa54a6145f5abc79873a4085e
+    name: geoserver-datadir-sync
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geoserver-datadir-sync-1.1.0/geoserver-datadir-sync-1.1.0.tgz
+    version: 1.1.0
   - apiVersion: v2
     appVersion: 1.0.0
     created: "2024-11-08T11:11:56.23128239Z"
@@ -6189,6 +6259,16 @@ entries:
     - geoserver-datadir-sync-0.1.0-main-5234e50.tgz
     version: 0.1.0-main-5234e50
   geoserver-lb:
+  - apiVersion: v2
+    appVersion: 22.0.4
+    created: "2024-11-08T11:20:59.82673004Z"
+    description: A Helm chart for deploying geoserver loadbalanced
+    digest: 0aa919890345a152f70c5f096fe9571ca54000861b47d87630f0c4f4fcb2c176
+    name: geoserver-lb
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geoserver-lb-1.2.0/geoserver-lb-1.2.0.tgz
+    version: 1.2.0
   - apiVersion: v2
     appVersion: 22.0.4
     created: "2024-11-08T11:11:56.373013031Z"
@@ -8524,6 +8604,16 @@ entries:
   opendata-ogc-features:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2024-11-08T11:20:59.958374512Z"
+    description: Helm chart for data-api (opendata-ogc-features)
+    digest: 86a43fe5b37c42c56f01d47d8a3595b3458e827d55dab943d52020149d463bd6
+    name: opendata-ogc-features
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/opendata-ogc-features-1.1.0/opendata-ogc-features-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2024-11-08T11:11:56.526478429Z"
     description: Helm chart for data-api (opendata-ogc-features)
     digest: 5283eb00deeb6a2d9abf66f112bb6a01afd20a7fca55bbd0cd48ba69b834799e
@@ -8633,6 +8723,15 @@ entries:
     - opendata-ogc-features-0.0.2-main-4d71a9c.tgz
     version: 0.0.2-main-4d71a9c
   pgbouncer:
+  - apiVersion: v1
+    appVersion: 1.18.0
+    created: "2024-11-08T11:21:00.051234157Z"
+    description: A Helm chart installing pgbouncer in kubernetes
+    digest: fc5beae1bb03cdeb9842a06626878bb95a087ea6475a53146542ceff9e95cbe9
+    name: pgbouncer
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/pgbouncer-1.9.0/pgbouncer-1.9.0.tgz
+    version: 1.9.0
   - apiVersion: v1
     appVersion: 1.18.0
     created: "2024-11-08T11:11:56.677373199Z"
@@ -9525,6 +9624,15 @@ entries:
     - pgbouncer-1.2.1-main-e3ff3f9.tgz
     version: 1.2.1-main-e3ff3f9
   sdi-consistence-check:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2024-11-08T11:21:00.14432694Z"
+    description: A Helm chart sdi-consistency-check cronjob
+    digest: 85430f86b2a659a4963ddfdb944336ad2a609c2410a987071d10deb6478fa139
+    name: sdi-consistence-check
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/sdi-consistence-check-1.1.0/sdi-consistence-check-1.1.0.tgz
+    version: 1.1.0
   - apiVersion: v1
     appVersion: "1.0"
     created: "2024-11-08T11:11:56.858239404Z"
@@ -10597,6 +10705,16 @@ entries:
     - sdi-consistence-check-0.1.0-main-3b8059a.tgz
     version: 0.1.0-main-3b8059a
   sftp:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2024-11-08T11:21:00.265975635Z"
+    description: A Helm chart for deploying a SFTP stack
+    digest: e110245060dbb0c52a252125458638195045f5bd1990a4cc6368d1b533fd942d
+    name: sftp
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/sftp-1.3.0/sftp-1.3.0.tgz
+    version: 1.3.0
   - apiVersion: v2
     appVersion: "1.0"
     created: "2024-11-08T11:11:57.017095513Z"
@@ -11910,6 +12028,16 @@ entries:
   vrt-bot:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2024-11-08T11:21:00.353478474Z"
+    description: A Helm chart for deploying vrt-bot
+    digest: cb1b3c20d3e7b07f954b541651a547a2975112f45bc7ead26e22756ecd5388f1
+    name: vrt-bot
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/vrt-bot-1.1.0/vrt-bot-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2024-11-08T11:11:57.181306155Z"
     description: A Helm chart for deploying vrt-bot
     digest: bbdc779e0dba11b338fe14e309d50c0c3e8b9b75add11338c3559e08243ebc1b
@@ -13138,4 +13266,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2024-11-08T11:11:57.186391627Z"
+generated: "2024-11-08T11:21:00.35886783Z"
