@@ -28,24 +28,6 @@ spec:
         {{- if .Values.nas.extraVolumeMounts }}
         {{- .Values.nas.extraVolumeMounts | toYaml | nindent 10 }}
         {{- end }}
-        command:
-          - /bin/bash
-        args:
-          - -c
-          - apt update ;
-            apt install -y libpq-dev ssmtp ;
-            sed -i "s/mailhub=mail/mailhub=georchestra-smtp-svc/" /etc/ssmtp/ssmtp.conf ;
-            sed -i 's/#FromLineOverride=YES/FromLineOverride=YES/' /etc/ssmtp/ssmtp.conf ;
-            printf "[mail function]\nsendmail_path = /usr/sbin/ssmtp -t\n" > /usr/local/etc/php/conf.d/sendmail.ini ;
-            docker-php-ext-install pgsql pdo_pgsql ;
-            apt-get clean ;
-            rm -rf /var/lib/apt/lists/* ;
-            groupmod --gid 999 www-data ;
-            usermod --non-unique --uid 999 --gid 999 www-data ;
-            chown -R www-data /run/apache2 /run/lock/apache2 /var/cache/apache2/mod_cache_disk /var/log/apache2 ;
-            printf "upload_max_filesize=50M\npost_max_size=50M\n" > /usr/local/etc/php/conf.d/upload-size-customizations.ini ;
-            a2enmod rewrite ;
-            exec apache2-foreground
       volumes:
         - name: apache-nas-data
           persistentVolumeClaim:
