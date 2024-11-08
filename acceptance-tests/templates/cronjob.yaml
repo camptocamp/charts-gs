@@ -1,0 +1,88 @@
+{{- $job := .Values.job -}}
+{{- $jobConfiguration := .Values.configuration -}}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "acceptance-tests.fullname" . }}
+  labels:
+    {{- include "acceptance-tests.labels" . | nindent 4 }}
+spec:
+  schedule: {{ $job.schedule | quote }}
+  successfulJobsHistoryLimit: {{ $job.successfulJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 86400
+      template:
+        metadata:
+          labels:
+            {{- include "acceptance-tests.labels" . | nindent 12 }}
+        spec:
+          {{- with $job.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+          {{- with $job.podSecurityContext }}
+          securityContext:
+            {{ toYaml . | nindent 10 }}
+          {{- end }}
+          containers:
+          - name: {{ .Chart.Name }}
+            image: "{{ $job.image.repository }}:{{ $job.image.tag }}"
+            imagePullPolicy: {{ $job.image.pullPolicy }}
+            {{- with .Values.podVolumeMounts }}
+            volumeMounts:
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+            env:
+            - name: RENATER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "acceptance-tests.fullname" . }}-job-secrets
+                  key: renaterUsername
+            - name: RENATER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "acceptance-tests.fullname" . }}-job-secrets
+                  key: renaterPassword
+            - name: RENATER_IDP_ID
+              value: {{ $jobConfiguration.renater.idpId | quote }}
+            - name: BASE_URL
+              value: {{ $jobConfiguration.georchestra.baseUrl | quote }}
+            - name: LOCAL_ACCOUNT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "acceptance-tests.fullname" . }}-job-secrets
+                  key: georchestraLocalAccountUsername
+            - name: LOCAL_ACCOUNT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "acceptance-tests.fullname" . }}-job-secrets
+                  key: georchestraLocalAccountPassword
+            {{- with $job.extraEnv }}
+              {{- toYaml . | nindent 8 }}
+            {{- end }}
+            {{- with $job.resources }}
+            resources:
+              {{ toYaml . | nindent 12 }}
+            {{- end }}
+            {{- with $job.securityContext }}
+            securityContext:
+              {{ toYaml . | nindent 12 }}
+            {{- end }}
+          restartPolicy: {{ $job.restartPolicy }}
+          {{- with .Values.podVolumeMounts }}
+          volumes:
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+          {{- with $job.nodeSelector }}
+          nodeSelector:
+            {{ toYaml . | nindent 10 }}
+          {{- end }}
+          {{- with $job.affinity }}
+          affinity:
+            {{ toYaml . | nindent 10 }}
+          {{- end }}
+          {{- with $job.tolerations }}
+          tolerations:
+            {{ toYaml . | nindent 10 }}
+          {{- end }}

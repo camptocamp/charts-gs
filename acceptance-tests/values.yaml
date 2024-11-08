@@ -1,0 +1,59 @@
+nameOverride: ""
+fullnameOverride: ""
+
+podVolumeMounts:
+  volumeMounts:
+  - name: reports-output
+    mountPath: /output
+  # the application will work in the folder /output/public/non-regression
+  # change it if needed
+    subPath: public/non-regression
+
+volumes:
+- name: "reports-output"
+  persistentVolumeClaim:
+    claimName: apache-nas
+
+job:
+  image:
+    repository: ghcr.io/camptocamp/mel-docker-images/acceptance-tests
+    pullPolicy: Always
+    tag: "latest"
+  schedule: "0 13 * * *"
+  successfulJobsHistoryLimit: 3
+  restartPolicy: Never
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  extraEnv: {}
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+  podSecurityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+  securityContext: {}
+  imagePullSecrets: []
+
+configuration:
+  renater:
+    username: testuser
+    password: testuser
+    idpId: "My IDP integration"
+  georchestra:
+    baseUrl: "http://mygeorchestra.com"
+    localAccount:
+      username: myusername
+      password: mypassword
