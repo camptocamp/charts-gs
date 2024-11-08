@@ -325,6 +325,16 @@ entries:
   apache-nas:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-11-08T17:50:54.075860604Z"
+    description: A Helm chart for deploying a Apache-httpd server
+    digest: 3b79107ac87957e16d187d9616cbb18222a2a81aec271815467a76edba932dd6
+    name: apache-nas
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/apache-nas-1.2.1/apache-nas-1.2.1.tgz
+    version: 1.2.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-11-08T17:22:26.100821534Z"
     description: A Helm chart for deploying a Apache-httpd server
     digest: 09fb087374b76f26b7153055b1c7e7eaf0fe66205f28bd12d90f8416613b4619
@@ -13306,4 +13316,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2024-11-08T17:22:26.104008035Z"
+generated: "2024-11-08T17:50:54.078924111Z"
