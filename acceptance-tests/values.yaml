@@ -2,7 +2,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 podVolumeMounts:
-  volumeMounts:
+  # make sure that name: is the same in volumes
   - name: reports-output
     mountPath: /output
   # the application will work in the folder /output/public/non-regression
@@ -10,6 +10,7 @@ podVolumeMounts:
     subPath: public/non-regression
 
 volumes:
+  # make sure that name: is the same in podVolumeMounts
 - name: "reports-output"
   persistentVolumeClaim:
     claimName: apache-nas
