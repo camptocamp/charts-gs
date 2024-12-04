@@ -66,6 +66,6 @@ podMonitor:
   enabled: false
   # match the pod where prometheusData.txt is hosted
   matchLabels:
-    app.camptocamp.com/name: apache-nas
+    app.kubernetes.io/name: apache-nas
   httpPath: /public/non-regression/report/export/prometheusData.txt
   httpPort: "80"
