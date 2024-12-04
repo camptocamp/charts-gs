@@ -69,3 +69,5 @@ podMonitor:
     app.kubernetes.io/name: apache-nas
   httpPath: /public/non-regression/report/export/prometheusData.txt
   httpPort: "80"
+  # Should be set to a value coherent with the `job.schedule` parameter above.
+  frequency: 1d

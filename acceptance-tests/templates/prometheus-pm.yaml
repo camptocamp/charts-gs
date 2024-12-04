@@ -7,7 +7,7 @@ metadata:
   name: {{ include "acceptance-tests.fullname" . }}-pm
 spec:
   podMetricsEndpoints:
-  - interval: 1d
+  - interval: {{ .Values.podMonitor.frequency }}
     path: {{ .Values.podMonitor.httpPath }}
     port: {{ .Values.podMonitor.httpPort }}
   selector:
