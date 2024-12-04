@@ -58,3 +58,13 @@ configuration:
     localAccount:
       username: myusername
       password: mypassword
+
+# If enabled, this will create a PodMonitor object in order
+# to gather metrics on the tests, as allure provides a prometheus compatible
+# file which can be scrapped.
+podMonitor:
+  enabled: false
+  matchLabels:
+    app.camptocamp.com/name: apache-nas
+  httpPath: /public/non-regression/report/export/prometheusData.txt
+  httpPort: "80"

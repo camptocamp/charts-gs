@@ -1,0 +1,18 @@
+{{- if .Values.podMonitor.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    {{- include "acceptance-tests.labels" . | nindent 4 }}
+  name: {{ include "acceptance-tests.fullname" . }}-pm
+spec:
+  podMetricsEndpoints:
+  - interval: 1d
+    path: {{ .Values.podMonitor.httpPath }}
+    port: {{ .Values.podMonitor.httpPort }}
+  selector:
+    matchLabels:
+      {{- with .Values.podMonitor.matchLabels }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}
