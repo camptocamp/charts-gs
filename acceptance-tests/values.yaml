@@ -64,6 +64,7 @@ configuration:
 # file which can be scrapped.
 podMonitor:
   enabled: false
+  # match the pod where prometheusData.txt is hosted
   matchLabels:
     app.camptocamp.com/name: apache-nas
   httpPath: /public/non-regression/report/export/prometheusData.txt
