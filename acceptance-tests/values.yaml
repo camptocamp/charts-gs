@@ -58,3 +58,16 @@ configuration:
     localAccount:
       username: myusername
       password: mypassword
+
+# If enabled, this will create a PodMonitor object in order
+# to gather metrics on the tests, as allure provides a prometheus compatible
+# file which can be scrapped.
+podMonitor:
+  enabled: false
+  # match the pod where prometheusData.txt is hosted
+  matchLabels:
+    app.kubernetes.io/name: apache-nas
+  httpPath: /public/non-regression/report/export/prometheusData.txt
+  httpPort: "80"
+  # Should be set to a value coherent with the `job.schedule` parameter above.
+  frequency: 1d
