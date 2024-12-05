@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "apache-nas.fullname" . }}
+  name: {{ include "apache-nas.fullname" . }}-svc
   labels:
     {{- include "apache-nas.labels" . | nindent 4 }}
 spec:
