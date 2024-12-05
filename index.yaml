@@ -3,6 +3,16 @@ entries:
   acceptance-tests:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2024-12-05T09:45:19.472192496Z"
+    description: A Helm chart for launching "tests non regression"
+    digest: c15f028fc988f9afe5745d70ad71cd1fc43cb4384cb47344b6cb35f030d64423
+    name: acceptance-tests
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/acceptance-tests-0.5.3/acceptance-tests-0.5.3.tgz
+    version: 0.5.3
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2024-12-05T09:16:39.185394488Z"
     description: A Helm chart for launching "tests non regression"
     digest: c5b8b3bd19a267e6ca190f9682b4b39dc4b517a322e15fc4608110f4292b6a64
@@ -13336,4 +13346,4 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2024-12-05T09:16:39.191441402Z"
+generated: "2024-12-05T09:45:19.475495307Z"
