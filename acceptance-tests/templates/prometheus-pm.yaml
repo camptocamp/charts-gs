@@ -9,7 +9,7 @@ spec:
   podMetricsEndpoints:
   - interval: {{ .Values.podMonitor.frequency }}
     path: {{ .Values.podMonitor.httpPath }}
-    port: {{ .Values.podMonitor.httpPort | quote }}
+    portNumber: {{ .Values.podMonitor.httpPort }}
   selector:
     matchLabels:
       {{- with .Values.podMonitor.matchLabels }}
