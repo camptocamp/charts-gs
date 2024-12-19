@@ -59,7 +59,7 @@ spec:
                   name: {{ include "acceptance-tests.fullname" . }}-job-secrets
                   key: georchestraLocalAccountPassword
             {{- with $job.extraEnv }}
-              {{- toYaml . | nindent 8 }}
+              {{- toYaml . | nindent 12 }}
             {{- end }}
             {{- with $job.resources }}
             resources:
