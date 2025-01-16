@@ -1,0 +1,18 @@
+environment:
+  - name: WIREGUARD_KEY
+    value: QLwVsC9gXoOBVO8IFOJGrp1GEzLFxe+sKw55d0KAtHg=
+
+configMap:
+  wireproxyConf: |
+    [Interface]
+    PrivateKey = $WIREGUARD_KEY
+    Address = 192.168.100.1/32
+    ListenPort = 51820
+
+    [Peer]
+    PublicKey = n21LuUwLDByVqlh1Q6YFgzwfE/7ndWsh5BLdxTw6vlI=
+    AllowedIPs = 192.168.100.0/24
+
+    [TCPServerTunnel]
+    ListenPort = 8181
+    Target = test-studio-svc:8000
