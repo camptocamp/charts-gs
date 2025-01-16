@@ -1,6 +1,0 @@
-releases:
-  - name: wireproxy
-    chart: ./
-    namespace: mviewer
-    values:
-      - extra-values.yaml
