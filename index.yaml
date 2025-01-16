@@ -13396,4 +13396,15 @@ entries:
     urls:
     - vrt-bot-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
-generated: "2024-12-20T09:11:49.002166904Z"
+  wireproxy:
+  - apiVersion: v2
+    appVersion: 1.0.9
+    created: "2025-01-16T13:44:31.037700908Z"
+    description: Wireguard client that exposes itself as a socks5 proxy
+    digest: a5b72a26b233ca295d8a16750b07191c48095c070e3b6d93e7b9330b1d7b321d
+    name: wireproxy
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-01-16T13:44:31.041731396Z"
