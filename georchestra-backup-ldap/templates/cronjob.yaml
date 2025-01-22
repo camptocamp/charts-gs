@@ -40,7 +40,7 @@ spec:
               /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.orgsRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-$(date +"%s").ldif;
               /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.pendingorgsRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-$(date +"%s").ldif;
               /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.rolesRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-$(date +"%s").ldif;
-              cd /backup && rm `ls -t | awk 'NR>{{ .Values.configuration.keepLastBackups }}'`
+              find /backup -name '*.ldif' -mtime +{{.Values.configuration.backupRetentionDays}} -delete ;
             {{- with $job.resources }}
             resources:
               {{ toYaml . | nindent 12 }}
