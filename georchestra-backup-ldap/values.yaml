@@ -35,7 +35,7 @@ job:
   imagePullSecrets: []
 
 configuration:
-  keepLastBackups: "10"
+  backupRetentionDays: "10"
   ldapTarget:
     # the url to the ldap kubernetes service
     service: "ldap://georchestra-ldap-svc:389"
