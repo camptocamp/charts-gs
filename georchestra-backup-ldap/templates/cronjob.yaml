@@ -35,11 +35,12 @@ spec:
             command: ["/bin/bash", "-c"]
             args:
             - |
-              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.usersRdn }},{{ $ldapTargetConfiguration.baseDn }}" > /backup/ldap-$(date +"%s").ldif;
-              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.pendingusersRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-$(date +"%s").ldif;
-              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.orgsRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-$(date +"%s").ldif;
-              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.pendingorgsRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-$(date +"%s").ldif;
-              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.rolesRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-$(date +"%s").ldif;
+              timestamp=$(date +"%s") ;
+              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.usersRdn }},{{ $ldapTargetConfiguration.baseDn }}" > /backup/ldap-${timestamp}.ldif;
+              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.pendingusersRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-${timestamp}.ldif;
+              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.orgsRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-${timestamp}.ldif;
+              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.pendingorgsRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-${timestamp}.ldif;
+              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.rolesRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-${timestamp}.ldif;
               find /backup -name '*.ldif' -mtime +{{.Values.configuration.backupRetentionDays}} -delete ;
             {{- with $job.resources }}
             resources:
