@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "geoserver-datadir-sync.fullname" . }}-sync-ssh-key
+  name: {{ include "geoserver-datadir-sync.fullname" . }}-depl
   labels:
     {{- include "geoserver-datadir-sync.labels" . | nindent 4 }}
 spec:
