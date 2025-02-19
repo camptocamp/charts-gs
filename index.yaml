@@ -13419,6 +13419,16 @@ entries:
   wireproxy:
   - apiVersion: v2
     appVersion: 1.0.9
+    created: "2025-02-19T16:51:56.099886939Z"
+    description: Wireguard client that exposes itself as a socks5 proxy
+    digest: e69bd0585cee1bb0aa56afb2d7ec3d62bfc03cb5a5a35af454eda1a4e8a69ee4
+    name: wireproxy
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-1.0.1/wireproxy-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.0.9
     created: "2025-01-16T13:45:12.899656425Z"
     description: Wireguard client that exposes itself as a socks5 proxy
     digest: 8e4ac3c47af0a8636c194c86818cac52f644bdc6eacd1d991bcbf520fec3091f
@@ -13437,4 +13447,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2025-01-28T13:50:43.462568062Z"
+generated: "2025-02-19T16:51:56.103119689Z"
