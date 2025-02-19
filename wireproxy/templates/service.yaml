@@ -11,5 +11,8 @@ spec:
       targetPort: wireguard
       protocol: UDP
       name: wireguard
+      {{- if .Values.service.nodePort }}
+      nodePort: {{ .Values.service.nodePort }}
+      {{- end }}
   selector:
     {{- include "wireproxy.selectorLabels" . | nindent 4 }}
