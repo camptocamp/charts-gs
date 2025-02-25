@@ -4,9 +4,9 @@ fullnameOverride: ""
 job:
   image:
     repository: georchestra/ldap
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "latest"
+    tag: "24.0.6"
   schedule: "0 6 * * *"
   successfulJobsHistoryLimit: 3
   restartPolicy: OnFailure
