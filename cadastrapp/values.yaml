@@ -1,6 +1,6 @@
 cadastrapp:
   image: camptocamp/georchestra_cadastrapp:v1.9-1
-  imagePullPolicy: Always
+  imagePullPolicy: IfNotPresent
   # If defined, this will be used to pull the docker image
   #imagePullSecrets:
   #  - name: myPullSecret
