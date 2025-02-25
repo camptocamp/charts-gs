@@ -15,7 +15,8 @@ spec:
         {{- include "apache-nas.labels" . | nindent 8 }}
     spec:
       containers:
-      - image: {{ .Values.docker_image }}
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         name: apache-nas
         resources: {}
         {{- with .Values.env_variables }}
