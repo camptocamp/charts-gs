@@ -15,4 +15,7 @@ env_variables: []
 
 tolerations: []
 
-docker_image: ghcr.io/camptocamp/georchestra-docker-images/apache-nas:1.0.0-8.3
+image:
+  repository: ghcr.io/camptocamp/georchestra-docker-images/apache-nas
+  pullPolicy: IfNotPresent
+  tag: "1.0.0-8.3-build-4386ddb33070e5479ea356ccf5d95d7686396e29"
