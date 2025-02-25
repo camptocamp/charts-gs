@@ -3,7 +3,7 @@ cronjobs:
   - name: wms
     schedule: TBD
     image: TBD
-    imagePullPolicy: Always
+    imagePullPolicy: IfNotPresent
     args: []
     # Those volumes will be available in /mnt
     # Example :
