@@ -17,7 +17,7 @@ spec:
       containers:
         - name: frontend
           image: {{ .Values.frontend.image }}
-          imagePullPolicy: Always
+          imagePullPolicy: {{ .Values.frontend.pullPolicy }}
           command:
           - /bin/bash
           - -c

@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: redis
-          image: redis
-          imagePullPolicy: Always
+          image: redis:7
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             tcpSocket:
               port: 6379

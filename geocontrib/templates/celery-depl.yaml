@@ -17,7 +17,7 @@ spec:
       containers:
         - name: celery
           image: {{ .Values.geocontrib.image }}
-          imagePullPolicy: Always
+          imagePullPolicy: {{ .Values.geocontrib.pullPolicy }}
           command:
           - src/docker/geocontrib/docker-entrypoint.sh
           args:
