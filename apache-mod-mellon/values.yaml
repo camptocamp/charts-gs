@@ -1,3 +1,7 @@
+image:
+  repository: ghcr.io/camptocamp/inrae-docker-images/apache-mod-mellon
+  pullPolicy: IfNotPresent
+  tag: "2.4-build-20250224"
 hostname: https://inrae.sandbox.apps.gs-fr-prod.camptocamp.com:443
 # Enable for ProxyPass mode
 #georchestra_proxypass_endpoint: http://georchestra-gateway-svc:8080/
