@@ -4,8 +4,8 @@ replicaCount: 1
 livenessProbeHttpUrl: /data/ogcapi/
 docker:
   image: georchestra/data-api
-  tag: latest
-  imagePullPolicy: Always
+  tag: 1.2.3
+  imagePullPolicy: IfNotPresent
   # tag: latest
 environment:
   - name: SPRING_PROFILES_ACTIVE
