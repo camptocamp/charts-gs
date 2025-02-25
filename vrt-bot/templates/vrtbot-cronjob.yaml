@@ -29,7 +29,8 @@ spec:
           {{- .Values.volumes | toYaml | nindent 10 }}
           initContainers:
             - name: create-sourcedir
-              image: "{{ .Values.image }}"
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
               command: ['sh', '-c', "mkdir -p $SOURCEDIR; chown app:app $SOURCEDIR"]
               securityContext:
                 runAsUser: 0
@@ -39,8 +40,8 @@ spec:
               {{- .Values.extra_env | toYaml | nindent 14 }}
           containers:
             - name: vrt-bot
-              image: "{{ .Values.image }}"
-              imagePullPolicy: {{ .Values.pullPolicy }}
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
               volumeMounts:
               {{- .Values.volumeMounts | toYaml | nindent 14 }}
               env:
