@@ -1,7 +1,9 @@
 # Default values for vrt-bot.
 replicaCount: 1
-image: georchestra/vrt-bot:latest
-pullPolicy: IfNotPresent
+image:
+  repository: georchestra/vrt-bot
+  pullPolicy: IfNotPresent
+  tag: "build-d48d2d469687ef0c1a5a5237d0a68334f69934bf"
 
 imagePullSecrets: []
 podAnnotations: {}
