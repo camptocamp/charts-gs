@@ -39,7 +39,7 @@ spec:
       containers:
         - name: geoserver-lb
           image: {{ .Values.nginx.image.repository }}/{{ .Values.nginx.image.name }}:{{ .Values.nginx.image.tag }}
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: {{ .Values.nginx.image.pullPolicy }}
           volumeMounts:
           - name: etc-nginx
             mountPath: /etc/nginx
