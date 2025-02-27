@@ -4,7 +4,6 @@ metadata:
   name: {{ include "sftp.fullname" . }}-sftp-hostkeys-cm
   labels:
     {{- include "sftp.labels" . | nindent 4 }}
-    app.kubernetes.io/name: sftp
 data:
   {{- range $filename, $contents := .Values.sftp.host_keys }}
   {{ $filename }}: |
