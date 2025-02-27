@@ -2,5 +2,5 @@ name: geoserver-lb
 apiVersion: v2
 description: A Helm chart for deploying geoserver loadbalanced
 type: application
-version: 1.3.0
+version: 1.4.0
 appVersion: "22.0.4"
