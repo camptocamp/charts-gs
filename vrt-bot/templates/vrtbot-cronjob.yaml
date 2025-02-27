@@ -10,6 +10,7 @@ spec:
   successfulJobsHistoryLimit: 2
   failedJobsHistoryLimit: 3
   jobTemplate:
+    ttlSecondsAfterFinished: 3600
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
@@ -19,7 +20,6 @@ spec:
         {{- include "vrt-bot.selectorLabels" . | nindent 8 }}
     spec:
       template:
-        ttlSecondsAfterFinished: 3600
         spec:
           {{- with .Values.imagePullSecrets }}
           imagePullSecrets:
