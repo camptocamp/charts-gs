@@ -12296,6 +12296,16 @@ entries:
   vrt-bot:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2025-02-27T12:09:53.772658995Z"
+    description: A Helm chart for deploying vrt-bot
+    digest: 960fde2478416c1e07a51160cfd560076b89fcaa003bcdac77657d34a84c3958
+    name: vrt-bot
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/vrt-bot-1.2.2/vrt-bot-1.2.2.tgz
+    version: 1.2.2
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2025-02-27T12:04:26.343131143Z"
     description: A Helm chart for deploying vrt-bot
     digest: c9652a51bd4fb9cb9281931099fd3d118a18081170ec9f7de47e1713e7b023d1
@@ -13595,4 +13605,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2025-02-27T12:04:26.347893965Z"
+generated: "2025-02-27T12:09:53.779520076Z"
