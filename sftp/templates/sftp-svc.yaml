@@ -4,7 +4,6 @@ metadata:
   name: {{ include "sftp.fullname" . }}-sftp-svc
   labels:
     {{- include "sftp.labels" . | nindent 4 }}
-    app.kubernetes.io/name: sftp
 spec:
   type: {{ .Values.sftp.service.type }}
   {{- if .Values.sftp.service.externalTrafficPolicy }}

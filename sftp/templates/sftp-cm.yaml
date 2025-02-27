@@ -4,7 +4,6 @@ metadata:
   name: {{ include "sftp.fullname" . }}-sftp-cm
   labels:
     {{- include "sftp.labels" . | nindent 4 }}
-    app.kubernetes.io/name: sftp
 data:
   authorized_keys: |
     {{- .Values.sftp.authorized_keys | nindent 4 }}

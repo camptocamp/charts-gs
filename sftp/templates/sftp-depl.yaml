@@ -4,17 +4,14 @@ metadata:
   name: {{ include "sftp.fullname" . }}-sftp-depl
   labels:
     {{- include "sftp.labels" . | nindent 4 }}
-    app.kubernetes.io/name: sftp
 spec:
   selector:
     matchLabels:
       {{- include "sftp.selectorLabels" . | nindent 6 }}
-      app.kubernetes.io/name: sftp
   template:
     metadata:
       labels:
         {{- include "sftp.selectorLabels" . | nindent 8 }}
-        app.kubernetes.io/name: sftp
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/sftp-cm.yaml") . | sha256sum }}
     spec:
