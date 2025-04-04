@@ -375,6 +375,16 @@ entries:
   apache-nas:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2025-04-04T13:25:17.047909004Z"
+    description: A Helm chart for deploying a Apache-httpd server
+    digest: ce8f17bab710195f8f099f4c93ca64806094c31af34fb955a8df378a8abfd004
+    name: apache-nas
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/apache-nas-1.4.1/apache-nas-1.4.1.tgz
+    version: 1.4.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2025-02-27T09:58:28.148953019Z"
     description: A Helm chart for deploying a Apache-httpd server
     digest: 58c2214a3d1c84cdf45a8d6db7e9ee59c23fe01aed718b0d13e358f4f44d2541
@@ -13605,4 +13615,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2025-02-27T12:09:53.779520076Z"
+generated: "2025-04-04T13:25:17.051197458Z"
