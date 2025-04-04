@@ -18,4 +18,4 @@ tolerations: []
 image:
   repository: ghcr.io/camptocamp/georchestra-docker-images/apache-nas
   pullPolicy: IfNotPresent
-  tag: "1.0.0-8.3-build-4386ddb33070e5479ea356ccf5d95d7686396e29"
+  tag: "1.0.0-8.3-build-01c3afc701e6846b99a14168815e60869ec2e396"
