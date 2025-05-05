@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: celery
-          image: {{ .Values.geocontrib.image }}
-          imagePullPolicy: {{ .Values.geocontrib.pullPolicy }}
+          image: {{ .Values.celery.image }}
+          imagePullPolicy: {{ .Values.celery.pullPolicy }}
           command:
           - src/docker/geocontrib/docker-entrypoint.sh
           args:
@@ -28,6 +28,8 @@ spec:
           {{- end }}
             - name: REDIS_HOST
               value: {{ include "geocontrib.fullname" . }}-redis-svc
+          resources:
+            {{- toYaml .Values.celery.resources | nindent 10 }}
           volumeMounts:
           - name: geocontrib-config
             mountPath: /home/apprunner/geocontrib_app/config_front
@@ -45,3 +47,5 @@ spec:
       - name: geocontrib-static
         persistentVolumeClaim:
           claimName: {{ include "geocontrib.fullname" . }}-geocontrib-static-pvc
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}

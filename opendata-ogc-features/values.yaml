@@ -45,3 +45,5 @@ environment:
         name: georchestra-database-geodata-secret
 tolerations: []
 ogcFeatConfig: {}
+
+resources: {}

@@ -81,6 +81,8 @@ spec:
           env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: georchestra-datadir
               mountPath: /etc/georchestra
@@ -97,3 +99,5 @@ spec:
             secretName: {{ .Values.cadastrapp.datadir.git.ssh_secret }}
             defaultMode: 0400
         {{- end }}
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}

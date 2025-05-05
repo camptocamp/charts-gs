@@ -16,11 +16,15 @@ spec:
     spec:
       containers:
         - name: redis
-          image: redis:7
-          imagePullPolicy: IfNotPresent
+          image: {{ .Values.redis.image }}
+          imagePullPolicy: {{ .Values.redis.pullPolicy }}
+          resources:
+            {{- toYaml .Values.redis.resources | nindent 12 }}
           livenessProbe:
             tcpSocket:
               port: 6379
           readinessProbe:
             tcpSocket:
               port: 6379
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}

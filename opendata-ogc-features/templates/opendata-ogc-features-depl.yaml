@@ -18,23 +18,25 @@ spec:
         app.mel.fr/name: opendata-ogc-features
     spec:
       containers:
-      - image: {{ .Values.docker.image }}:{{ .Values.docker.tag }}
-        name: opendata-ogc-features
-        imagePullPolicy: {{.Values.docker.imagePullPolicy }}
-        env:
-        - name: MANAGEMENT_SERVER_PORT
-          value: "8081"
-        {{- with .Values.environment }}
-        {{- . | toYaml | nindent 8 }}
-        {{- end }}
-        {{- if .Values.ogcFeatConfig }}
-        - name: JAVA_TOOL_OPTIONS
-          value: "-Ddataapi.configdir=/etc"
-        {{- end }}
-        livenessProbe:
-          httpGet:
-            path: {{ .Values.livenessProbeHttpUrl }}
-            port: 8080
+        - name: opendata-ogc-features
+          image: {{ .Values.docker.image }}:{{ .Values.docker.tag }}
+          imagePullPolicy: {{.Values.docker.imagePullPolicy }}
+          env:
+          - name: MANAGEMENT_SERVER_PORT
+            value: "8081"
+          {{- with .Values.environment }}
+          {{- . | toYaml | nindent 8 }}
+          {{- end }}
+          {{- if .Values.ogcFeatConfig }}
+          - name: JAVA_TOOL_OPTIONS
+            value: "-Ddataapi.configdir=/etc"
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.livenessProbeHttpUrl }}
+              port: 8080
           initialDelaySeconds: 60
           periodSeconds: 10
           timeoutSeconds: 4

@@ -18,7 +18,8 @@ spec:
       - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         name: apache-nas
-        resources: {}
+        resources:
+          {{- toYaml .Values.geoserver.resources | nindent 10 }}
         {{- with .Values.env_variables }}
         env:
         {{- toYaml . | nindent 8 }}

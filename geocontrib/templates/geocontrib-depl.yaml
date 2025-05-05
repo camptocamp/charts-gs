@@ -40,6 +40,8 @@ spec:
           {{- end }}
             - name: REDIS_HOST
               value: {{ include "geocontrib.fullname" . }}-redis-svc
+          resources:
+            {{- toYaml .Values.geocontrib.resources | nindent 12 }}
           volumeMounts:
             - name: geocontrib-config
               mountPath: /home/apprunner/geocontrib_app/config_front
@@ -63,3 +65,5 @@ spec:
         - name: geocontrib-static
           persistentVolumeClaim:
             claimName: {{ include "geocontrib.fullname" . }}-geocontrib-static-pvc
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}

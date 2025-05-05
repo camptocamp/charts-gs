@@ -22,3 +22,7 @@ cadastrapp:
       # the chart expects to have a k8s secret with an entry named "ssh-privatekey"
       # containing the private key allowed to clone the git repository above.
       #ssh_secret: mySshSecret
+
+tolerations: []
+
+resources: {}
