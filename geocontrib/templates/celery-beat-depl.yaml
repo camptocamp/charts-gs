@@ -11,17 +11,13 @@ spec:
       {{- include "geocontrib.selectorLabels" . | nindent 6 }}-celery-beat-depl
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
         {{- include "geocontrib.selectorLabels" . | nindent 8 }}-celery-beat-depl
     spec:
       containers:
         - name: celery-beat
-          image: {{ .Values.geocontrib.image }}
-          imagePullPolicy: {{ .Values.geocontrib.pullPolicy }}
+          image: {{ .Values.celerybeat.image }}
+          imagePullPolicy: {{ .Values.celerybeat.pullPolicy }}
           command:
           - src/docker/geocontrib/docker-entrypoint.sh 
           args:
@@ -32,6 +28,8 @@ spec:
           {{- end }}
           - name: REDIS_HOST
             value: {{ include "geocontrib.fullname" . }}-redis-svc
+          resources:
+            {{- toYaml .Values.celerybeat.resources | nindent 12 }}
           volumeMounts:
           - name: geocontrib-config
             mountPath: /home/apprunner/geocontrib_app/config_front
@@ -49,3 +47,5 @@ spec:
       - name: geocontrib-static
         persistentVolumeClaim:
           claimName: {{ include "geocontrib.fullname" . }}-geocontrib-static-pvc
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}

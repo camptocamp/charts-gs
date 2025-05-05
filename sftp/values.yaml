@@ -32,6 +32,8 @@ sftp:
 
   tolerations: []
 
+  resources: {}
+
   # Developper and customer public keys
   authorized_keys: ""
 

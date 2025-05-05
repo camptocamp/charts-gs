@@ -1,10 +1,27 @@
 geocontrib:
   image: neogeo/geocontrib:5.0.2
   pullPolicy: IfNotPresent
+  resources: {}
 
 frontend:
   image: neogeo/geocontrib-front:5.0.2
   pullPolicy: IfNotPresent
+  resources: {}
+
+celery:
+  image: neogeo/geocontrib:5.0.2
+  pullPolicy: IfNotPresent
+  resources: {}
+
+celerybeat:
+  image: neogeo/geocontrib:5.0.2
+  pullPolicy: IfNotPresent
+  resources: {}
+
+redis:
+  image: redis:7
+  pullPolicy: IfNotPresent
+  resources: {}
 
 config_front: |
   {
@@ -45,6 +62,8 @@ volumes:
   static:
     pv_name: static_pv
     size: 2Gi
+
+tolerations: []
 
 env_variables:
     - name: ADMIN_USER_GROUPS
@@ -160,3 +179,4 @@ env_variables:
       value: geocontrib/
     - name: USE_X_FORWARDED_HOST
       value: '1'
+

@@ -54,6 +54,8 @@ spec:
         {{- if .Values.geoserver.extra_volumes }}
           {{ .Values.geoserver.extra_volumes | toYaml | nindent 8 }}
         {{- end }}
+      tolerations:
+        {{- toYaml .Values.geoserver.tolerations | nindent 8 }}
       {{- with .Values.geoserver.pull_secret }}
       imagePullSecrets:
       - name: {{ . }}
