@@ -6,7 +6,7 @@ job:
     repository: georchestra/ldap
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "24.0.6"
+    tag: "24.0.10"
   schedule: "0 6 * * *"
   successfulJobsHistoryLimit: 3
   restartPolicy: OnFailure
