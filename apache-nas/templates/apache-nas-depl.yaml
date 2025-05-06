@@ -19,7 +19,7 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         name: apache-nas
         resources:
-          {{- toYaml .Values.geoserver.resources | nindent 10 }}
+          {{- toYaml .Values.resources | nindent 10 }}
         {{- with .Values.env_variables }}
         env:
         {{- toYaml . | nindent 8 }}

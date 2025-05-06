@@ -24,7 +24,7 @@ spec:
           image: {{ .Values.sftp.image }}
           imagePullPolicy: {{ .Values.sftp.imagePullPolicy }}
           resources:
-            {{- toYaml .Values.geoserver.resources | nindent 12 }}
+            {{- toYaml .Values.sftp.resources | nindent 12 }}
           {{- with .Values.sftp.lifecycle }}
           lifecycle:
             {{- toYaml . | nindent 12 }}
