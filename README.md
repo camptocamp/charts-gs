@@ -8,7 +8,8 @@
 
 1. Create a new folder with the name of your helm chart
 2. Do your changes inside the folder
-3. Push your code
+3. Make sure to add it to dependabot: [dependabot.yml](https://github.com/camptocamp/charts-gs/blob/main/.github/dependabot.yml)
+4. Push your code
 
 # WARNING: New location storage for the helm chart - How to use
 
