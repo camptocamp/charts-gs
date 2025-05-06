@@ -4,7 +4,63 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-  - package-ecosystem: github-actions
-    directory: /
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/acceptance-tests"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/apache-mod-mellon"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/apache-nas"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/cadastrapp"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/geocontrib"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/georchestra-backup-ldap"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/geoserver-datadir-sync"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/geoserver-lb"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/opendata-ogc-features"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/pgbouncer"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/sdi-consistence-check"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/sftp"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/vrt-bot"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
+    directory: "/wireproxy"
     schedule:
       interval: "weekly"
