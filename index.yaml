@@ -375,6 +375,16 @@ entries:
   apache-nas:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2025-05-06T09:48:37.339235201Z"
+    description: A Helm chart for deploying a Apache-httpd server
+    digest: a0a4824b565cb4b12b795632313e005d6866b592302de6d714b3fc4a9b38d495
+    name: apache-nas
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/apache-nas-1.5.1/apache-nas-1.5.1.tgz
+    version: 1.5.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2025-05-05T12:40:36.604842329Z"
     description: A Helm chart for deploying a Apache-httpd server
     digest: 76aabc75e52dda33c183758acf7b446cb48538d0b8d029055d2d0200af6c8ebf
@@ -3716,6 +3726,16 @@ entries:
     - datahub-0.1.0-datahub-integration-datadir-crepel-test-09e33a5.tgz
     version: 0.1.0-datahub-integration-datadir-crepel-test-09e33a5
   geocontrib:
+  - apiVersion: v2
+    appVersion: 5.0.2
+    created: "2025-05-06T09:48:37.466672435Z"
+    description: 'A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib) '
+    digest: 17e9f59034a4613fb1d6574eaf267b4fbab137226c8c79e920517a99d3f994a5
+    name: geocontrib
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geocontrib-1.3.1/geocontrib-1.3.1.tgz
+    version: 1.3.1
   - apiVersion: v2
     appVersion: 5.0.2
     created: "2025-05-05T12:40:37.018884194Z"
@@ -11015,6 +11035,16 @@ entries:
   sftp:
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2025-05-06T09:48:37.587425504Z"
+    description: A Helm chart for deploying a SFTP stack
+    digest: 2791d889cbb19594193fccc0d3bec6e635bfc37b32f9e92e1887c13046fc54af
+    name: sftp
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/sftp-1.6.1/sftp-1.6.1.tgz
+    version: 1.6.1
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2025-05-05T12:40:37.578645409Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 1dab4cff6a3fdbad9125176e98cf1401b6c55fbd7c5eb5992418f1acf814092f
@@ -13675,4 +13705,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2025-05-05T12:40:37.582865146Z"
+generated: "2025-05-06T09:48:37.591597485Z"
