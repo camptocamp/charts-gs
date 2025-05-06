@@ -80,7 +80,7 @@ image:
   registry: ""
   # only work with bitnami/pgbouncer
   repository: bitnami/pgbouncer
-  tag: 1.18.0
+  tag: 1.24.1
   pullPolicy: IfNotPresent
 
 ## Service configuration
