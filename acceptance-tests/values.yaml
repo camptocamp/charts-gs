@@ -19,7 +19,7 @@ job:
   image:
     repository: ghcr.io/camptocamp/mel-docker-images/acceptance-tests
     pullPolicy: IfNotPresent
-    tag: "build-20250224"
+    tag: "20250507"
   schedule: "0 13 * * *"
   successfulJobsHistoryLimit: 3
   restartPolicy: Never
