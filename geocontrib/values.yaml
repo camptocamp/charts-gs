@@ -179,4 +179,3 @@ env_variables:
       value: geocontrib/
     - name: USE_X_FORWARDED_HOST
       value: '1'
-
