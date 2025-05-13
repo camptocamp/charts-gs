@@ -57,10 +57,10 @@ config_front: |
 volumes:
   storage_class_name: default
   media:
-    pv_name: media_pv
+    #pv_name: media_pv
     size: 2Gi
   static:
-    pv_name: static_pv
+    #pv_name: static_pv
     size: 2Gi
 
 tolerations: []
