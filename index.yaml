@@ -9965,6 +9965,15 @@ entries:
   sdi-consistence-check:
   - apiVersion: v1
     appVersion: "1.0"
+    created: "2025-05-13T14:30:31.996191991Z"
+    description: A Helm chart sdi-consistency-check cronjob
+    digest: 661c39c6e953b1e1e11c5ab4514c19c5979589d00f88f34804c806d8e544af36
+    name: sdi-consistence-check
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/sdi-consistence-check-1.3.0/sdi-consistence-check-1.3.0.tgz
+    version: 1.3.0
+  - apiVersion: v1
+    appVersion: "1.0"
     created: "2025-02-27T09:58:29.481833798Z"
     description: A Helm chart sdi-consistency-check cronjob
     digest: ccef3229dbd6c0118db1f09fc7853a6889e6d0fddf5e5ee7f495c18497840027
@@ -12416,6 +12425,16 @@ entries:
   vrt-bot:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2025-05-13T14:30:32.111266117Z"
+    description: A Helm chart for deploying vrt-bot
+    digest: 40603c15b47ba52f9a1a7d6522d6be0942870a78db286242d76b39803ee1bdcd
+    name: vrt-bot
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/vrt-bot-1.3.0/vrt-bot-1.3.0.tgz
+    version: 1.3.0
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2025-02-27T12:09:53.772658995Z"
     description: A Helm chart for deploying vrt-bot
     digest: 960fde2478416c1e07a51160cfd560076b89fcaa003bcdac77657d34a84c3958
@@ -13725,4 +13744,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2025-05-13T12:27:52.218617886Z"
+generated: "2025-05-13T14:30:32.114968727Z"
