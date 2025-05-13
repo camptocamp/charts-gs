@@ -11,3 +11,6 @@ cronjobs:
     #    persistentVolumeClaim:
     #      claimName: apache-nas-data
     volumes: []
+    tolerations: []
+    affinity: {}
+    resources: {}

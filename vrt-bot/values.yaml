@@ -50,3 +50,7 @@ volumeMounts:
     mountPath: /home/app/apache-nas
 
 schedule: "*/15 * * * *"
+
+tolerations: []
+affinity: {}
+resources: {}

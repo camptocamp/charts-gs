@@ -32,7 +32,10 @@ spec:
             - name: sdi-consistence-check
               image: {{ $cronjob.image }}
               imagePullPolicy: {{ $cronjob.imagePullPolicy }}
-              resources: {}
+              {{- with $cronjob.resources }}
+              resources:
+                {{ toYaml . | nindent 12 }}
+              {{- end }}
               volumeMounts:
                 {{- range $cronjob.volumes }}
                 - name: {{ .name }}
@@ -48,4 +51,12 @@ spec:
               {{- end }}
           volumes:
             {{- $cronjob.volumes | toYaml | nindent 12 }}
+          {{- with $cronjob.affinity }}
+          affinity:
+            {{ toYaml . | nindent 10 }}
+          {{- end }}
+          {{- with $cronjob.tolerations }}
+          tolerations:
+            {{ toYaml . | nindent 10 }}
+          {{- end }}
 {{- end -}}
