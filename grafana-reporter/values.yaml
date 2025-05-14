@@ -5,6 +5,7 @@ cronjobs:
     image: camptocamp/grafana-reporter:latest
     imagePullPolicy: IfNotPresent
     args: []
+    envs: []
     volumes: []
     tolerations: []
     affinity: {}
