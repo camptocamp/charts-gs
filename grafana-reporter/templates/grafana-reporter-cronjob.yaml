@@ -1,0 +1,62 @@
+{{- range $cronjob := $.Values.cronjobs }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "grafana-reporter.fullname" $ }}-{{ $cronjob.name }}-cronjob
+  labels:
+    {{- include "grafana-reporter.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: {{ include "grafana-reporter.fullname" $ }}-{{ $cronjob.name }}
+    app.georchestra.org: grafana-reporter
+spec:
+  schedule: "{{ $cronjob.schedule }}"
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 3600
+      template:
+        metadata:
+          labels:
+            {{- include "grafana-reporter.labels" $ | nindent 12 }}
+            app.kubernetes.io/component: {{ include "grafana-reporter.fullname" $ }}-{{ $cronjob.name }}
+            app.georchestra.org: grafana-reporter
+        spec:
+          {{- with $cronjob.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          restartPolicy: OnFailure
+          containers:
+            - name: grafana-reporter
+              image: {{ $cronjob.image }}
+              imagePullPolicy: {{ $cronjob.imagePullPolicy }}
+              {{- with $cronjob.resources }}
+              resources:
+                {{ toYaml . | nindent 12 }}
+              {{- end }}
+              volumeMounts:
+                {{- range $cronjob.volumes }}
+                - name: {{ .name }}
+                  mountPath: /mnt/{{ .name }}
+                {{- end }}
+              {{- with  $cronjob.command }}
+              command:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              {{- with $cronjob.args }}
+              args:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+          volumes:
+            {{- $cronjob.volumes | toYaml | nindent 12 }}
+          {{- with $cronjob.affinity }}
+          affinity:
+            {{ toYaml . | nindent 10 }}
+          {{- end }}
+          {{- with $cronjob.tolerations }}
+          tolerations:
+            {{ toYaml . | nindent 10 }}
+          {{- end }}
+{{- end -}}

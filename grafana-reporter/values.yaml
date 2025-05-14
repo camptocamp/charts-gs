@@ -1,0 +1,11 @@
+---
+cronjobs:
+  - name: grafana-report
+    schedule: TBD
+    image: TBD
+    imagePullPolicy: IfNotPresent
+    args: []
+    volumes: []
+    tolerations: []
+    affinity: {}
+    resources: {}
