@@ -2,7 +2,7 @@
 cronjobs:
   - name: grafana-report
     schedule: TBD
-    image: camptocamp/grafana-reporter:1.0.0
+    image: camptocamp/grafana-reporter:latest
     imagePullPolicy: IfNotPresent
     args: []
     volumes: []
