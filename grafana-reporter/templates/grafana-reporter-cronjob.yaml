@@ -1,66 +1,75 @@
-{{- range $cronjob := $.Values.cronjobs }}
----
+{{- $job := .Values.job -}}
+{{- $smtp := .Values.smtp -}}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "grafana-reporter.fullname" $ }}-{{ $cronjob.name }}-cronjob
+  name: {{ include "grafana-reporter.fullname" . }}
   labels:
-    {{- include "grafana-reporter.labels" $ | nindent 4 }}
-    app.kubernetes.io/component: {{ include "grafana-reporter.fullname" $ }}-{{ $cronjob.name }}
-    app.georchestra.org: grafana-reporter
+    {{- include "grafana-reporter.labels" . | nindent 4 }}
 spec:
-  schedule: "{{ $cronjob.schedule }}"
-  successfulJobsHistoryLimit: 0
-  failedJobsHistoryLimit: 1
-  concurrencyPolicy: Forbid
+  schedule: {{ $job.schedule | quote }}
+  successfulJobsHistoryLimit: {{ $job.successfulJobsHistoryLimit }}
   jobTemplate:
     spec:
-      ttlSecondsAfterFinished: 3600
+      ttlSecondsAfterFinished: 86400
       template:
         metadata:
           labels:
-            {{- include "grafana-reporter.labels" $ | nindent 12 }}
-            app.kubernetes.io/component: {{ include "grafana-reporter.fullname" $ }}-{{ $cronjob.name }}
-            app.georchestra.org: grafana-reporter
+            {{- include "grafana-reporter.labels" . | nindent 12 }}
         spec:
-          {{- with $cronjob.imagePullSecrets }}
+          {{- with $job.imagePullSecrets }}
           imagePullSecrets:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          restartPolicy: OnFailure
+          {{- with $job.podSecurityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           containers:
-            - name: grafana-reporter
-              image: {{ $cronjob.image }}
-              imagePullPolicy: {{ $cronjob.imagePullPolicy }}
-              {{- with $cronjob.resources }}
-              resources:
-                {{ toYaml . | nindent 12 }}
-              {{- end }}
-              {{- with $cronjob.envs }}
+            - name: {{ .Chart.Name }}
+              image: "{{ $job.image.repository }}:{{ $job.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ $job.image.pullPolicy }}
               env:
+                {{- with $job.envs }}
                 {{- toYaml . | nindent 16 }}
-              {{- end }}
-              volumeMounts:
-                {{- range $cronjob.volumes }}
-                - name: {{ .name }}
-                  mountPath: /mnt/{{ .name }}
                 {{- end }}
-              {{- with  $cronjob.command }}
+                - name: SMTP_SERVER
+                  value: "{{ $smtp.server }}"
+                - name: SMTP_PORT
+                  value: "{{ $smtp.port }}"
+                - name: SMTP_USER
+                  value: "{{ $smtp.user }}"
+                - name: SMTP_PASS
+                  value: "{{ $smtp.pass }}"
+                - name: SMTP_TLS
+                  value: "{{ $smtp.tls }}"
+              {{- with $job.command }}
               command:
                 {{- toYaml . | nindent 16 }}
               {{- end }}
-              {{- with $cronjob.args }}
+              {{- with $job.args }}
               args:
                 {{- toYaml . | nindent 16 }}
               {{- end }}
-          volumes:
-            {{- $cronjob.volumes | toYaml | nindent 12 }}
-          {{- with $cronjob.affinity }}
+              {{- with $job.resources }}
+              resources:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              {{- with $job.securityContext }}
+              securityContext:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+          restartPolicy: {{ $job.restartPolicy }}
+          {{- with $job.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $job.affinity }}
           affinity:
-            {{ toYaml . | nindent 10 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with $cronjob.tolerations }}
+          {{- with $job.tolerations }}
           tolerations:
-            {{ toYaml . | nindent 10 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
-{{- end -}}
+
