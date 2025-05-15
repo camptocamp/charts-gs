@@ -1,0 +1,75 @@
+{{- $job := .Values.job -}}
+{{- $smtp := .Values.smtp -}}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "grafana-reporter.fullname" . }}
+  labels:
+    {{- include "grafana-reporter.labels" . | nindent 4 }}
+spec:
+  schedule: {{ $job.schedule | quote }}
+  successfulJobsHistoryLimit: {{ $job.successfulJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 86400
+      template:
+        metadata:
+          labels:
+            {{- include "grafana-reporter.labels" . | nindent 12 }}
+        spec:
+          {{- with $job.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $job.podSecurityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          containers:
+            - name: {{ .Chart.Name }}
+              image: "{{ $job.image.repository }}:{{ $job.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ $job.image.pullPolicy }}
+              env:
+                {{- with $job.envs }}
+                {{- toYaml . | nindent 16 }}
+                {{- end }}
+                - name: SMTP_SERVER
+                  value: "{{ $smtp.server }}"
+                - name: SMTP_PORT
+                  value: "{{ $smtp.port }}"
+                - name: SMTP_USER
+                  value: "{{ $smtp.user }}"
+                - name: SMTP_PASS
+                  value: "{{ $smtp.pass }}"
+                - name: SMTP_TLS
+                  value: "{{ $smtp.tls }}"
+              {{- with $job.command }}
+              command:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              {{- with $job.args }}
+              args:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              {{- with $job.resources }}
+              resources:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              {{- with $job.securityContext }}
+              securityContext:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+          restartPolicy: {{ $job.restartPolicy }}
+          {{- with $job.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $job.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $job.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
