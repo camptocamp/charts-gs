@@ -7860,6 +7860,16 @@ entries:
     urls:
     - geoserver-loadbalanced-0.1.0-main-36cd18f.tgz
     version: 0.1.0-main-36cd18f
+  grafana-reporter:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2025-05-15T17:08:32.876214589Z"
+    description: A Helm chart grafana-reporter cronjob
+    digest: 31367c0ad372c79b4e9362a974e77803a3c76d66c758ca089053838d69303aaf
+    name: grafana-reporter
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/grafana-reporter-1.0.0/grafana-reporter-1.0.0.tgz
+    version: 1.0.0
   mviewer:
   - apiVersion: v2
     appVersion: "3.9"
@@ -13744,4 +13754,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2025-05-13T14:30:32.114968727Z"
+generated: "2025-05-15T17:08:32.881677475Z"
