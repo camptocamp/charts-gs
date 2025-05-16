@@ -1266,6 +1266,16 @@ entries:
   cadastrapp:
   - apiVersion: v2
     appVersion: 2.0.0
+    created: "2025-05-16T17:40:41.904058548Z"
+    description: A Helm chart for deploying geOrchestra's cadastrapp
+    digest: c33bb59713b4f0ca71671c70296961b6ee3c67332da0f2d5e3d4248d5cdb6ad3
+    name: cadastrapp
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/cadastrapp-1.4.0/cadastrapp-1.4.0.tgz
+    version: 1.4.0
+  - apiVersion: v2
+    appVersion: 2.0.0
     created: "2025-05-05T12:40:36.809063042Z"
     description: A Helm chart for deploying geOrchestra's cadastrapp
     digest: d6df17e344ec8d4c092c858ebf4947640925b7d1c169bde6dc1a3cbbb0f18d37
@@ -13754,4 +13764,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2025-05-15T17:08:32.881677475Z"
+generated: "2025-05-16T17:40:41.909525943Z"
