@@ -47,7 +47,7 @@ spec:
         {{- end }}
       - name: init-cadastrapp-webapp
         image: {{ .Values.cadastrapp.image }}
-        imagePullPolicy: {{ .Values.cadastrapp.imagePullPolicy }}
+        imagePullPolicy: IfNotPresent
         command:
         - /bin/bash
         args:
