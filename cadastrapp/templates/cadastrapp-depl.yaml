@@ -22,7 +22,7 @@ spec:
       {{- end }}
       initContainers:
       - name: bootstrap-georchestra-datadir
-        image: bitnami/git
+        image: "{{ .Values.tooling.general.image.repository }}:{{ .Values.tooling.general.image.tag }}"
         command:
         - /bin/sh
         - -c
