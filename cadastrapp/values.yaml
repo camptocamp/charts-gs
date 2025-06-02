@@ -32,4 +32,4 @@ tooling:
   general:
     image:
       repository: alpine/git
-      tag: 2.47.2
+      tag: 2.49.0
