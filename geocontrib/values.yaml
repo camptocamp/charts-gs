@@ -2,6 +2,8 @@ geocontrib:
   image: neogeo/geocontrib:5.0.2
   pullPolicy: IfNotPresent
   resources: {}
+  livenessProbe: {}
+  readinessProbe: {}
 
 frontend:
   image: neogeo/geocontrib-front:5.0.2

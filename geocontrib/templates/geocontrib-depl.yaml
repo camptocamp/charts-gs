@@ -19,6 +19,9 @@ spec:
           image: {{ .Values.geocontrib.image }}
           imagePullPolicy: {{ .Values.geocontrib.pullPolicy }}
           livenessProbe:
+          {{- if .Values.geocontrib.livenessProbe }}
+          {{- .Values.geocontrib.livenessProbe | toYaml | nindent 11 }}
+          {{- else }}
             failureThreshold: 3
             periodSeconds: 10
             successThreshold: 1
@@ -26,7 +29,11 @@ spec:
             initialDelaySeconds: 210
             tcpSocket:
               port: 5000
+          {{- end }}
           readinessProbe:
+          {{- if .Values.geocontrib.readinessProbe }}
+          {{- .Values.geocontrib.readinessProbe | toYaml | nindent 11 }}
+          {{- else }}
             failureThreshold: 3
             periodSeconds: 10
             initialDelaySeconds: 210
@@ -34,6 +41,7 @@ spec:
             timeoutSeconds: 1
             tcpSocket:
               port: 5000
+          {{- end }}
           {{- with .Values.env_variables }}
           env:
             {{- toYaml . | nindent 12 }}
