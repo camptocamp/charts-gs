@@ -18,7 +18,7 @@ geoserver:
       scheme: HTTP
       httpHeaders:
       - name: ctrl-flow-priority
-        value: "true"
+        value: "10"
     periodSeconds: 10
     failureThreshold: 3
     successThreshold: 1
