@@ -6561,6 +6561,16 @@ entries:
   geoserver-lb:
   - apiVersion: v2
     appVersion: 22.0.4
+    created: "2025-06-06T09:38:52.415703151Z"
+    description: A Helm chart for deploying geoserver loadbalanced
+    digest: 4547f5874b8fe8a8dcc6d47142f3636f2e40807e326a19cd28b85f405c955d12
+    name: geoserver-lb
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geoserver-lb-1.5.1/geoserver-lb-1.5.1.tgz
+    version: 1.5.1
+  - apiVersion: v2
+    appVersion: 22.0.4
     created: "2025-05-05T12:40:37.216419347Z"
     description: A Helm chart for deploying geoserver loadbalanced
     digest: 8bf85e0325516f5d258192958c94376fc6b20bafaa007979072a483c3194cd22
@@ -13794,4 +13804,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2025-05-19T17:51:38.977928394Z"
+generated: "2025-06-06T09:38:52.525229593Z"
