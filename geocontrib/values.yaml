@@ -8,14 +8,12 @@ frontend:
   pullPolicy: IfNotPresent
   resources: {}
 
+# image from geocontrib.image
 celery:
-  image: neogeo/geocontrib:5.0.2
-  pullPolicy: IfNotPresent
   resources: {}
 
+# image from geocontrib.image
 celerybeat:
-  image: neogeo/geocontrib:5.0.2
-  pullPolicy: IfNotPresent
   resources: {}
 
 redis:

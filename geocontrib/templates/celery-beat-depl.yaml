@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: celery-beat
-          image: {{ .Values.celerybeat.image }}
-          imagePullPolicy: {{ .Values.celerybeat.pullPolicy }}
+          image: {{ .Values.geocontrib.image }}
+          imagePullPolicy: {{ .Values.geocontrib.pullPolicy }}
           command:
           - src/docker/geocontrib/docker-entrypoint.sh 
           args:
