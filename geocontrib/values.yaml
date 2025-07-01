@@ -2,6 +2,7 @@ geocontrib:
   image: neogeo/geocontrib:5.0.2
   pullPolicy: IfNotPresent
   resources: {}
+  timeout: 30
 
 frontend:
   image: neogeo/geocontrib-front:5.0.2
