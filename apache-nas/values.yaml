@@ -3,7 +3,7 @@ nas:
   volume:
     #pv_name: c2c-com-apache-nas-data
     pvc_name: apache-nas-data
-    #storage_class_name: local or "-" for empty storageClassName 
+    #storage_class_name: local or "-" for empty storageClassName
     storage_size: 5Gi
     accessModes:
     - ReadWriteOnce
@@ -19,6 +19,6 @@ tolerations: []
 image:
   repository: ghcr.io/camptocamp/georchestra-docker-images/apache-nas
   pullPolicy: IfNotPresent
-  tag: "1.0.0-8.3-build-01c3afc701e6846b99a14168815e60869ec2e396"
+  tag: "20250708"
 
 resources: {}
