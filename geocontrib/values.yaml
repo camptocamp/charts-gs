@@ -1,11 +1,11 @@
 geocontrib:
-  image: neogeo/geocontrib:5.0.2
+  image: neogeo/geocontrib:6.4.4
   pullPolicy: IfNotPresent
   resources: {}
   timeout: 30
 
 frontend:
-  image: neogeo/geocontrib-front:5.0.2
+  image: neogeo/geocontrib-front:6.4.4
   pullPolicy: IfNotPresent
   resources: {}
 
