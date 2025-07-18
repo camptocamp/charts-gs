@@ -10075,6 +10075,15 @@ entries:
   sdi-consistence-check:
   - apiVersion: v1
     appVersion: "1.0"
+    created: "2025-07-18T10:48:24.003789215Z"
+    description: A Helm chart to deploy cronjobs related to geOrchestra's sdi-consistence-check
+    digest: 61574c80c2a9c084761d3e2917896ddd9a2fb550c780ebf9aa147800771e394e
+    name: sdi-consistence-check
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/sdi-consistence-check-1.4.0/sdi-consistence-check-1.4.0.tgz
+    version: 1.4.0
+  - apiVersion: v1
+    appVersion: "1.0"
     created: "2025-05-13T14:30:31.996191991Z"
     description: A Helm chart sdi-consistency-check cronjob
     digest: 661c39c6e953b1e1e11c5ab4514c19c5979589d00f88f34804c806d8e544af36
@@ -13854,4 +13863,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2025-07-15T08:58:24.144316934Z"
+generated: "2025-07-18T10:48:24.010105647Z"
