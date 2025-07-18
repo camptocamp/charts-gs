@@ -49,6 +49,10 @@ spec:
               args:
                 {{- toYaml . | nindent 16 }}
               {{- end }}
+              {{- with $cronjob.env_variables }}
+              env:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
           volumes:
             {{- $cronjob.volumes | toYaml | nindent 12 }}
           {{- with $cronjob.affinity }}

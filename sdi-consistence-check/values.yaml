@@ -5,6 +5,7 @@ cronjobs:
     image: TBD
     imagePullPolicy: IfNotPresent
     args: []
+    env_variables: []
     # Those volumes will be available in /mnt
     # Example :
     #  - name: apache-nas-data
