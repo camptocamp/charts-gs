@@ -75,7 +75,7 @@ spec:
         env:
         - name: GIT_SSH_COMMAND
           value: ssh -o "IdentitiesOnly=yes" -o "StrictHostKeyChecking no"
-        image: bitnami/git
+        image: alpine/git
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
