@@ -6,7 +6,7 @@ sftp:
   #  nodePort: 30022 # when type NodePort
   #  Set to local if want to preserve source IP for NodePort or LoadBalancer
   #  externalTrafficPolicy: Cluster
-  image: ghcr.io/camptocamp/georchestra-docker-images/sftp-server:20250703
+  image: ghcr.io/camptocamp/georchestra-docker-images/sftp-server:20250801
   imagePullPolicy: IfNotPresent
   lifecycle: {}
   #  postStart:
