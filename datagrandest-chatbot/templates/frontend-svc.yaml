@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "dgechatbot.fullname" . }}-studio-svc
+  labels:
+    {{- include "dgechatbot.labels" . | nindent 4 }}
+spec:
+  ports:
+    - port: 8000
+      protocol: TCP
+      targetPort: http
+  selector:
+    {{- include "dgechatbot.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ include "dgechatbot.fullname" . }}-mviewerstudio

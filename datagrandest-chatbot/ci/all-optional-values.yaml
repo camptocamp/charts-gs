@@ -1,0 +1,113 @@
+imagePullSecrets: []
+nameOverride: "test"
+fullnameOverride: "test"
+
+mviewer:
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "250m"
+    limits:
+      memory: "128Mi"
+      cpu: "500m"
+  nodeSelector:
+    "node-role.kubernetes.io/control-plane": "true"
+  tolerations:
+  - key: "key1"
+    operator: "Equal"
+    value: "value1"
+    effect: "NoSchedule"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/os
+            operator: In
+            values:
+            - linux
+  podAnnotations:
+    myapp: mviewer
+  lifecycle:
+    postStart:
+      exec:
+        command: ["/bin/sh", "-c", "echo"]
+  extraVolumes: []
+  extraVolumeMounts: []
+  extraEnv:
+  - name: FOO
+    value: BAR
+
+elasticsearch:
+  enabled: true
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "500m"
+    limits:
+      memory: "1024Mi"
+      cpu: "1000m"
+  securityContext:
+    runAsUser: 1000
+  nodeSelector:
+    "node-role.kubernetes.io/control-plane": "true"
+  tolerations:
+  - key: "key1"
+    operator: "Equal"
+    value: "value1"
+    effect: "NoSchedule"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/os
+            operator: In
+            values:
+            - linux
+  podAnnotations:
+    myapp: mviewer
+  extraEnv:
+  - name: FOO
+    value: BAR
+  lifecycle:
+    postStart:
+      exec:
+        command: ["/bin/sh", "-c", "echo"]
+
+ingress:
+  className: "traefik"
+
+mviewerstudio:
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "500m"
+    limits:
+      memory: "1024Mi"
+      cpu: "1000m"
+  nodeSelector:
+    "node-role.kubernetes.io/control-plane": "true"
+  tolerations:
+  - key: "key1"
+    operator: "Equal"
+    value: "value1"
+    effect: "NoSchedule"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/os
+            operator: In
+            values:
+            - linux
+  podAnnotations:
+    myapp: mviewer
+  keepConfigFromKubernetes: true
+  lifecycle:
+    postStart:
+      exec:
+        command: ["/bin/sh", "-c", "echo"]
+  extraVolumes: []
+  extraVolumeMounts: []

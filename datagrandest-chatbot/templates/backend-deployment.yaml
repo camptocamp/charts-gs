@@ -1,0 +1,123 @@
+{{- $webapp := .Values.backend -}}
+{{- if $webapp.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "dgechatbot.fullname" . }}-backend
+  labels:
+    {{- include "dgechatbot.labels" . | nindent 4 }}
+spec:
+  replicas: {{ $webapp.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "dgechatbot.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ include "dgechatbot.fullname" . }}-backend
+  template:
+    metadata:
+      {{- with $webapp.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "dgechatbot.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ include "dgechatbot.fullname" . }}-backend
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml $webapp.podSecurityContext | nindent 8 }}
+      {{- with $webapp.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . |nindent 8 }}
+      {{- end }}
+      {{- with $webapp.affinity }}
+      affinity:
+        {{- toYaml . |nindent 8 }}
+      {{- end }}
+      {{- with $webapp.tolerations }}
+      tolerations:
+        {{- toYaml . |nindent 8 }}
+      {{- end }}
+      containers:
+      - name: backend
+        image: "{{ $webapp.image.repository }}:{{ $webapp.image.tag }}"
+        imagePullPolicy: {{ $webapp.image.imagePullPolicy }}
+        env: {{ not (empty $webapp.extraEnv) | ternary nil "" }}
+          {{- range $key, $value := $webapp.extraEnv }}
+          - name: {{ $key }}
+            {{- toYaml $value | nindent 12 }}
+          {{- end }}
+                              {{- $database := .Values.database -}}
+          {{- $database_secret_name := printf "%s-backend-database-secret" (include "dgechatbot.fullname" .) -}}
+          {{- if $database.builtin }}
+          - name: PGHOST
+            value: "{{ .Release.Name }}-database"
+          {{- else }}
+          {{- if $database.auth.existingSecret }}
+          {{- $database_secret_name = $database.auth.existingSecret -}}
+          {{- end }}
+          - name: PGHOST
+            valueFrom:
+              secretKeyRef:
+                  name: {{ $database_secret_name }}
+                  key: host
+                  optional: false
+          {{- end }}
+          - name: PGPORT
+            valueFrom:
+              secretKeyRef:
+                  name: {{ $database_secret_name }}
+                  key: port
+                  optional: false
+          - name: PGDATABASE
+            valueFrom:
+              secretKeyRef:
+                  name: {{ $database_secret_name }}
+                  key: dbname
+                  optional: false
+          - name: PGUSER
+            valueFrom:
+              secretKeyRef:
+                  name: {{ $database_secret_name }}
+                  key: user
+                  optional: false
+          - name: PGPASSWORD
+            valueFrom:
+              secretKeyRef:
+                  name: {{ $database_secret_name }}
+                  key: password
+                  optional: false
+        envFrom:
+          - configMapRef:
+              name: {{ include "dgechatbot.fullname" . }}-backend-config
+        resources:
+          {{- toYaml $webapp.resources | nindent 10 }}
+        securityContext:
+          {{- toYaml $webapp.securityContext | nindent 12 }}
+        {{- with $webapp.lifecycle }}
+        lifecycle:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        ports:
+        - name: http
+          containerPort: 5678
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+        {{- if $webapp.extraVolumeMounts }}
+        volumeMounts:
+          {{- $webapp.extraVolumeMounts | toYaml | nindent 8 }}
+        {{- end }}
+      {{- if $webapp.extraVolumes }}
+      volumes:
+        {{ $webapp.extraVolumes | toYaml | nindent 6 }}
+      {{- end }}
+{{- end }}
