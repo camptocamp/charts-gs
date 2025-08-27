@@ -1,3 +1,4 @@
+{{- if .Values.geoserver.jetty_monitoring }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -163,3 +164,4 @@ data:
          </Connection>
        </Plugin>
     </Plugin>
+{{- end }}
