@@ -31,12 +31,11 @@ spec:
           {{- with .Values.geoserver.volumes.geoserverDatadir | required ".Values.geoserver.volumes.geoserverDatadir is required." }}
           {{ . | toYaml | nindent 10 }}
           {{- end }}
-        - name: geoserver-cm
-          configMap:
-            name: {{ include "georchestra-geoserver.fullname" . }}-geoserver-slaves-cm
+        {{- if .Values.geoserver.jetty_monitoring }}
         - name: geoserver-monitoring-cm
           configMap:
             name: {{ include "georchestra-geoserver.fullname" . }}-monitoring-cm
+        {{- end }}
         - name: ssh-secret
           secret:
             defaultMode: 256
@@ -203,7 +202,7 @@ spec:
         {{- . | toYaml | nindent 8 }}
         {{- end }}
         image: {{ .Values.geoserver.docker_image }}
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: {{ .Values.geoserver.docker_image_pull_policy }}
         livenessProbe:
         {{- .Values.geoserver.livenessProbe | toYaml | nindent 10 }}
         ports:
@@ -237,19 +236,10 @@ spec:
           {{- end }}
       - name: geoserver-reload
         image: {{ .Values.geoserver.reloader.docker_image }}
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: {{ .Values.geoserver.reloader.docker_image_pull_policy }}
         volumeMounts:
         - name: geoserver-datadir
           mountPath: /mnt/geoserver_datadir
-        - name: geoserver-cm
-          mountPath: /mnt/geoserver-cm
-        command:
-        - /bin/sh
-        - -c
-        args:
-        - >-
-          pip install requests ;
-          exec python -u /mnt/geoserver-cm/sync.py
         resources:
           requests:
             memory: "64Mi"
