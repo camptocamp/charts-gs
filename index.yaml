@@ -2574,6 +2574,28 @@ entries:
     urls:
     - cadastrapp-0.2.1-datahub-integration-datadir-crepel-test-09e33a5.tgz
     version: 0.2.1-datahub-integration-datadir-crepel-test-09e33a5
+  datagrandest-chatbot:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2025-08-28T15:19:52.453975967Z"
+    dependencies:
+    - alias: phoenix
+      condition: phoenix.enabled
+      name: phoenix-helm
+      repository: oci://registry-1.docker.io/arizephoenix
+      version: 2.0.34
+    - alias: database
+      condition: database.builtin
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamichartslegacy
+      version: 15.5.2
+    description: A Helm chart for deploying DataGrandEst chatbot
+    digest: 9b66ee1c27e7a8dd44a18066385fa68f30395a978722730a649ec7af46267098
+    name: datagrandest-chatbot
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/datagrandest-chatbot-0.1.0/datagrandest-chatbot-0.1.0.tgz
+    version: 0.1.0
   datahub:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -13903,4 +13925,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2025-08-28T10:56:45.244773681Z"
+generated: "2025-08-28T15:19:52.457373867Z"
