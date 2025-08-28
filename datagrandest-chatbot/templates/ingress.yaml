@@ -25,26 +25,27 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.ingress.hosts | default (list "") }}
-    - host: {{ .host | quote }}
-    {{- end }}
-      http:
-        paths:
-          {{- if $.Values.frontend.enabled }}
-          - path: /chatbot/
-            backend:
-              service:
-                name: {{ include "dgechatbot.fullname" $ }}-frontend-svc
-                port:
-                  name: http
-          {{- end }}
-          {{- if $.Values.backend.enabled }}
-          - path: /chatbot-backend/
-            backend:
-              service:
-                name: {{ include "dgechatbot.fullname" $ }}-backend-svc
-                port:
-                  name: http
-          {{- end }}
-    {{- end }}
+  {{- range .Values.ingress.hosts | default (list "") }}
+  - host: {{ .host | quote }}
+    http:
+      paths:
+        {{- if $.Values.frontend.enabled }}
+        - path: /chatbot/
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ include "dgechatbot.fullname" $ }}-frontend-svc
+              port:
+                name: http
+        {{- end }}
+        {{- if $.Values.backend.enabled }}
+        - path: /chatbot-backend/
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ include "dgechatbot.fullname" $ }}-backend-svc
+              port:
+                name: http
+        {{- end }}
+  {{- end }}
 {{- end }}
