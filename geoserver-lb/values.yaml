@@ -27,6 +27,8 @@ geoserver:
   replicas: 1
   jetty_monitoring: false
   git:
+    docker_image: alpine/git
+    docker_image_pull_policy: IfNotPresent
     repository_url: git@github.com:org/georchestra-client-configuration.git
     branch: k8s-master
   reloader:
