@@ -1,0 +1,9 @@
+dependencies:
+- name: phoenix-helm
+  repository: oci://registry-1.docker.io/arizephoenix
+  version: 2.0.34
+- name: postgresql
+  repository: oci://registry-1.docker.io/bitnamichartslegacy
+  version: 15.5.2
+digest: sha256:514d2a025c4b7747b76989b4bf6a19c360c943663dc7ba08ac73af9dc5ecc74f
+generated: "2025-08-28T16:27:05.578587547+02:00"
