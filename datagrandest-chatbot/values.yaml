@@ -6,9 +6,9 @@ backend:
   enabled: true
   replicaCount: 1
   image:
-    repository: hashicorp/http-echo
+    repository: ghcr.io/camptocamp/datagrandest-assistant/backend
     imagePullPolicy: IfNotPresent
-    tag: latest
+    tag: sha-21fca9a
   config:
     domain: "localhost"
     frontendHost: "http://localhost:5173"
@@ -30,11 +30,11 @@ backend:
   resources: {}
   podSecurityContext:
     runAsNonRoot: true
-    runAsUser: 999
-    runAsGroup: 999
-    fsGroup: 999
+    runAsUser: 10000
+    runAsGroup: 10001
+    fsGroup: 10001
   securityContext:
-    runAsUser: 999
+    runAsUser: 10000
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -53,17 +53,17 @@ frontend:
   enabled: true
   replicaCount: 1
   image:
-    repository: hashicorp/http-echo
+    repository: ghcr.io/camptocamp/datagrandest-assistant/frontend
     pullPolicy: IfNotPresent
-    tag: latest
+    tag: sha-27ec8db
   resources: {}
   podSecurityContext:
     runAsNonRoot: true
-    runAsUser: 999
-    runAsGroup: 999
-    fsGroup: 999
+    runAsUser: 101
+    runAsGroup: 101
+    fsGroup: 101
   securityContext:
-    runAsUser: 999
+    runAsUser: 101
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -112,7 +112,7 @@ database:
       password: backend
 
 ingress:
-  enabled: true
+  enabled: false
   className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx
@@ -156,7 +156,7 @@ phoenix:
     #   - PostgreSQL: postgresql.enabled=true, persistence.enabled=false
     #   - SQLite: postgresql.enabled=false, persistence.enabled=true
     #   - External DB: postgresql.enabled=false, persistence.enabled=false, database.url configured
-    enabled: false
+    enabled: true
   database:
     # -- Default retention policy for traces in days (PHOENIX_DEFAULT_RETENTION_POLICY_DAYS)
     # Set to 0 to disable automatic trace cleanup. When set to a positive value,
@@ -172,7 +172,7 @@ phoenix:
     #   - SQLite: persistence.enabled=true, postgresql.enabled=false
     #   - PostgreSQL: persistence.enabled=false, postgresql.enabled=true
     #   - External DB: persistence.enabled=false, postgresql.enabled=false, database.url configured
-    enabled: true
+    enabled: false
 
     # -- Kubernetes storage class for Phoenix home volume
     storageClass: ""

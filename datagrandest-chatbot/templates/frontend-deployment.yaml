@@ -46,15 +46,15 @@ spec:
         imagePullPolicy: {{ $webapp.image.imagePullPolicy }}
         ports:
         - name: http
-          containerPort: 5678
+          containerPort: 8080
           protocol: TCP
         livenessProbe:
           httpGet:
-            path: /
+            path: /chatbot/
             port: http
         readinessProbe:
           httpGet:
-            path: /
+            path: /chatbot/
             port: http
         env: {{ not (empty $webapp.extraEnv) | ternary nil "[]" }}
           {{- range $key, $value := $webapp.extraEnv }}

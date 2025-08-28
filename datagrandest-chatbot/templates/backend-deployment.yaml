@@ -52,38 +52,38 @@ spec:
                               {{- $database := .Values.database -}}
           {{- $database_secret_name := printf "%s-backend-database-secret" (include "dgechatbot.fullname" .) -}}
           {{- if $database.builtin }}
-          - name: PGHOST
+          - name: POSTGRES_SERVER
             value: "{{ .Release.Name }}-database"
           {{- else }}
           {{- if $database.auth.existingSecret }}
           {{- $database_secret_name = $database.auth.existingSecret -}}
           {{- end }}
-          - name: PGHOST
+          - name: POSTGRES_SERVER
             valueFrom:
               secretKeyRef:
                   name: {{ $database_secret_name }}
                   key: host
                   optional: false
           {{- end }}
-          - name: PGPORT
+          - name: POSTGRES_PORT
             valueFrom:
               secretKeyRef:
                   name: {{ $database_secret_name }}
                   key: port
                   optional: false
-          - name: PGDATABASE
+          - name: POSTGRES_DB
             valueFrom:
               secretKeyRef:
                   name: {{ $database_secret_name }}
                   key: dbname
                   optional: false
-          - name: PGUSER
+          - name: POSTGRES_USER
             valueFrom:
               secretKeyRef:
                   name: {{ $database_secret_name }}
                   key: user
                   optional: false
-          - name: PGPASSWORD
+          - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
                   name: {{ $database_secret_name }}
@@ -102,7 +102,7 @@ spec:
         {{- end }}
         ports:
         - name: http
-          containerPort: 5678
+          containerPort: 8000
           protocol: TCP
         livenessProbe:
           httpGet:
