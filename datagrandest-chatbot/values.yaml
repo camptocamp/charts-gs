@@ -159,6 +159,7 @@ phoenix:
     #   - PostgreSQL: postgresql.enabled=true, persistence.enabled=false
     #   - SQLite: postgresql.enabled=false, persistence.enabled=true
     #   - External DB: postgresql.enabled=false, persistence.enabled=false, database.url configured
+    # CONSULT THIS LINK FOR SQLITE: https://github.com/Arize-ai/phoenix/issues/9219#issuecomment-3228959427
     enabled: true
   database:
     # -- Default retention policy for traces in days (PHOENIX_DEFAULT_RETENTION_POLICY_DAYS)
