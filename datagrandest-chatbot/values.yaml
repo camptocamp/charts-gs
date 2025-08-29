@@ -20,7 +20,7 @@ backend:
     elasticSearch:
       url: "http://localhost:9200"
     llm:
-      model: "mistral-large-latest"
+      model: "mistral-small-latest"
       apiKey: "changethis"
     mistralAI:
       apiKey: "changethis"
