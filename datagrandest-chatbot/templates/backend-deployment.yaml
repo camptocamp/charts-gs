@@ -90,8 +90,8 @@ spec:
                   key: password
                   optional: false
         envFrom:
-          - configMapRef:
-              name: {{ include "dgechatbot.fullname" . }}-backend-config
+          - secretRef:
+              name: {{ include "dgechatbot.fullname" . }}-backend-secret
         resources:
           {{- toYaml $webapp.resources | nindent 10 }}
         securityContext:
