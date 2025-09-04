@@ -1,0 +1,34 @@
+{{- $webapp := .Values.backend -}}
+{{- if $webapp.enabled -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "dgechatbot.fullname" . }}-backend-app-data
+  {{- with $webapp.persistence.app_data.annotations }}
+  annotations:
+    {{- range $key, $value := . }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+  {{- end }}
+  labels:
+    {{- include "dgechatbot.labels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ include "dgechatbot.fullname" . }}-backend
+spec:
+  accessModes:
+    {{- range $webapp.persistence.app_data.accessModes }}
+    - {{ . | quote }}
+    {{- end }}
+  resources:
+    requests:
+      storage: {{ $webapp.persistence.app_data.size }}
+  {{- if $webapp.persistence.app_data.storageClass }}
+  {{- if eq "-" $webapp.persistence.app_data.storageClass }}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: {{ $webapp.persistence.app_data.storageClass }}
+  {{- end }}
+  {{- end }}
+  {{- if $webapp.persistence.app_data.existingPV }}
+  volumeName: {{ $webapp.persistence.app_data.existingPV }}
+  {{- end }}
+{{- end }}

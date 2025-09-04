@@ -112,12 +112,17 @@ spec:
           httpGet:
             path: /healthz
             port: http
-        {{- if $webapp.extraVolumeMounts }}
         volumeMounts:
+        - name: app-data
+          mountPath: /app/data
+        {{- if $webapp.extraVolumeMounts }}
           {{- $webapp.extraVolumeMounts | toYaml | nindent 8 }}
         {{- end }}
-      {{- if $webapp.extraVolumes }}
       volumes:
+      - name: app-data
+        persistentVolumeClaim:
+          claimName: {{ include "dgechatbot.fullname" . }}-backend-app-data
+      {{- if $webapp.extraVolumes }}
         {{ $webapp.extraVolumes | toYaml | nindent 6 }}
       {{- end }}
 {{- end }}
