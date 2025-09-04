@@ -31,6 +31,6 @@ dependencies:
   alias: phoenix
 - name: postgresql
   version: 15.5.2
-  repository: "ghcr.io/camptocamp/charts-gs"
+  repository: "oci://ghcr.io/camptocamp/charts-gs"
   condition: database.builtin
   alias: database
