@@ -14,8 +14,9 @@ spec:
       app.kubernetes.io/component: {{ include "dgechatbot.fullname" . }}-backend
   template:
     metadata:
-      {{- with $webapp.podAnnotations }}
       annotations:
+        configHash: {{ (toJson .Values) | sha256sum | quote }}
+      {{- with $webapp.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:

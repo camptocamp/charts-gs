@@ -19,6 +19,8 @@ backend:
     secretKey: "changethis"
     elasticSearch:
       url: "http://localhost:9200"
+    geonetwork:
+      url: "http://localhost:8080/geonetwork/"
     llm:
       model: "mistral-small-latest"
       apiKey: "changethis"
