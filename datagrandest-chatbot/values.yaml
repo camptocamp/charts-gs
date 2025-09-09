@@ -19,6 +19,7 @@ backend:
     secretKey: "changethis"
     elasticSearch:
       url: "http://localhost:9200"
+    metadataUrl: "http://localhost/datahub/dataset/{uuid}"
     llm:
       model: "mistral-small-latest"
       apiKey: "changethis"
