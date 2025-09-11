@@ -23,6 +23,8 @@ backend:
     llm:
       model: "mistral-small-latest"
       apiKey: "changethis"
+    phoenix:
+      apiKey: "changethis"
     mistralAI:
       apiKey: "changethis"
     testGenerationModel:
