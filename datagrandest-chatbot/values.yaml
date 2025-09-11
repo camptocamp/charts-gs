@@ -23,6 +23,8 @@ backend:
     llm:
       model: "mistral-small-latest"
       apiKey: "changethis"
+      temperature: "0.0"
+      maxTokens: "4000"
     phoenix:
       apiKey: "changethis"
     mistralAI:
