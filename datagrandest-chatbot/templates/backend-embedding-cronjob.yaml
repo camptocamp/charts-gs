@@ -23,7 +23,7 @@ spec:
           {{- end }}
           {{- with $webapp.podSecurityContext }}
           securityContext:
-            {{ toYaml . | nindent 10 }}
+            {{ toYaml . | nindent 12 }}
           {{- end }}
           containers:
           - name: cron-embedding
@@ -87,7 +87,7 @@ spec:
             {{- end }}
             {{- with $webapp.securityContext }}
             securityContext:
-              {{ toYaml . | nindent 12 }}
+              {{ toYaml . | nindent 14 }}
             {{- end }}
             volumeMounts:
             - name: app-data
