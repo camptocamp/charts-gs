@@ -1,0 +1,117 @@
+{{- $webapp := .Values.backend -}}
+{{- $jobConfiguration := $webapp.jobEmbedding -}}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "dgechatbot.fullname" . }}
+  labels:
+    {{- include "dgechatbot.labels" . | nindent 4 }}
+spec:
+  schedule: {{ $jobConfiguration.schedule | quote }}
+  successfulJobsHistoryLimit: {{ $jobConfiguration.successfulJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 86400
+      template:
+        metadata:
+          labels:
+            {{- include "dgechatbot.labels" . | nindent 12 }}
+        spec:
+          {{- with $webapp.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+          {{- with $webapp.podSecurityContext }}
+          securityContext:
+            {{ toYaml . | nindent 10 }}
+          {{- end }}
+          containers:
+          - name: cron-embedding
+            image: "{{ $webapp.image.repository }}:{{ $webapp.image.tag }}"
+            imagePullPolicy: {{ $webapp.image.pullPolicy }}
+            args:
+            - python3
+            - -m
+            - imports.embed_es_gn
+            env: {{ not (empty $webapp.extraEnv) | ternary nil "" }}
+            {{- range $key, $value := $webapp.extraEnv }}
+            - name: {{ $key }}
+              {{- toYaml $value | nindent 12 }}
+            {{- end }}
+            {{- $database := .Values.database -}}
+            {{- $database_secret_name := printf "%s-backend-database-secret" (include "dgechatbot.fullname" .) -}}
+            {{- if $database.builtin }}
+            - name: POSTGRES_SERVER
+              value: "{{ .Release.Name }}-database"
+            {{- else }}
+            {{- if $database.auth.existingSecret }}
+            {{- $database_secret_name = $database.auth.existingSecret -}}
+            {{- end }}
+            - name: POSTGRES_SERVER
+              valueFrom:
+                secretKeyRef:
+                    name: {{ $database_secret_name }}
+                    key: host
+                    optional: false
+            {{- end }}
+            - name: POSTGRES_PORT
+              valueFrom:
+                secretKeyRef:
+                    name: {{ $database_secret_name }}
+                    key: port
+                    optional: false
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                    name: {{ $database_secret_name }}
+                    key: dbname
+                    optional: false
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                    name: {{ $database_secret_name }}
+                    key: user
+                    optional: false
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                    name: {{ $database_secret_name }}
+                    key: password
+                    optional: false
+            envFrom:
+            - secretRef:
+                name: {{ include "dgechatbot.fullname" . }}-backend-secret
+            {{- with $webapp.resources }}
+            resources:
+              {{ toYaml . | nindent 12 }}
+            {{- end }}
+            {{- with $webapp.securityContext }}
+            securityContext:
+              {{ toYaml . | nindent 12 }}
+            {{- end }}
+            volumeMounts:
+            - name: app-data
+              mountPath: /app/data
+            {{- if $webapp.extraVolumeMounts }}
+              {{- $webapp.extraVolumeMounts | toYaml | nindent 8 }}
+            {{- end }}
+          restartPolicy: {{ $jobConfiguration.restartPolicy }}
+          volumes:
+          - name: app-data
+            persistentVolumeClaim:
+              claimName: {{ include "dgechatbot.fullname" . }}-backend-app-data
+          {{- if $webapp.extraVolumes }}
+            {{ $webapp.extraVolumes | toYaml | nindent 6 }}
+          {{- end }}
+          {{- with $webapp.nodeSelector }}
+          nodeSelector:
+            {{ toYaml . | nindent 10 }}
+          {{- end }}
+          {{- with $webapp.affinity }}
+          affinity:
+            {{ toYaml . | nindent 10 }}
+          {{- end }}
+          {{- with $webapp.tolerations }}
+          tolerations:
+            {{ toYaml . | nindent 10 }}
+          {{- end }}

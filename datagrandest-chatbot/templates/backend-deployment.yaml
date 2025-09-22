@@ -50,7 +50,7 @@ spec:
           - name: {{ $key }}
             {{- toYaml $value | nindent 12 }}
           {{- end }}
-                              {{- $database := .Values.database -}}
+          {{- $database := .Values.database -}}
           {{- $database_secret_name := printf "%s-backend-database-secret" (include "dgechatbot.fullname" .) -}}
           {{- if $database.builtin }}
           - name: POSTGRES_SERVER
