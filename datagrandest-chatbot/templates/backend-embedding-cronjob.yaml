@@ -9,6 +9,7 @@ metadata:
 spec:
   schedule: {{ $jobConfiguration.schedule | quote }}
   successfulJobsHistoryLimit: {{ $jobConfiguration.successfulJobsHistoryLimit }}
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       ttlSecondsAfterFinished: 86400
