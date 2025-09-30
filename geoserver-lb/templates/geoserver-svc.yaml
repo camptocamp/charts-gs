@@ -11,7 +11,7 @@ spec:
     - name: http-alt
       port: 8080
       protocol: TCP
-      targetPort: 8080
+      targetPort: http
   selector:
     {{- include "georchestra-geoserver.selectorLabels" . | nindent 4 }}
     app.kubernetes.io/component: {{ include "georchestra-geoserver.fullname" . }}-geoserver-slaves

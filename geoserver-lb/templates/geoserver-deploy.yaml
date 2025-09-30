@@ -205,22 +205,29 @@ spec:
         image: {{ .Values.geoserver.docker_image }}
         imagePullPolicy: {{ .Values.geoserver.docker_image_pull_policy }}
         livenessProbe:
-        {{- .Values.geoserver.livenessProbe | toYaml | nindent 10 }}
+          httpGet:
+            path: /geoserver/index.html
+            port: http
+            scheme: HTTP
+          periodSeconds: 10
+          failureThreshold: 3
+          successThreshold: 1
+          timeoutSeconds: 5
         ports:
         - containerPort: 8080
-          name: http-proxy
+          name: http
           protocol: TCP
         resources:
           {{- toYaml .Values.geoserver.resources | nindent 10 }}
         startupProbe:
-          failureThreshold: 5
-          periodSeconds: 40
+          httpGet:
+            path: /geoserver/index.html
+            port: http
+            scheme: HTTP
+          periodSeconds: 10
+          failureThreshold: 3
           successThreshold: 1
-          tcpSocket:
-            port: 8080
-          timeoutSeconds: 1
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
+          timeoutSeconds: 5
         volumeMounts:
           - mountPath: /etc/georchestra
             name: georchestra-datadir
@@ -264,21 +271,4 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 10
-      {{- if .Values.geoserver.jetty_monitoring }}
-      - name: jmx-collectd
-        image: camptocamp/jmx-collectd:bullseye
-        imagePullPolicy: IfNotPresent
-        volumeMounts:
-        - mountPath: /collectd-template
-          name: geoserver-monitoring-cm
-        ports:
-        - containerPort: 9103
-          name: prometheus
-        command:
-        - /bin/sh
-        - -c
-        - mkdir /etc/collectd/collectd.conf.d/ ;
-          cat /collectd-template/collectd-jmx-jetty.conf | sed "s/localhost/$(hostname)/g" > /etc/collectd/collectd.conf.d/jmx.conf ;
-          collectd -f
-      {{- end }}
 {{- end -}}
