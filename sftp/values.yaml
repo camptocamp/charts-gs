@@ -1,8 +1,10 @@
 ---
 sftp:
   service:
-    type: "ClusterIP" # or NodePort or LoadBalancer
+    type: "ClusterIP"  # or NodePort or LoadBalancer
     port: 22
+    annotations: {}
+    lbIpWhitelist: []  # Require type: LoadBalancer
   #  nodePort: 30022 # when type NodePort
   #  Set to local if want to preserve source IP for NodePort or LoadBalancer
   #  externalTrafficPolicy: Cluster
@@ -17,10 +19,10 @@ sftp:
   #      command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
 
   imagePullSecrets: []
-  #- name: secret
-  
+  # - name: secret
+
   customHostname: "{{ .Release.Name }}-{{ .Release.Namespace }}"
-  
+
   extraVolumes: []
    # - mountPath: /usr/share/nginx/html
    #   name: volume-pvc
