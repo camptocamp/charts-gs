@@ -11496,6 +11496,16 @@ entries:
   sftp:
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2025-10-07T09:54:20.214859693Z"
+    description: A Helm chart for deploying a SFTP stack
+    digest: 5e936ca5a6f8327cec391fc2a00a1859666ff3664eb8fc3a58c6b02b53a6cf46
+    name: sftp
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/sftp-1.7.0/sftp-1.7.0.tgz
+    version: 1.7.0
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2025-09-24T13:26:27.410380289Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 00064a0586a54624c8b3470710d3ae78e1c5e817c4b229e683c789b188a420ac
@@ -14196,4 +14206,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2025-09-30T17:56:03.34032302Z"
+generated: "2025-10-07T09:54:20.221403785Z"
