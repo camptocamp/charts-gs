@@ -4,6 +4,10 @@ metadata:
   name: {{ include "sftp.fullname" . }}-sftp-svc
   labels:
     {{- include "sftp.labels" . | nindent 4 }}
+  {{- with .Values.sftp.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.sftp.service.type }}
   {{- if .Values.sftp.service.externalTrafficPolicy }}
@@ -18,3 +22,9 @@ spec:
       {{- end }}
   selector:
     {{- include "sftp.selectorLabels" . | nindent 4 }}
+  {{- with .Values.sftp.service.lbIpWhitelist }}
+  loadBalancerSourceRanges:
+  {{- range . }}
+    - {{ . | quote }}
+  {{- end }}
+  {{- end }}
