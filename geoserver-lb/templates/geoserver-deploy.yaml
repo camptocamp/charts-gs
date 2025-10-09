@@ -206,7 +206,7 @@ spec:
         imagePullPolicy: {{ .Values.geoserver.docker_image_pull_policy }}
         livenessProbe:
           httpGet:
-            path: /geoserver/index.html
+            path: /geoserver/ows?SERVICE=WMS&REQUEST=DescribeLayer&LAYERS=geor:public_layer&VERSION=1.1.1
             port: http
             scheme: HTTP
           periodSeconds: 10
@@ -221,7 +221,7 @@ spec:
           {{- toYaml .Values.geoserver.resources | nindent 10 }}
         startupProbe:
           httpGet:
-            path: /geoserver/index.html
+            path: /geoserver/ows?SERVICE=WMS&REQUEST=DescribeLayer&LAYERS=geor:public_layer&VERSION=1.1.1
             port: http
             scheme: HTTP
           failureThreshold: 60
