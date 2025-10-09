@@ -23,6 +23,8 @@ geoserver:
     docker_image_pull_policy: IfNotPresent
   extra_environment: []
   extra_volumes: []
+  extra_volumeMounts: []
+  extraContainers: []
   volumes:
     geoserverDatadir:
       persistentVolumeClaim:
