@@ -19,6 +19,6 @@ tolerations: []
 image:
   repository: ghcr.io/camptocamp/georchestra-docker-images/apache-nas
   pullPolicy: IfNotPresent
-  tag: "20250901"
+  tag: "20251006"
 
 resources: {}
