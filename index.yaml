@@ -10417,6 +10417,28 @@ entries:
   rclone:
   - apiVersion: v2
     appVersion: "1.68"
+    created: "2025-10-16T13:37:33.682312656Z"
+    description: A Helm chart for to deploy rclone jobs in Kubernetes.
+    digest: c6fd138da5d5d7aa48bc4d70d3d37b3028b34b0ed89ece98207b2858c9047e6e
+    home: https://github.com/abarrak/rclone-helm
+    icon: https://cdn.icon-icons.com/icons2/2699/PNG/512/rclone_logo_icon_168876.png
+    keywords:
+    - S3
+    - Rclone
+    - Rsync
+    - Copy Utility
+    - Buckets Replication
+    - Kubernetes
+    maintainers:
+    - email: abdullah@abarrak.com
+      name: Abdullah Barrak
+    name: rclone
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/rclone-2.0.2/rclone-2.0.2.tgz
+    version: 2.0.2
+  - apiVersion: v2
+    appVersion: "1.68"
     created: "2025-10-16T12:36:23.338984352Z"
     description: A Helm chart for to deploy rclone jobs in Kubernetes.
     digest: a007e3d432e3ee77d2545a1e4bf7d68cbdf691620fe1606259dbd4c6a50d9c34
@@ -14258,4 +14280,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-16T12:36:23.342438531Z"
+generated: "2025-10-16T13:37:33.685353661Z"
