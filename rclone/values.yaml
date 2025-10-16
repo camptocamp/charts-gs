@@ -1,0 +1,140 @@
+# Daily, at 1 PM.
+schedule: "0 10 * * *"
+# Stop the job temorarily.
+suspend: false
+# Forbid or allow simultaneous run for the jobs.
+concurrencyPolicy: Forbid
+
+timeZone: ""
+backoffLimit: 3
+failedJobsHistoryLimit: 5
+successfulJobsHistoryLimit: 5
+startingDeadlineSeconds: ""
+
+# Time to keep pods afer the job successful run.
+# Useful for reference and logs.
+ttlSecondsAfterFinished: "518400"
+
+restartPolicy: OnFailure
+
+image:
+  repository: rclone/rclone
+  pullPolicy: IfNotPresent
+  tag: "1.68"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+
+##
+# The rclone configuration file and command to run.
+# The default: copy between two S3 buckets (usually different providers).
+#
+rclone:
+  config: ""
+  command: |
+    rclone copy $REMOTE_A_NAME:"$REMOTE_A_BUCKET/" $REMOTE_B_NAME:"$REMOTE_A_BUCKET/" --config $RCLONE_CONFIG_FILE --log-level=DEBUG --retries=1 --fast-list --progress --ignore-checksum --metadata --metadata-include "tier=STANDARD"
+
+##
+# Optional. You can specify your rclone command's arguments as environment
+# variables for flexibility.
+# @note: the remotes names must be the same as in the rclone config.
+#
+envVars:
+  - name: RCLONE_CONFIG_FILE
+    value: /opt/rclone.conf
+  - name: REMOTE_A_NAME
+    value: ""
+  - name: REMOTE_B_NAME
+    value: ""
+  - name: REMOTE_A_BUCKET
+    value: ""
+  - name: REMOTE_B_BUCKET
+    value: ""
+
+##
+# The secret names from provider (AWS SecretManager, OCI Vault, etc.).
+#
+# Thi is used to populate the ExternalSecret resources holding
+# the rclone remotes' credentials for remote backends (S3),
+# so credentails be mounted as files in the conainter.
+#
+# This is needed where the implicit node/workload iam role usage is not feasible.
+#
+# @example: including s3 cred entials for 2 remotes.
+# ---------
+# enableExternalSecrets: true
+# remoteBackendsExternalSecrets:
+#   - source-s3-creds
+#   - dest-s3-creds
+#
+enableExternalSecrets: false
+remoteBackendsExternalSecrets: []
+
+##
+#
+# If the external secret aren't used, the credentials can be set in plain secret
+# resources then secret names passed to mount credentails as files in the conainter,
+# and the secret content of s3 file creds as base64 string
+#
+# @example: including s3 cred entials for 2 remotes.
+# ---------
+# enablePlainSecrets: true
+# remoteBackendsSecrets:
+#   - name: bucket-a-s3-creds-file
+#     data: W2RlZmF1bHRdCmF3c19hY2Nlc3Nfa2V5X2lkID0gWFhYWAphd3Nfc2VjcmV0X2FjY2Vzc19rZXkgPSBYWFhZWVkK
+#   - name: bucket-b-s3-creds-file
+#     data: W2RlZmF1bHRdCmF3c19hY2Nlc3Nfa2V5X2lkID0gWFhYWAphd3Nfc2VjcmV0X2FjY2Vzc19rZXkgPSBYWFhZWVkK
+#
+enablePlainSecrets: false
+remoteBackendsSecrets: []
+
+#
+# Resource utlization for the pod.
+resources: {}
+  # requests:
+  #   cpu: "100m"
+  #   memory: "256Mi"
+  # limits:
+  #   cpu: "500m"
+  #   memory: "1024Mi"
+
+volumes:
+  - name: rclone-conf
+    configMap:
+      name: rclone
+
+volumeMounts:
+  - name: rclone-conf
+    mountPath: /opt/rclone.conf
+    subPath: rclone.conf
+    readOnly: false
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
