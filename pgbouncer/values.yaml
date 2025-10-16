@@ -79,7 +79,7 @@ imagePullSecrets: []
 image:
   registry: ""
   # only work with bitnami/pgbouncer
-  repository: bitnami/pgbouncer
+  repository: ghcr.io/camptocamp/charts-gs/docker-pgbouncer
   tag: 1.24.1
   pullPolicy: IfNotPresent
 
