@@ -9,7 +9,7 @@ This Helm chart deploys the [geoserver-datadir-sync](https://github.com/camptoca
 - Intelligent rebase handling for diverged histories
 - Graceful degradation on conflicts requiring manual intervention
 
-🔔 **Built-in webhook monitoring** (required)
+🔔 **Built-in webhook monitoring** (optional)
 - GET requests for simple monitoring (UptimeRobot, etc.)
 - POST requests with JSON payloads for advanced integrations
 - Notifications on sync success and failure
@@ -29,7 +29,7 @@ This Helm chart deploys the [geoserver-datadir-sync](https://github.com/camptoca
 - Kubernetes 1.19+
 - Helm 3.0+
 - A Git repository to sync with (optional for local-only mode)
-- A webhook endpoint for monitoring (required for continuous sync)
+- A webhook endpoint for monitoring (optional for sync notifications)
 - SSH deploy key for Git authentication (if using remote repository)
 
 ## Installation
@@ -48,6 +48,11 @@ The following values must be configured for the chart to work properly:
 |-----------|-------------|---------|
 | `git.username` | Git username for commits | `geoserver-sync` |
 | `git.email` | Git email for commits | `geoserver@example.com` |
+
+### Git Remote Configuration (Optional)
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
 | `git.remote.name` | Name of the git remote (e.g., `origin`) | `origin` |
 | `git.remote.url` | Git repository URL | `git@github.com:your-org/geoserver-datadir.git` |
 | `git.remote.branch` | Branch to synchronize | `master` |
@@ -60,7 +65,7 @@ The SSH key is automatically mounted as a Kubernetes secret and passed to the co
 |-----------|-------------|---------|
 | `secrets.datadirSSHKey` | Private RSA key content (multiline). This will be mounted as a secret. | `""` |
 
-### Webhook Configuration
+### Webhook Configuration (Optional)
 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
@@ -118,9 +123,10 @@ git:
   email: "local@example.com"
   # No remote configuration needed
 
-webhook:
-  url: "http://localhost:8080/health"
-  method: "GET"
+# Optional: webhook for monitoring notifications
+# webhook:
+#   url: "http://localhost:8080/health"
+#   method: "GET"
 
 volumes:
   geoserverDatadir:
@@ -138,6 +144,11 @@ git:
     name: "origin"
     url: "git@github.com:org/repo.git"
     branch: "master"
+
+# Optional: webhook for monitoring notifications
+# webhook:
+#   url: "https://your-monitoring.com/webhook"
+#   method: "GET"
 
 secrets:
   datadirSSHKey: |
@@ -215,7 +226,7 @@ The container performs initialization and then runs continuously to sync changes
 
 ### "ERROR: WEBHOOK_URL is not configured"
 
-Webhook is required for continuous sync. Set `webhook.url` in your values.
+Webhook is optional for continuous sync notifications. Set `webhook.url` in your values if you want monitoring notifications. The container will work without webhook configuration.
 
 ### "Manual intervention required"
 
@@ -305,7 +316,7 @@ secrets:
 ### What Changed
 
 - **SSH Key**: Now mounted as a Kubernetes secret and passed via `GIT_RSA_DEPLOY_KEY` environment variable
-- **New required fields**: `git.username`, `git.email`, `webhook.url` (when using continuous sync)
+- **New required fields**: `git.username`, `git.email` (webhook.url is optional)
 
 ### Testing the Migration
 
@@ -339,10 +350,10 @@ secrets:
    - **New repos only**: Automatically configures git-sync settings
 
 3. **Continuous Sync**:
-   - Webhook notifications if configured
+   - Webhook notifications if configured (optional)
    - Starts file watcher with inotify
    - Performs periodic sync on timeout
-   - Sends webhook notifications
+   - Sends webhook notifications if configured
 
 ### Sync Behavior
 
