@@ -2,6 +2,84 @@
 
 This Helm chart deploys the [geoserver-datadir-sync](https://github.com/camptocamp/georchestra-docker-images/tree/master/geoserver-datadir-sync) container, which provides automated, bi-directional Git synchronization for GeoServer configuration directories with intelligent conflict resolution, webhook monitoring, and robust error handling.
 
+## Deployment
+
+### A) Installation
+
+Install using the Camptocamp Helm repository via OCI registry:
+
+```bash
+helm install geoserver-datadir-sync \
+  oci://ghcr.io/camptocamp/charts-gs/geoserver-datadir-sync \
+  --version X.X.X \
+  -f values.yaml
+```
+
+### B) Configuration
+
+Create a `values.yaml` file with your settings:
+
+```yaml
+# Git configuration
+git:
+  remote:
+    name: "origin"
+    url: "git@github.com:yourorg/geoserver-datadir.git"
+    branch: "main"
+
+# Webhook configuration
+webhook:
+  url: "https://hc-ping.com/your-monitor-id"
+  method: "GET"
+
+# SSH authentication - provide your private RSA key for git authentication
+# This will be mounted as a secret and passed via GIT_RSA_DEPLOY_KEY environment variable
+secrets:
+  # GIT_RSA_DEPLOY_KEY - Private RSA key content (multiline)
+  datadirSSHKey: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    your-private-key-here
+    -----END OPENSSH PRIVATE KEY-----
+```
+
+### C) Configure UptimeRobot webhook
+
+See https://github.com/camptocamp/georchestra-docker-images/blob/master/geoserver-datadir-sync/WEBHOOK-UPTIMEROBOT.md
+
+### D) ⚠️ Critical: Branch Sync Configuration
+
+**You must configure git-sync for your repository branch before the sync will start working.**
+
+This is a safety feature to prevent accidental synchronization. After the first deployment:
+
+1. **Exec into the pod**:
+   ```bash
+   kubectl exec -it deployment/geoserver-datadir-sync -- bash
+   ```
+
+2. **Navigate to the data directory**:
+   ```bash
+   cd /mnt/geoserver_datadir
+   ```
+
+3. **Enable sync for your branch** (replace `main` with your branch name):
+   ```bash
+   git config branch.main.sync true
+   ```
+
+4. **Verify the configuration**:
+   ```bash
+   git config --get branch.main.sync
+   # Should output: true
+   ```
+
+5. **Restart the pod** to start syncing:
+   ```bash
+   kubectl rollout restart deployment/geoserver-datadir-sync
+   ```
+
+The sync will only work after `branch.<your-branch>.sync` is set to `true`. This prevents accidental synchronization of the wrong branches.
+
 ## Features
 
 ✨ **Based on proven git-sync technology**
@@ -23,20 +101,6 @@ This Helm chart deploys the [geoserver-datadir-sync](https://github.com/camptoca
 - Configure which branch to sync (prevents accidents)
 - Repository must be explicitly configured for sync
 - Automatic sync configuration for new repos only
-
-## Prerequisites
-
-- Kubernetes 1.19+
-- Helm 3.0+
-- A Git repository to sync with (optional for local-only mode)
-- A webhook endpoint for monitoring (optional for sync notifications)
-- SSH deploy key for Git authentication (if using remote repository)
-
-## Installation
-
-```bash
-helm install my-datadir-sync ./geoserver-datadir-sync -f values.yaml
-```
 
 ## Configuration
 
@@ -85,82 +149,6 @@ The SSH key is automatically mounted as a Kubernetes secret and passed to the co
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | `volumes.geoserverDatadir` | Volume configuration for GeoServer datadir | PVC with claimName `georchestra-geoserver-datadir` |
-
-## Example Configurations
-
-### Basic Configuration with Remote Repository
-
-```yaml
-git:
-  username: "geoserver-sync"
-  email: "geoserver@example.com"
-  remote:
-    name: "origin"
-    url: "git@github.com:your-org/geoserver-datadir.git"
-    branch: "master"
-
-webhook:
-  url: "https://heartbeat.uptimerobot.com/your-monitor-id"
-  method: "GET"
-
-secrets:
-  datadirSSHKey: |
-    -----BEGIN RSA PRIVATE KEY-----
-    MIIEpAIBAAKCAQEA...
-    -----END RSA PRIVATE KEY-----
-
-volumes:
-  geoserverDatadir:
-    persistentVolumeClaim:
-      claimName: georchestra-geoserver-datadir
-```
-
-### Local Repository Only (No Remote)
-
-```yaml
-git:
-  username: "local-user"
-  email: "local@example.com"
-  # No remote configuration needed
-
-# Optional: webhook for monitoring notifications
-# webhook:
-#   url: "http://localhost:8080/health"
-#   method: "GET"
-
-volumes:
-  geoserverDatadir:
-    persistentVolumeClaim:
-      claimName: georchestra-geoserver-datadir
-```
-
-### Initialization Only (No Continuous Sync)
-
-```yaml
-git:
-  username: "init-user"
-  email: "init@example.com"
-  remote:
-    name: "origin"
-    url: "git@github.com:org/repo.git"
-    branch: "master"
-
-# Optional: webhook for monitoring notifications
-# webhook:
-#   url: "https://your-monitoring.com/webhook"
-#   method: "GET"
-
-secrets:
-  datadirSSHKey: |
-    -----BEGIN RSA PRIVATE KEY-----
-    ...
-    -----END RSA PRIVATE KEY-----
-
-volumes:
-  geoserverDatadir:
-    persistentVolumeClaim:
-      claimName: georchestra-geoserver-datadir
-```
 
 ### Custom Commit Messages
 
