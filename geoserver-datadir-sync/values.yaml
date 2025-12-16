@@ -1,21 +1,53 @@
 replicaCount: 1
 
 image:
-  repository: camptocamp/geoserver-datadir-sync
+  repository: ghcr.io/camptocamp/georchestra-docker-images/geoserver-datadir-sync
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "28062024"
+  tag: "sha-56ae55a"
+
+# Git configuration
+# GIT_USERNAME - Git username for commits
+# GIT_EMAIL - Git email for commits
+# REMOTE_NAME - Name of the git remote (e.g., origin)
+# REMOTE_URL - Git repository URL
+# REMOTE_BRANCH - Branch to synchronize
+git:
+  username: "geoserver-sync"
+  email: "geoserver@example.com"
+  remote:
+    name: "origin"
+    url: "git@github.com:your-org/geoserver-datadir.git"
+    branch: "master"
+
+# Webhook configuration
+# WEBHOOK_URL - Webhook URL for monitoring notifications
+# WEBHOOK_METHOD - HTTP method for webhook: GET or POST
+webhook:
+  url: ""
+  method: "GET"
+
+# SSH authentication - provide your private RSA key for git authentication
+# This will be mounted as a secret and passed via GIT_RSA_DEPLOY_KEY environment variable
+secrets:
+  # GIT_RSA_DEPLOY_KEY - Private RSA key content (multiline)
+  datadirSSHKey: ""
+
+# Optional configuration
+config:
+  # GIT_SYNC_INTERVAL - Sync interval in milliseconds (inotify timeout)
+  syncInterval: 500
+  # FORCE_CLONE - Force cleanup of directory before cloning (yes/no)
+  forceClone: "no"
+  # GIT_COMMIT_MESSAGE - Custom commit message (can be a shell command)
+  # Example: 'printf "updateSequence "; grep updateSequence global.xml | sed -e "s#.*ce>\(.*\)</up.*#\1#"'
+  commitMessage: ""
 
 volumes:
   geoserverDatadir:
     persistentVolumeClaim:
       claimName: georchestra-geoserver-datadir
 
-secrets:
-  datadirSSHKey: |
-    -----BEGIN RSA PRIVATE KEY-----
-    -----END RSA PRIVATE KEY-----
-
+# Additional environment variables (advanced use)
 extra_environment: []
 
 imagePullSecrets: []

@@ -27,10 +27,57 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: geoserver-datadir-sync
           env:
-          - name: GIT_RSA_DEPLOY_KEY_FILE
-            value: /tmp/secrets/geoserver_datadir_deploy_key
+          # Git configuration
+          - name: GIT_USERNAME
+            value: {{ .Values.git.username | quote }}
+          - name: GIT_EMAIL
+            value: {{ .Values.git.email | quote }}
+          # Remote repository configuration
+          {{- if .Values.git.remote.name }}
+          - name: REMOTE_NAME
+            value: {{ .Values.git.remote.name | quote }}
+          {{- end }}
+          {{- if .Values.git.remote.url }}
+          - name: REMOTE_URL
+            value: {{ .Values.git.remote.url | quote }}
+          {{- end }}
+          {{- if .Values.git.remote.branch }}
+          - name: REMOTE_BRANCH
+            value: {{ .Values.git.remote.branch | quote }}
+          {{- end }}
+          # Webhook configuration
+          {{- if .Values.webhook.url }}
+          - name: WEBHOOK_URL
+            value: {{ .Values.webhook.url | quote }}
+          {{- end }}
+          {{- if .Values.webhook.method }}
+          - name: WEBHOOK_METHOD
+            value: {{ .Values.webhook.method | quote }}
+          {{- end }}
+          # Optional configuration
+          {{- if .Values.config.syncInterval }}
+          - name: GIT_SYNC_INTERVAL
+            value: {{ .Values.config.syncInterval | quote }}
+          {{- end }}
+          {{- if .Values.config.forceClone }}
+          - name: FORCE_CLONE
+            value: {{ .Values.config.forceClone | quote }}
+          {{- end }}
+          {{- if .Values.config.commitMessage }}
+          - name: GIT_COMMIT_MESSAGE
+            value: {{ .Values.config.commitMessage | quote }}
+          {{- end }}
+          # SSH authentication
+          {{- if .Values.secrets.datadirSSHKey }}
+          - name: GIT_RSA_DEPLOY_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "geoserver-datadir-sync.fullname" . }}-secret-sync-ssh-key
+                key: geoserver_datadir_deploy_key
+          {{- end }}
+          # Additional environment variables
           {{- with .Values.extra_environment }}
             {{- . | toYaml | nindent 10 }}
           {{- end }}
@@ -42,9 +89,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
           - name: geoserver-datadir
-            mountPath: /var/local/data
-          - name: sync-secret
-            mountPath: /tmp/secrets
+            mountPath: /mnt/geoserver_datadir
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -58,9 +103,11 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
+      {{- if .Values.secrets.datadirSSHKey }}
       - name: sync-secret
         secret:
           secretName: {{ include "geoserver-datadir-sync.fullname" . }}-secret-sync-ssh-key
+      {{- end }}
       - name: geoserver-datadir
       {{- with .Values.volumes.geoserverDatadir -}}
       {{ . | toYaml | nindent 8 }}
