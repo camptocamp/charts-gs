@@ -1,0 +1,81 @@
+{{- $webapp := .Values.frontend -}}
+{{- if $webapp.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "datakern.fullname" . }}-frontend
+  labels:
+    {{- include "datakern.labels" . | nindent 4 }}
+spec:
+  replicas: {{ $webapp.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "datakern.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ include "datakern.fullname" . }}-frontend
+  template:
+    metadata:
+      {{- with $webapp.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "datakern.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ include "datakern.fullname" . }}-frontend
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml $webapp.podSecurityContext | nindent 8 }}
+      {{- with $webapp.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . |nindent 8 }}
+      {{- end }}
+      {{- with $webapp.affinity }}
+      affinity:
+        {{- toYaml . |nindent 8 }}
+      {{- end }}
+      {{- with $webapp.tolerations }}
+      tolerations:
+        {{- toYaml . |nindent 8 }}
+      {{- end }}
+      containers:
+      - name: frontend
+        image: "{{ $webapp.image.repository }}:{{ $webapp.image.tag }}"
+        imagePullPolicy: {{ $webapp.image.imagePullPolicy }}
+        env:
+          - name: BACKEND_URL
+            value: "{{ include "datakern.fullname" . }}-backend"
+        {{- with $webapp.extraEnv }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+        resources:
+          {{- toYaml $webapp.resources | nindent 10 }}
+        securityContext:
+          {{- toYaml $webapp.securityContext | nindent 12 }}
+        {{- with $webapp.lifecycle }}
+        lifecycle:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+        {{- if $webapp.extraVolumeMounts }}
+        volumeMounts:
+          {{- $webapp.extraVolumeMounts | toYaml | nindent 8 }}
+        {{- end }}
+      {{- if $webapp.extraVolumes }}
+      volumes:
+        {{ $webapp.extraVolumes | toYaml | nindent 6 }}
+      {{- end }}
+{{- end }}

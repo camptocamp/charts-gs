@@ -1,0 +1,218 @@
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+backend:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: ghcr.io/camptocamp/datakern/datakern-backend
+    pullPolicy: Always
+    tag: latest
+  resources: {}
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 10000
+    runAsGroup: 10001
+    fsGroup: 10001
+  securityContext:
+    runAsUser: 10000
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podAnnotations: {}
+  lifecycle: {}
+  extraVolumes: []
+  extraVolumeMounts: []
+  extraEnv: {}
+  database:
+    # existingSecret: mysecret
+    name: georchestra
+    host: georchestra
+    password: georchestra
+    postgresPassword: georchestra
+    port: "5432"
+    ssl: false
+    username: georchestra
+  datadir:
+    git:
+      url: https://github.com/georchestra/datadir.git
+      ref: docker-master
+      # ssh_secret: my-private-ssh-key
+  config:
+    secretKey: change-me
+    superuser:
+      username: admin
+      password: change-me
+    frontend:
+      # Change to your domain with subpath /datakern
+      url: https://georchestra-127-0-1-1.traefik.me/datakern
+    corsOrigins: http://localhost:5173
+    geoserver:
+      # optional, default to georchestra-geoserver-svc (work if helm chart geOrchestra installed)
+      url: ""
+      username: geoserver_privileged_user
+      password: change-me
+      geonetwork:
+        # optional, default to georchestra-geonetwork-svc (work if helm chart geOrchestra installed)
+        url: ""
+    airflow:
+      # optional, default to airflow api-server in the same helm chart
+      url: ""
+      username: admin
+      password: change-me
+
+frontend:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: ghcr.io/camptocamp/datakern/datakern-frontend
+    pullPolicy: Always
+    tag: latest
+  resources: {}
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 999
+    runAsGroup: 999
+    fsGroup: 999
+  securityContext:
+    runAsUser: 999
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podAnnotations: {}
+  lifecycle: {}
+  extraVolumes: []
+  extraVolumeMounts: []
+  extraEnv: {}
+  ingress:
+    enabled: true
+    className: ""
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: "georchestra-127-0-1-1.traefik.me"
+    # tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
+tooling:
+  # Global image used for toolbox: chmod + git clone
+  general:
+    image:
+      repository: alpine/git
+      tag: 2.49.1
+
+# Airflow helm chart. Doc here: https://airflow.apache.org/docs/helm-chart/stable/index.html
+airflow:
+  enabled: true
+
+  redis:
+    persistence:
+      enabled: false
+
+  statsd:
+    enabled: false
+
+  images:
+    airflow:
+      repository: ghcr.io/camptocamp/datakern/datakern-airflow
+      tag: latest
+      pullPolicy: Always #Set to Always while it's latest
+
+  data:
+    metadataConnection:
+      protocol: postgresql
+      user: georchestra
+      pass: georchestra
+
+  # Configure Airflow to run behind a subpath
+  config:
+    api:
+      base_url: /airflow
+    webserver:
+      base_url: /airflow
+
+  ingress:
+    apiServer:
+      enabled: true
+      className: ""
+      path: "/airflow"
+      annotations: {}
+      hosts:
+        - name: "georchestra-127-0-1-1.traefik.me"
+      #    tls:
+      #      enabled: true
+      #      secretName: "https-georchestra"
+
+  triggerer:
+    persistence:
+      enabled: false
+
+  workers:
+    persistence:
+      enabled: false
+
+  postgresql:
+  # Uncomment when using external PostgreSQL
+  #  enabled: false
+    image:  # section of parameters for builtin database
+      registry: ghcr.io
+      repository: camptocamp/datakern/datakern-database
+      tag: latest
+    auth:
+      database: georchestra
+      # If using an existing secret: this one will both be used by the bitnami chart managing the DB
+      # and by the georchestra db secret
+      # (https://github.com/georchestra/helm-charts/blob/main/georchestra/templates/database/database-georchestra-secret.yaml)
+      # that is used by the apps
+      # So you must be quite careful. It should follow the pattern from the previsouly mentioned secret
+      # and tell the bitnami chart which variable provide the user and password
+      # And the `database`, `username` and `ssl` params still have to be defined here and match the ones
+      # provided by the secret
+      # existingSecret: mysecret
+      # secretKeys:
+      #   adminPasswordKey: postgresPassword
+      #   userPasswordKey: password # This one should stay as it is
+  #   host: georchestra
+      password: georchestra
+      postgresPassword: georchestra
+      port: "5432"
+      ssl: false
+      username: georchestra
+    primary:  # section of parameters for builtin database
+      startupProbe:
+        enabled: true
+      containerSecurityContext:
+        readOnlyRootFilesystem: false
+      persistentVolumeClaimRetentionPolicy:
+        enabled: true
+      initdb:
+        username: georchestra
+        password: georchestra
+      resources:
+        requests:
+          cpu: 200m
+          memory: 512Mi
+        limits:
+          memory: 512Mi
+
+  # When using specific external secret
+  # See https://airflow.apache.org/docs/helm-chart/stable/production-guide.html#built-in-secrets-and-environment-variables
+  #secret:
+  #  - envName: AIRFLOW__DATABASE__SQL_ALCHEMY_CONN
+  #    secretName: db-credentials-int-airflow
+  #    secretKey: conn
+  #enableBuiltInSecretEnvVars:
+  #  AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: false
+
+  # for ArgoCD
+  # https://airflow.apache.org/docs/helm-chart/stable/index.html#installing-the-chart-with-argo-cd-flux-rancher-or-terraform
+  #createUserJob:
+  #  useHelmHooks: false
+  #  applyCustomEnv: false
+  #migrateDatabaseJob:
+  #  useHelmHooks: false
+  #  applyCustomEnv: false
