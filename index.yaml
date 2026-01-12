@@ -4049,6 +4049,22 @@ entries:
     urls:
     - datahub-0.1.0-datahub-integration-datadir-crepel-test-09e33a5.tgz
     version: 0.1.0-datahub-integration-datadir-crepel-test-09e33a5
+  datakern:
+  - apiVersion: v2
+    appVersion: 3.12.0
+    created: "2026-01-12T17:46:22.840013993Z"
+    dependencies:
+    - condition: airflow.enabled
+      name: airflow
+      repository: https://airflow.apache.org
+      version: 1.18.0
+    description: A Helm chart for deploying DataKern
+    digest: a333ecd081a4ebd55efa1f54acf45fc1802ee6bba6b994a619eaf7bd9cfa23fd
+    name: datakern
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/datakern-0.1.0/datakern-0.1.0.tgz
+    version: 0.1.0
   geocontrib:
   - apiVersion: v2
     appVersion: 5.0.2
@@ -14323,4 +14339,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2025-12-16T14:25:53.465900883Z"
+generated: "2026-01-12T17:46:23.014772398Z"
