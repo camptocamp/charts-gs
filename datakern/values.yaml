@@ -120,7 +120,7 @@ airflow:
     airflow:
       repository: ghcr.io/camptocamp/datakern/datakern-airflow
       tag: latest
-      pullPolicy: Always #Set to Always while it's latest
+      pullPolicy: Always  # Set to Always while it's latest
 
   data:
     metadataConnection:
@@ -201,18 +201,18 @@ airflow:
 
   # When using specific external secret
   # See https://airflow.apache.org/docs/helm-chart/stable/production-guide.html#built-in-secrets-and-environment-variables
-  #secret:
-  #  - envName: AIRFLOW__DATABASE__SQL_ALCHEMY_CONN
-  #    secretName: db-credentials-int-airflow
-  #    secretKey: conn
-  #enableBuiltInSecretEnvVars:
-  #  AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: false
+  # secret:
+  #   - envName: AIRFLOW__DATABASE__SQL_ALCHEMY_CONN
+  #     secretName: db-credentials-int-airflow
+  #     secretKey: conn
+  # enableBuiltInSecretEnvVars:
+  #   AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: false
 
   # for ArgoCD
   # https://airflow.apache.org/docs/helm-chart/stable/index.html#installing-the-chart-with-argo-cd-flux-rancher-or-terraform
-  #createUserJob:
-  #  useHelmHooks: false
-  #  applyCustomEnv: false
-  #migrateDatabaseJob:
-  #  useHelmHooks: false
-  #  applyCustomEnv: false
+  # createUserJob:
+  #   useHelmHooks: false
+  #   applyCustomEnv: false
+  # migrateDatabaseJob:
+  #   useHelmHooks: false
+  #   applyCustomEnv: false
