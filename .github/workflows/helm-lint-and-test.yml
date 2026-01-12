@@ -39,6 +39,11 @@ jobs:
       - name: Helm Installation
         uses: azure/setup-helm@v4
 
+      - name: Add Helm repositories
+        run: |
+          helm repo add apache-airflow https://airflow.apache.org
+          helm repo update
+
       - uses: actions/setup-python@main
         with:
           check-latest: true
@@ -54,7 +59,7 @@ jobs:
         run: |
           # sometimes it fail to download the binary
           for i in {1..5}; do
-            helm plugin install https://github.com/jtyr/kubeconform-helm && break
+            helm plugin install --verify=false https://github.com/jtyr/kubeconform-helm && break
             echo "Retry $i failed... trying again in 5 seconds"
             sleep 5
           done

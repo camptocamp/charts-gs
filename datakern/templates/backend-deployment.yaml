@@ -1,0 +1,107 @@
+{{- $webapp := .Values.backend -}}
+{{- if $webapp.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "datakern.fullname" . }}-backend
+  labels:
+    {{- include "datakern.labels" . | nindent 4 }}
+spec:
+  replicas: {{ $webapp.replicaCount | default 2 }}
+  selector:
+    matchLabels:
+      {{- include "datakern.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ include "datakern.fullname" . }}-backend
+  template:
+    metadata:
+      {{- with $webapp.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "datakern.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ include "datakern.fullname" . }}-backend
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml $webapp.podSecurityContext | nindent 8 }}
+      {{- with $webapp.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . |nindent 8 }}
+      {{- end }}
+      {{- with $webapp.affinity }}
+      affinity:
+        {{- toYaml . |nindent 8 }}
+      {{- end }}
+      {{- with $webapp.tolerations }}
+      tolerations:
+        {{- toYaml . |nindent 8 }}
+      {{- end }}
+      initContainers:
+      {{ include "georchestra.bootstrap_georchestra_datadir" . | nindent 6 }}
+      containers:
+      - name: backend
+        image: "{{ $webapp.image.repository }}:{{ $webapp.image.tag }}"
+        imagePullPolicy: {{ $webapp.image.imagePullPolicy }}
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        env:
+          {{- include "datakern.database-envs" . | nindent 10 }}
+          - name: DATADIR
+            value: "/etc/georchestra"
+          - name: ENVIRONMENT
+            value: "production"
+          - name: BACKEND_URL
+            value: "{{ include "datakern.fullname" . }}-backend"
+          - name: FIRST_SUPERUSER
+            value: "{{ $webapp.config.superuser.username }}"
+          - name: FRONTEND_HOST
+            value: "{{ $webapp.config.frontend.url }}"
+          - name: BACKEND_CORS_ORIGINS
+            value: "{{ $webapp.config.corsOrigins }}"
+          - name: GEOSERVER_URL
+            value: "{{ $webapp.config.geoserver.url | default "http://georchestra-geoserver-svc:8080" }}"
+          - name: GEOSERVER_USER
+            value: "{{ $webapp.config.geoserver.username }}"
+          - name: GEONETWORK_URL
+            value: "{{ $webapp.config.geoserver.geonetwork.url | default "http://georchestra-geonetwork-svc:8080" }}"
+          - name: AIRFLOW_URL
+            value: "{{ $webapp.config.airflow.url | default "http://{{ .Release.Name }}-api-server:8080" }}"
+          - name: AIRFLOW_USERNAME
+            value: "{{ $webapp.config.airflow.username }}"
+        envFrom:
+          - secretRef:
+              name: {{ include "datakern.fullname" . }}-backend
+        {{- with $webapp.extraEnv }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+        resources:
+          {{- toYaml $webapp.resources | nindent 10 }}
+        securityContext:
+          {{- toYaml $webapp.securityContext | nindent 12 }}
+        {{- with $webapp.lifecycle }}
+        lifecycle:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        volumeMounts:
+          - mountPath: /etc/georchestra
+            name: georchestra-datadir
+          - mountPath: /tmpbackend
+            name: temp-backend
+        {{- if $webapp.extraVolumeMounts }}
+          {{- $webapp.extraVolumeMounts | toYaml | nindent 8 }}
+        {{- end }}
+      volumes:
+      - name: georchestra-datadir
+        emptyDir: {}
+      - name: temp-backend
+        emptyDir: {}
+      {{- if $webapp.extraVolumes }}
+        {{ $webapp.extraVolumes | toYaml | nindent 6 }}
+      {{- end }}
+{{- end }}
