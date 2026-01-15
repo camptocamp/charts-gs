@@ -160,8 +160,14 @@ airflow:
       enabled: false
 
   workers:
-    persistence:
-      enabled: false
+    celery:
+      persistence:
+        enabled: false
+
+  logs:
+    emptyDirConfig:
+      sizeLimit: 1Gi
+      medium: Memory
 
   postgresql:
   # Uncomment when using external PostgreSQL
