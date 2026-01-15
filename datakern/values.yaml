@@ -48,7 +48,7 @@ backend:
     git:
       url: https://github.com/georchestra/datadir.git
       ref: docker-master
-      # ssh_secret: my-private-ssh-key
+      ssh_secret: ""
   config:
     secretKey: change-me
     superuser:
