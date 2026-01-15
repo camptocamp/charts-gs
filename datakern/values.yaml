@@ -35,7 +35,7 @@ backend:
     #    hosts:
     #      - chart-example.local
   database:
-    # existingSecret: mysecret
+    existingSecret: ""
     name: georchestra
     host: georchestra
     password: georchestra

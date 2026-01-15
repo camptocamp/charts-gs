@@ -4,8 +4,8 @@ Insert database environment variables
 {{- define "datakern.database-envs" -}}
 {{- $database := .Values.airflow.postgresql -}}
 {{- $database_secret_datakern_name := printf "%s-database-backend" (include "datakern.fullname" .) -}}
-{{- if $database.auth.existingSecret }}
-{{- $database_secret_datakern_name = $database.auth.existingSecret -}}
+{{- if $database.database.existingSecret }}
+{{- $database_secret_datakern_name = .Values.backend.database.existingSecret -}}
 {{- end }}
 - name: PGHOST
   valueFrom:
