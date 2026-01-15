@@ -15,7 +15,8 @@ backend:
     runAsUser: 10000
     runAsGroup: 10001
     fsGroup: 10001
-  securityContext: {}
+  securityContext:
+    runAsUser: 10000
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -80,11 +81,11 @@ frontend:
     tag: latest
   resources: {}
   podSecurityContext:
-    runAsNonRoot: true
     runAsUser: 999
     runAsGroup: 999
     fsGroup: 999
-  securityContext: {}
+  securityContext:
+    runAsUser: 999
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -135,6 +136,10 @@ airflow:
       protocol: postgresql
       user: georchestra
       pass: georchestra
+
+  # To change
+  jwtSecret: ~
+  fernetKey: ~
 
   # Configure Airflow to run behind a subpath
   config:

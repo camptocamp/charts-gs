@@ -16,7 +16,7 @@
   {{- if .Values.backend.datadir.git.ssh_secret }}
   env:
     - name: GIT_SSH_COMMAND
-      value: ssh -o "IdentitiesOnly=yes" -o "StrictHostKeyChecking no"
+      value: ssh -o "IdentitiesOnly=yes" -o UserKnownHostsFile=/dev/null -o "StrictHostKeyChecking no"
   {{- end }}
   volumeMounts:
   - mountPath: /etc/georchestra
