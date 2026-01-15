@@ -25,6 +25,16 @@ backend:
   extraVolumes: []
   extraVolumeMounts: []
   extraEnv: {}
+  ingress:
+    enabled: true
+    className: ""
+    annotations: {}
+    hosts:
+      - host: "georchestra-127-0-1-1.traefik.me"
+    # tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
   database:
     # existingSecret: mysecret
     name: georchestra
