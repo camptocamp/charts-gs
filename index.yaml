@@ -4052,6 +4052,21 @@ entries:
   datakern:
   - apiVersion: v2
     appVersion: 3.12.0
+    created: "2026-01-15T10:48:10.936327039Z"
+    dependencies:
+    - condition: airflow.enabled
+      name: airflow
+      repository: oci://ghcr.io/camptocamp/charts-gs
+      version: 1.19.0-dev
+    description: A Helm chart for deploying DataKern
+    digest: 2dae9978b344d28eba901c02f47bc8da4eb1d8caca2198f0013daa763b9b3097
+    name: datakern
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/datakern-0.1.2/datakern-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 3.12.0
     created: "2026-01-15T10:33:48.793934018Z"
     dependencies:
     - condition: airflow.enabled
@@ -14354,4 +14369,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-15T10:33:48.798202716Z"
+generated: "2026-01-15T10:48:10.939382424Z"
