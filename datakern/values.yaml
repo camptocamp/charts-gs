@@ -15,8 +15,7 @@ backend:
     runAsUser: 10000
     runAsGroup: 10001
     fsGroup: 10001
-  securityContext:
-    runAsUser: 10000
+  securityContext: {}
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -85,8 +84,7 @@ frontend:
     runAsUser: 999
     runAsGroup: 999
     fsGroup: 999
-  securityContext:
-    runAsUser: 999
+  securityContext: {}
   nodeSelector: {}
   tolerations: []
   affinity: {}
