@@ -232,7 +232,7 @@ airflow:
   # https://airflow.apache.org/docs/helm-chart/stable/index.html#installing-the-chart-with-argo-cd-flux-rancher-or-terraform
   # createUserJob:
   #   useHelmHooks: false
-  #   applyCustomEnv: false
   # migrateDatabaseJob:
   #   useHelmHooks: false
-  #   applyCustomEnv: false
+  #   jobAnnotations:
+  #     "argocd.argoproj.io/hook": Sync
