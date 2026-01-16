@@ -6,7 +6,7 @@ metadata:
     {{- include "datakern.labels" . | nindent 4 }}
 spec:
   ports:
-    - port: 8080
+    - port: 80
       protocol: TCP
       targetPort: http
   selector:
