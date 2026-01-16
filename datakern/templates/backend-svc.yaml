@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "datakern.fullname" . }}-studio-svc
+  name: {{ include "datakern.fullname" . }}-backend-svc
   labels:
     {{- include "datakern.labels" . | nindent 4 }}
 spec:
