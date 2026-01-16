@@ -34,9 +34,14 @@ backend:
     #  - secretName: chart-example-tls
     #    hosts:
     #      - chart-example.local
+  # In production, need to use the database where geOrchestra is installed.
+  # Configure the existingSecret to geOrchestra database if using geOrchestra helm chart
+  # Or configure to the external PostgreSQL host with georchestra database
+  # You also need to configure an external database for Airflow, otherwise it uses
+  # the internal PostgreSQL database.
   database:
     existingSecret: ""
-    name: georchestra
+    dbname: georchestra
     host: georchestra
     password: georchestra
     postgresPassword: georchestra
@@ -176,7 +181,7 @@ airflow:
       medium: Memory
 
   postgresql:
-  # Uncomment when using external PostgreSQL
+  # Uncomment when using external PostgreSQL, highly recommended for production
   #  enabled: false
     image:  # section of parameters for builtin database
       registry: ghcr.io
