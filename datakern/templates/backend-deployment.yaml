@@ -71,9 +71,11 @@ spec:
           - name: GEONETWORK_URL
             value: "{{ $webapp.config.geoserver.geonetwork.url | default "http://georchestra-geonetwork-svc:8080" }}"
           - name: AIRFLOW_URL
-            value: "{{ $webapp.config.airflow.url | default "http://{{ .Release.Name }}-api-server:8080" }}"
+            value: {{ $webapp.config.airflow.url | default (printf "http://%s-api-server:8080" .Release.Name) | quote }}
           - name: AIRFLOW_USERNAME
             value: "{{ $webapp.config.airflow.username }}"
+          - name: AIRFLOW_PASSWORD
+            value: "{{ $webapp.config.airflow.password }}"
         envFrom:
           - secretRef:
               name: {{ include "datakern.fullname" . }}-backend
