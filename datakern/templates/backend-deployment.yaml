@@ -59,8 +59,6 @@ spec:
             value: "production"
           - name: BACKEND_URL
             value: "{{ include "datakern.fullname" . }}-backend"
-          - name: FIRST_SUPERUSER
-            value: "{{ $webapp.config.superuser.username }}"
           - name: FRONTEND_HOST
             value: "{{ $webapp.config.frontend.url }}"
           - name: BACKEND_CORS_ORIGINS
