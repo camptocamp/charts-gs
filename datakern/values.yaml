@@ -241,3 +241,9 @@ airflow:
   #   useHelmHooks: false
   #   jobAnnotations:
   #     "argocd.argoproj.io/hook": Sync
+
+volumes:
+  storage_class_name: default
+  airflow_logs:
+    #pv_name: datakern-airflow-logs
+    size: 10Gi
