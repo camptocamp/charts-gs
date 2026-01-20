@@ -173,7 +173,7 @@ airflow:
   workers:
     celery:
       persistence:
-        enabled: false
+        enabled: true
 
   logs:
     emptyDirConfig:
