@@ -52,6 +52,7 @@ spec:
           protocol: TCP
         env:
           {{- include "datakern.database-envs" . | nindent 10 }}
+          {{- include "datakern.data-database-envs" . | nindent 10 }}
           - name: DATADIR
             value: "/etc/georchestra"
           - name: ENVIRONMENT
@@ -71,7 +72,7 @@ spec:
           - name: GEONETWORK_URL
             value: "{{ $webapp.config.geoserver.geonetwork.url | default "http://georchestra-geonetwork-svc:8080" }}"
           - name: AIRFLOW_URL
-            value: {{ $webapp.config.airflow.url | default (printf "http://%s-api-server:8080" .Release.Name) | quote }}
+            value: {{ $webapp.config.airflow.url | default (printf "http://%s-api-server:8080/airflow" .Release.Name) | quote }}
           - name: AIRFLOW_USERNAME
             value: "{{ $webapp.config.airflow.username }}"
           - name: AIRFLOW_PASSWORD
