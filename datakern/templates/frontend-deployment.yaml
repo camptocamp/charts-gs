@@ -72,22 +72,22 @@ spec:
           httpGet:
             path: /datakern/
             port: http
-        {{- if $webapp.extraVolumeMounts }}
         volumeMounts:
           - mountPath: /etc/georchestra
             name: georchestra-datadir
+        {{- if $webapp.extraVolumeMounts }}
           {{- $webapp.extraVolumeMounts | toYaml | nindent 8 }}
         {{- end }}
-      {{- if $webapp.extraVolumes }}
       volumes:
-        - name: georchestra-datadir
-          emptyDir: { }
-        {{- if .Values.backend.datadir.git.ssh_secret }}
-        - name: ssh-secret
-          secret:
-            secretName: {{ .Values.backend.datadir.git.ssh_secret }}
-            defaultMode: 0400
-        {{- end }}
+      - name: georchestra-datadir
+        emptyDir: {}
+      {{- if .Values.backend.datadir.git.ssh_secret }}
+      - name: ssh-secret
+        secret:
+          secretName: {{ .Values.backend.datadir.git.ssh_secret }}
+          defaultMode: 0400
+      {{- end }}
+      {{- if $webapp.extraVolumes }}
         {{ $webapp.extraVolumes | toYaml | nindent 6 }}
       {{- end }}
 {{- end }}
