@@ -40,6 +40,8 @@ spec:
       tolerations:
         {{- toYaml . |nindent 8 }}
       {{- end }}
+      initContainers:
+      {{ include "georchestra.bootstrap_georchestra_datadir" . | nindent 6 }}
       containers:
       - name: frontend
         image: "{{ $webapp.image.repository }}:{{ $webapp.image.tag }}"
