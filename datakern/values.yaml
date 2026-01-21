@@ -99,7 +99,7 @@ frontend:
   lifecycle: {}
   extraVolumes: []
   extraVolumeMounts: []
-  extraEnv: {}
+  extraEnv: []
   ingress:
     enabled: true
     className: ""
