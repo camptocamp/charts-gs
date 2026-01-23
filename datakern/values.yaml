@@ -64,6 +64,9 @@ backend:
       # Change to your domain with subpath /datakern
       url: https://georchestra-127-0-1-1.traefik.me/datakern
     corsOrigins: http://localhost:5173
+    console:
+      # optional, default to georchestra-console-svc (work if helm chart geOrchestra installed)
+      url: ""
     geoserver:
       # optional, default to georchestra-geoserver-svc (work if helm chart geOrchestra installed)
       url: ""
