@@ -69,9 +69,11 @@ backend:
       url: ""
       username: geoserver_privileged_user
       password: change-me
-      geonetwork:
-        # optional, default to georchestra-geonetwork-svc (work if helm chart geOrchestra installed)
-        url: ""
+    geonetwork:
+      # optional, default to georchestra-geonetwork-svc (work if helm chart geOrchestra installed)
+      url: ""
+      username: geoserver_privileged_user
+      password: change-me
     airflow:
       # optional, default to airflow api-server in the same helm chart
       url: ""
