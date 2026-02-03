@@ -57,9 +57,7 @@ backend:
       ssh_secret: ""
   config:
     secretKey: change-me
-    superuser:
-      username: admin
-      password: change-me
+    encryptionKey: change-me
     frontend:
       # Change to your domain with subpath /datakern
       url: https://georchestra-127-0-1-1.traefik.me/datakern
