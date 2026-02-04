@@ -25,6 +25,7 @@ geoserver:
   extra_volumes: []
   extra_volumeMounts: []
   extraContainers: []
+  podAnnotations: {}
   volumes:
     geoserverDatadir:
       persistentVolumeClaim:
