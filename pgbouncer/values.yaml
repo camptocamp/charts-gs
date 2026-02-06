@@ -93,6 +93,7 @@ service:
   # externalTrafficPolicy: Cluster
   # nodePort: 30543 # when type NodePort
   annotations: {}
+  loadBalancerSourceRanges: []
 
 ## Labels to add to the pod metadata
 ##
