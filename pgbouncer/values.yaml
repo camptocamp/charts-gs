@@ -207,7 +207,7 @@ pgbouncerExporter:
   image:
     registry: ""
     repository: prometheuscommunity/pgbouncer-exporter
-    tag: 0.11.0
+    tag: 0.11.1
     pullPolicy: IfNotPresent
   log:
     level: info # or debug, warn, error
