@@ -20,6 +20,14 @@ backend:
     elasticSearch:
       url: "http://localhost:9200"
     metadataUrl: "http://localhost/datahub/dataset/{uuid}"
+    cms:
+      baseUrl: ""
+      endpoints:
+        - posts
+        - pages
+      limitPerEndpoint: -1
+      username: ""
+      password: ""
     llm:
       model: "mistral-small-latest"
       apiKey: "changethis"
