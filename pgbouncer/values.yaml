@@ -89,11 +89,23 @@ image:
 service:
   type: ClusterIP
   port: 5432
+  annotations: {}
+  loadBalancerSourceRanges: []
   # Set to local if want to preserve source IP for NodePort or LoadBalancer
   # externalTrafficPolicy: Cluster
   # nodePort: 30543 # when type NodePort
+
+## Optional second Service (e.g., internet-facing LoadBalancer)
+servicePublic:
+  enabled: false
+  nameSuffix: public
+  type: LoadBalancer
+  port: 5432
   annotations: {}
   loadBalancerSourceRanges: []
+  # Set to local if want to preserve source IP for NodePort or LoadBalancer
+  # externalTrafficPolicy: Local
+  # nodePort: 30543 # when type NodePort
 
 ## Labels to add to the pod metadata
 ##

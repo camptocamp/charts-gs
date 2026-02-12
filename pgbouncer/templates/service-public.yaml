@@ -1,0 +1,38 @@
+{{- if .Values.servicePublic.enabled }}
+{{- $suffix := default "public" .Values.servicePublic.nameSuffix }}
+{{- $derivedName := printf "%s-%s" (include "pgbouncer.fullname" .) $suffix }}
+{{- $serviceName := default $derivedName .Values.servicePublic.nameOverride | trunc 63 | trimSuffix "-" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $serviceName }}
+  labels:
+    app.kubernetes.io/name: {{ template "pgbouncer.name" . }}
+    helm.sh/chart: {{ template "pgbouncer.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  {{- if .Values.servicePublic.annotations }}
+  annotations:
+  {{- toYaml .Values.servicePublic.annotations | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ default "LoadBalancer" .Values.servicePublic.type }}
+  {{- if .Values.servicePublic.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.servicePublic.externalTrafficPolicy }}
+  {{- end }}
+  {{- if .Values.servicePublic.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges:
+  {{- toYaml .Values.servicePublic.loadBalancerSourceRanges | nindent 4 }}
+  {{- end }}
+  ports:
+    - port: {{ .Values.servicePublic.port }}
+      targetPort: psql
+      protocol: TCP
+      name: psql
+      {{- if .Values.servicePublic.nodePort }}
+      nodePort: {{ .Values.servicePublic.nodePort }}
+      {{- end }}
+  selector:
+    app.kubernetes.io/name: {{ template "pgbouncer.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
