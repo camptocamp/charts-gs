@@ -9783,6 +9783,15 @@ entries:
   pgbouncer:
   - apiVersion: v1
     appVersion: 1.18.0
+    created: "2026-02-12T09:41:48.09352144Z"
+    description: A Helm chart installing pgbouncer in kubernetes
+    digest: e384bc1c09471542c994ca8c589c5882f5587f936366a36e6fc737206250d6f2
+    name: pgbouncer
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/pgbouncer-1.12.0/pgbouncer-1.12.0.tgz
+    version: 1.12.0
+  - apiVersion: v1
+    appVersion: 1.18.0
     created: "2026-02-06T16:23:09.714357389Z"
     description: A Helm chart installing pgbouncer in kubernetes
     digest: 3f4ad86ae6f9257a6ab482cdf64cefb3037a2ae7da9bb1bdbce2006b59f289ec
@@ -14574,4 +14583,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2026-02-11T13:32:37.031436975Z"
+generated: "2026-02-12T09:41:48.099029315Z"
