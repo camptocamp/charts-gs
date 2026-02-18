@@ -83,6 +83,10 @@ spec:
             value: "{{ $webapp.config.airflow.username }}"
           - name: AIRFLOW_PASSWORD
             value: "{{ $webapp.config.airflow.password }}"
+          - name: METADATA_FETCH_GROUPS_URL
+            value: "{{ $webapp.config.metadataFetchGroupsUrl | default "http://georchestra-console-svc:8080/console/internal/organizations" }}"
+          - name: DATA_FETCH_GROUPS_URL
+            value: "{{ $webapp.config.dataFetchGroupsUrl | default "http://georchestra-console-svc:8080/console/internal/roles" }}"
         envFrom:
           - secretRef:
               name: {{ include "datakern.fullname" . }}-backend
