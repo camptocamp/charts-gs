@@ -50,7 +50,9 @@ config_front: |
     },
     "SELECTED_GEOCODER" : {
         "PROVIDER": "addok"
-    }
+    },
+    "VUE_APP_URL_DOCUMENTATION": "https://www.onegeosuite.fr/docs/module-geocontrib/intro",
+    "VUE_APP_URL_DOCUMENTATION_FEATURE": "https://www.onegeosuite.fr/docs/module-geocontrib/project_settings"
   }
 
 volumes:
