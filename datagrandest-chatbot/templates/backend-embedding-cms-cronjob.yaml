@@ -1,9 +1,9 @@
 {{- $webapp := .Values.backend -}}
-{{- $jobConfiguration := $webapp.jobEmbedding -}}
+{{- $jobConfiguration := $webapp.jobEmbeddingCms -}}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "dgechatbot.fullname" . }}
+  name: {{ include "dgechatbot.fullname" . }}-cms
   labels:
     {{- include "dgechatbot.labels" . | nindent 4 }}
 spec:
@@ -34,7 +34,7 @@ spec:
             args:
             - python3
             - -m
-            - imports.embed_es_gn
+            - imports.embed_cms
             env: {{ not (empty $webapp.extraEnv) | ternary nil "" }}
             {{- range $key, $value := $webapp.extraEnv }}
             - name: {{ $key }}
