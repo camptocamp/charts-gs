@@ -1,5 +1,5 @@
 {{- $webapp := .Values.backend -}}
-{{- $jobConfiguration := $webapp.jobEmbedding -}}
+{{- $jobConfiguration := $webapp.jobEmbeddingMetadata -}}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
