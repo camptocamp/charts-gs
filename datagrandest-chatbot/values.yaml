@@ -40,7 +40,11 @@ backend:
     testGenerationModel:
       name: "openai:gpt-4.1"
       key: "changethis"
-  jobEmbedding:
+  jobEmbeddingCms:
+    schedule: "0 */2 * * *"
+    successfulJobsHistoryLimit: 3
+    restartPolicy: Never
+  jobEmbeddingMetadata:
     schedule: "0 */2 * * *"
     successfulJobsHistoryLimit: 3
     restartPolicy: Never
