@@ -1,13 +1,13 @@
-{{- $webapp := .Values.backend -}}
-{{- if .Values.backend.ingress.enabled -}}
-{{- $fullName := include "datakern.fullname" . -}}
+{{- $webapp := .Values.frontend -}}
+{{- if .Values.frontend.ingress.enabled -}}
+{{- $fullName := include "datafeeder-python.fullname" . -}}
 {{- $ingress := $webapp.ingress -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ $fullName }}-backend
+  name: {{ $fullName }}
   labels:
-    {{- include "datakern.labels" . | nindent 4 }}
+    {{- include "datafeeder-python.labels" . | nindent 4 }}
   {{- with $ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -31,11 +31,11 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          - path: /datakern/api
+          - path: /datafeeder
             pathType: Prefix
             backend:
               service:
-                name: {{ $fullName }}-backend-svc
+                name: {{ $fullName }}-svc
                 port:
                   name: http
     {{- end }}

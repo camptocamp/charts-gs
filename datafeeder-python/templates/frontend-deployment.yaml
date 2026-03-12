@@ -3,15 +3,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "datakern.fullname" . }}-frontend
+  name: {{ include "datafeeder-python.fullname" . }}-frontend
   labels:
-    {{- include "datakern.labels" . | nindent 4 }}
+    {{- include "datafeeder-python.labels" . | nindent 4 }}
 spec:
   replicas: {{ $webapp.replicaCount }}
   selector:
     matchLabels:
-      {{- include "datakern.selectorLabels" . | nindent 6 }}
-      app.kubernetes.io/component: {{ include "datakern.fullname" . }}-frontend
+      {{- include "datafeeder-python.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ include "datafeeder-python.fullname" . }}-frontend
   template:
     metadata:
       {{- with $webapp.podAnnotations }}
@@ -19,8 +19,8 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "datakern.selectorLabels" . | nindent 8 }}
-        app.kubernetes.io/component: {{ include "datakern.fullname" . }}-frontend
+        {{- include "datafeeder-python.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ include "datafeeder-python.fullname" . }}-frontend
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -64,11 +64,11 @@ spec:
           protocol: TCP
         livenessProbe:
           httpGet:
-            path: /datakern/
+            path: /datafeeder/
             port: http
         readinessProbe:
           httpGet:
-            path: /datakern/
+            path: /datafeeder/
             port: http
         volumeMounts:
           - mountPath: /etc/georchestra

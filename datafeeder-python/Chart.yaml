@@ -1,6 +1,6 @@
 apiVersion: v2
-name: datakern
-description: A Helm chart for deploying DataKern
+name: datafeeder
+description: A Helm chart for deploying Datafeeder-python
 
 # A chart can be either an 'application' or a 'library' chart.
 #
