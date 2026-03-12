@@ -2574,6 +2574,22 @@ entries:
     urls:
     - cadastrapp-0.2.1-datahub-integration-datadir-crepel-test-09e33a5.tgz
     version: 0.2.1-datahub-integration-datadir-crepel-test-09e33a5
+  datafeeder:
+  - apiVersion: v2
+    appVersion: 3.12.0
+    created: "2026-03-12T10:54:13.711558391Z"
+    dependencies:
+    - condition: airflow.enabled
+      name: airflow
+      repository: oci://ghcr.io/camptocamp/charts-gs
+      version: 1.19.0-dev
+    description: A Helm chart for deploying Datafeeder-python
+    digest: 494e9cb252b80ddeb369a36c4fa7b30fcfaa1688b70dcd84ede3276c03d20672
+    name: datafeeder
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/datafeeder-0.2.0/datafeeder-0.2.0.tgz
+    version: 0.2.0
   datagrandest-chatbot:
   - apiVersion: v2
     appVersion: 0.1.0
@@ -14604,4 +14620,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-02T15:09:44.616627256Z"
+generated: "2026-03-12T10:54:13.714479506Z"
