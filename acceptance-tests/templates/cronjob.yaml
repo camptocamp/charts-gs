@@ -58,6 +58,16 @@ spec:
                 secretKeyRef:
                   name: {{ include "acceptance-tests.fullname" . }}-job-secrets
                   key: georchestraLocalAccountPassword
+            - name: ADMIN_LOCAL_ACCOUNT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "acceptance-tests.fullname" . }}-job-secrets
+                  key: georchestraAdminLocalAccountUsername
+            - name: ADMIN_LOCAL_ACCOUNT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "acceptance-tests.fullname" . }}-job-secrets
+                  key: georchestraAdminLocalAccountPassword
             {{- with $job.extraEnv }}
               {{- toYaml . | nindent 12 }}
             {{- end }}

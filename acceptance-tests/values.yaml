@@ -58,6 +58,9 @@ configuration:
     localAccount:
       username: myusername
       password: mypassword
+    adminLocalAccount:
+      username: myadmin
+      password: myadminpassword
 
 # If enabled, this will create a PodMonitor object in order
 # to gather metrics on the tests, as allure provides a prometheus compatible
