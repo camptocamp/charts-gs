@@ -3,6 +3,16 @@ entries:
   acceptance-tests:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-03-20T09:03:47.107982076Z"
+    description: A Helm chart for launching "tests non regression"
+    digest: a130df35619c0b4db139a3467debf2424a680238ce07ba84d404ee75395d0d41
+    name: acceptance-tests
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/acceptance-tests-0.6.1/acceptance-tests-0.6.1.tgz
+    version: 0.6.1
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-02-27T09:58:27.860816505Z"
     description: A Helm chart for launching "tests non regression"
     digest: dd04e2beeb3b69f646cfd603535b904de943f895f53f88de0758713eed7180a8
@@ -14620,4 +14630,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-12T10:54:13.714479506Z"
+generated: "2026-03-20T09:03:47.250074698Z"
