@@ -127,6 +127,10 @@ tooling:
 airflow:
   enabled: true
 
+  env:
+    - name: AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION
+      value: "False"
+      
   redis:
     # To change
     password: ~
