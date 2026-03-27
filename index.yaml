@@ -10764,6 +10764,24 @@ entries:
     urls:
     - pgbouncer-1.2.1-main-e3ff3f9.tgz
     version: 1.2.1-main-e3ff3f9
+  postgres:
+  - apiVersion: v2
+    appVersion: "18.1"
+    created: "2026-03-27T08:13:57.711952215Z"
+    description: A Helm chart for PostgreSQL on Kubernetes
+    digest: a9f85db31b492c1cea0fe85b90b3454cd1275f63c9f6de37fd42ba926168140c
+    icon: https://www.postgresql.org/media/img/about/press/elephant64.png
+    keywords:
+    - database
+    - postgres
+    maintainers:
+    - name: groundhog2k
+      url: https://github.com/groundhog2k/helm-charts
+    name: postgres
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/postgres-1.6.1/postgres-1.6.1.tgz
+    version: 1.6.1
   rclone:
   - apiVersion: v2
     appVersion: "1.68"
@@ -14630,4 +14648,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-20T09:03:47.250074698Z"
+generated: "2026-03-27T08:13:57.715922375Z"
