@@ -140,7 +140,7 @@ airflow:
   env:
     - name: AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION
       value: "False"
-      
+
   redis:
     # To change
     password: ~
@@ -306,5 +306,5 @@ airflow:
 volumes:
   storage_class_name: default
   airflow_logs:
-    #pv_name: datafeeder-airflow-logs
+    # pv_name: datafeeder-airflow-logs
     size: 10Gi
