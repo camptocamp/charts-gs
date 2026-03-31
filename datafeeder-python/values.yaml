@@ -9,7 +9,12 @@ backend:
     repository: ghcr.io/camptocamp/datafeeder/datafeeder-python-backend
     pullPolicy: Always
     tag: latest
-  resources: {}
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      memory: 512Mi
   podSecurityContext:
     runAsUser: 10000
     runAsGroup: 10001
@@ -88,7 +93,12 @@ frontend:
     repository: ghcr.io/camptocamp/datafeeder/datafeeder-python-frontend
     pullPolicy: Always
     tag: latest
-  resources: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      memory: 128Mi
   podSecurityContext:
     runAsUser: 101
     runAsGroup: 101
@@ -136,6 +146,12 @@ airflow:
     password: ~
     persistence:
       enabled: false
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        memory: 256Mi
 
   statsd:
     enabled: false
@@ -178,8 +194,44 @@ airflow:
   triggerer:
     persistence:
       enabled: false
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        memory: 512Mi
+
+  scheduler:
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+      limits:
+        memory: 1Gi
+
+  apiServer:
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+      limits:
+        memory: 1Gi
+
+  dagProcessor:
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+      limits:
+        memory: 1Gi
 
   workers:
+    resources:
+      requests:
+        cpu: 500m
+        memory: 1Gi
+      limits:
+        memory: 5Gi
     celery:
       persistence:
         enabled: true
