@@ -87,12 +87,12 @@ spec:
             value: "{{ $webapp.config.metadataFetchGroupsUrl | default "http://georchestra-console-svc:8080/console/internal/organizations" }}"
           - name: DATA_FETCH_GROUPS_URL
             value: "{{ $webapp.config.dataFetchGroupsUrl | default "http://georchestra-console-svc:8080/console/internal/roles" }}"
+            {{- with $webapp.extraEnv }}
+              {{- toYaml . | nindent 10 }}
+            {{- end }}
         envFrom:
           - secretRef:
               name: {{ include "datafeeder-python.fullname" . }}-backend
-        {{- with $webapp.extraEnv }}
-          {{- toYaml . | nindent 8 }}
-        {{- end }}
         resources:
           {{- toYaml $webapp.resources | nindent 10 }}
         securityContext:
