@@ -2597,6 +2597,21 @@ entries:
   datafeeder:
   - apiVersion: v2
     appVersion: 3.12.0
+    created: "2026-04-03T11:13:04.002846575Z"
+    dependencies:
+    - condition: airflow.enabled
+      name: airflow
+      repository: oci://ghcr.io/camptocamp/charts-gs
+      version: 1.19.0-dev
+    description: A Helm chart for deploying Datafeeder-python
+    digest: f18798fd92f68645caa1b5231e0d4afd6c8f12a159828fea96e2d09ea229a253
+    name: datafeeder
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/datafeeder-0.3.1/datafeeder-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
+    appVersion: 3.12.0
     created: "2026-03-31T20:00:10.86149738Z"
     dependencies:
     - condition: airflow.enabled
@@ -14673,4 +14688,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-31T20:00:10.865232544Z"
+generated: "2026-04-03T11:13:04.005971Z"
