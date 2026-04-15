@@ -135,6 +135,7 @@ The SSH key is automatically mounted as a Kubernetes secret and passed to the co
 |-----------|-------------|---------|
 | `webhook.url` | Webhook URL for monitoring notifications | `""` |
 | `webhook.method` | HTTP method for webhook (`GET` or `POST`) | `GET` |
+| `webhook.skipCertValidation` | Skip HTTP certificate validation for webhook (`true` or `false`) | `false` |
 
 ### Optional Configuration
 

@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ghcr.io/camptocamp/georchestra-docker-images/geoserver-datadir-sync
   pullPolicy: IfNotPresent
-  tag: "sha-5763ecc"
+  tag: "sha-7bc166f"
 
 # Git configuration
 # GIT_USERNAME - Git username for commits
@@ -25,6 +25,7 @@ git:
 webhook:
   url: ""
   method: "GET"
+  skipCertValidation: false
 
 # SSH authentication - provide your private RSA key for git authentication
 # This will be mounted as a secret and passed via GIT_RSA_DEPLOY_KEY environment variable

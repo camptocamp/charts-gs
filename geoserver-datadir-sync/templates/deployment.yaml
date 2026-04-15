@@ -56,6 +56,10 @@ spec:
           - name: WEBHOOK_METHOD
             value: {{ .Values.webhook.method | quote }}
           {{- end }}
+          {{- if .Values.webhook.skipCertValidation }}
+          - name: WEBHOOK_SKIP_CERT_VALIDATION
+            value: {{ .Values.webhook.skipCertValidation | quote }}
+          {{- end }}
           # Optional configuration
           {{- if .Values.config.syncInterval }}
           - name: GIT_SYNC_INTERVAL
