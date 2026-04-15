@@ -6323,6 +6323,17 @@ entries:
   geoserver-datadir-sync:
   - apiVersion: v2
     appVersion: 2.0.0
+    created: "2026-04-15T14:18:39.974260861Z"
+    description: Automatic geoserver datadir volume backup and restore to/from github
+      using git-sync
+    digest: 577a1f9d0b607691889b0a73639ed5ea33978647aca77b34ff757e3da55de149
+    name: geoserver-datadir-sync
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geoserver-datadir-sync-2.1.0/geoserver-datadir-sync-2.1.0.tgz
+    version: 2.1.0
+  - apiVersion: v2
+    appVersion: 2.0.0
     created: "2026-04-15T13:29:51.812215261Z"
     description: Automatic geoserver datadir volume backup and restore to/from github
       using git-sync
@@ -14699,4 +14710,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2026-04-15T13:29:51.816354232Z"
+generated: "2026-04-15T14:18:39.977932648Z"
