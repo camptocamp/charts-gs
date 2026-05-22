@@ -41,6 +41,10 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: "helm"
+    directory: "/http-proxy"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "helm"
     directory: "/opendata-ogc-features"
     schedule:
       interval: "weekly"
