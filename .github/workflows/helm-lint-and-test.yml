@@ -65,6 +65,9 @@ jobs:
           done
           sudo pip install pyyaml
           for helmcharts in */; do
+            if [ -f "$helmcharts/Chart.yaml" ] && grep -q '^dependencies:' "$helmcharts/Chart.yaml"; then
+              helm dependency build "$helmcharts"
+            fi
             helm kubeconform --summary "$helmcharts"
           done
 
