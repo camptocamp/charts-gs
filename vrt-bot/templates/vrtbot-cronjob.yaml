@@ -9,6 +9,7 @@ spec:
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 2
   failedJobsHistoryLimit: 3
+  suspend: {{ .Values.suspend }}
   jobTemplate:
     metadata:
       {{- with .Values.podAnnotations }}
