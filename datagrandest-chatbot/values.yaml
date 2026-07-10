@@ -33,6 +33,7 @@ backend:
       apiKey: "changethis"
       temperature: "0.0"
       maxTokens: "4000"
+    evalJudgeModel: "mistralai:mistral-large-latest"
     phoenix:
       apiKey: "changethis"
     mistralAI:
