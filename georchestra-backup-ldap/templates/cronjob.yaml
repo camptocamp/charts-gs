@@ -19,51 +19,79 @@ spec:
         spec:
           {{- with $job.imagePullSecrets }}
           imagePullSecrets:
-            {{- toYaml . | nindent 10 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- with $job.podSecurityContext }}
           securityContext:
-            {{ toYaml . | nindent 10 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
-          containers:
-          - name: {{ .Chart.Name }}
-            image: "{{ $job.image.repository }}:{{ $job.image.tag | default .Chart.AppVersion }}"
-            imagePullPolicy: {{ $job.image.pullPolicy }}
-            volumeMounts:
-              - mountPath: /backup
-                name: backup
-            command: ["/bin/bash", "-c"]
-            args:
-            - |
-              timestamp=$(date +"%s") ;
-              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.usersRdn }},{{ $ldapTargetConfiguration.baseDn }}" > /backup/ldap-${timestamp}.ldif;
-              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.pendingusersRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-${timestamp}.ldif;
-              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.orgsRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-${timestamp}.ldif;
-              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.pendingorgsRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-${timestamp}.ldif;
-              /usr/bin/ldapsearch -H {{ $ldapTargetConfiguration.service }} -xLLL -D "{{ $ldapTargetConfiguration.adminDn }}" -w {{ $ldapTargetConfiguration.secret }} -b "{{ $ldapTargetConfiguration.rolesRdn }},{{ $ldapTargetConfiguration.baseDn }}" >> /backup/ldap-${timestamp}.ldif;
-              find /backup -name '*.ldif' -mtime +{{.Values.configuration.backupRetentionDays}} -delete ;
-            {{- with $job.resources }}
-            resources:
-              {{ toYaml . | nindent 12 }}
-            {{- end }}
-            {{- with $job.securityContext }}
-            securityContext:
-              {{ toYaml . | nindent 12 }}
-            {{- end }}
           restartPolicy: {{ $job.restartPolicy }}
+          containers:
+            - name: {{ .Chart.Name }}
+              image: "{{ $job.image.repository }}:{{ $job.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ $job.image.pullPolicy }}
+              command:
+                - /bin/bash
+                - -c
+              args:
+                - |
+                  timestamp=$(date +"%s")
+
+                  /usr/bin/ldapsearch -H "{{ $ldapTargetConfiguration.service }}" -xLLL \
+                    -D "{{ $ldapTargetConfiguration.adminDn }}" \
+                    -w "{{ $ldapTargetConfiguration.secret }}" \
+                    -b "{{ $ldapTargetConfiguration.usersRdn }},{{ $ldapTargetConfiguration.baseDn }}" \
+                    > /backup/ldap-${timestamp}.ldif
+
+                  /usr/bin/ldapsearch -H "{{ $ldapTargetConfiguration.service }}" -xLLL \
+                    -D "{{ $ldapTargetConfiguration.adminDn }}" \
+                    -w "{{ $ldapTargetConfiguration.secret }}" \
+                    -b "{{ $ldapTargetConfiguration.pendingusersRdn }},{{ $ldapTargetConfiguration.baseDn }}" \
+                    >> /backup/ldap-${timestamp}.ldif
+
+                  /usr/bin/ldapsearch -H "{{ $ldapTargetConfiguration.service }}" -xLLL \
+                    -D "{{ $ldapTargetConfiguration.adminDn }}" \
+                    -w "{{ $ldapTargetConfiguration.secret }}" \
+                    -b "{{ $ldapTargetConfiguration.orgsRdn }},{{ $ldapTargetConfiguration.baseDn }}" \
+                    >> /backup/ldap-${timestamp}.ldif
+
+                  /usr/bin/ldapsearch -H "{{ $ldapTargetConfiguration.service }}" -xLLL \
+                    -D "{{ $ldapTargetConfiguration.adminDn }}" \
+                    -w "{{ $ldapTargetConfiguration.secret }}" \
+                    -b "{{ $ldapTargetConfiguration.pendingorgsRdn }},{{ $ldapTargetConfiguration.baseDn }}" \
+                    >> /backup/ldap-${timestamp}.ldif
+
+                  /usr/bin/ldapsearch -H "{{ $ldapTargetConfiguration.service }}" -xLLL \
+                    -D "{{ $ldapTargetConfiguration.adminDn }}" \
+                    -w "{{ $ldapTargetConfiguration.secret }}" \
+                    -b "{{ $ldapTargetConfiguration.rolesRdn }},{{ $ldapTargetConfiguration.baseDn }}" \
+                    >> /backup/ldap-${timestamp}.ldif
+
+                  find /backup -name '*.ldif' -mtime +{{ .Values.configuration.backupRetentionDays }} -delete
+              volumeMounts:
+                - name: backup
+                  mountPath: /backup
+              {{- with $job.resources }}
+              resources:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              {{- with $job.securityContext }}
+              securityContext:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
           volumes:
-            - name: "backup"
+            - name: backup
               persistentVolumeClaim:
                 claimName: {{ include "georchestra-backup-ldap.fullname" . }}-pvc
           {{- with $job.nodeSelector }}
           nodeSelector:
-            {{ toYaml . | nindent 10 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- with $job.affinity }}
           affinity:
-            {{ toYaml . | nindent 10 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- with $job.tolerations }}
           tolerations:
-            {{ toYaml . | nindent 10 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
