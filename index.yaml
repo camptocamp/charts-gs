@@ -5733,6 +5733,16 @@ entries:
   georchestra-backup-ldap:
   - apiVersion: v2
     appVersion: 2.0.0
+    created: "2026-07-24T14:44:13.862611379Z"
+    description: A Helm chart for backup ldap
+    digest: 76b9b92954a36aa24c90ccf262cf885f0dfe1ed608595971a16a7fd405b9f088
+    name: georchestra-backup-ldap
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/georchestra-backup-ldap-2.1.2/georchestra-backup-ldap-2.1.2.tgz
+    version: 2.1.2
+  - apiVersion: v2
+    appVersion: 2.0.0
     created: "2025-05-19T17:51:38.97433234Z"
     description: A Helm chart for backup ldap
     digest: 747ab9b4458ae8f904b8b92036962505402264726c6188e3ffeae2f1f869e925
@@ -14741,4 +14751,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2026-07-10T13:35:43.535938608Z"
+generated: "2026-07-24T14:44:13.86553031Z"
