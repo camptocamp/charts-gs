@@ -1,0 +1,42 @@
+{{- if .Values.userSync.enabled -}}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "geocontrib.fullname" . }}-usersync-cronjob
+  labels:
+    {{- include "geocontrib.labels" . | nindent 4 }}
+    app.neogeo.fr: geocontrib
+spec:
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: {{ include "geocontrib.fullname" . }}-usersync-cronjob
+    spec:
+      template:
+        metadata:
+          name: {{ include "geocontrib.fullname" . }}-usersync-cronjob
+          labels:
+            {{- include "geocontrib.labels" . | nindent 12 }}
+            app.neogeo.fr: geocontrib
+        spec:
+          containers:
+          - name: geocontrib-usersync
+            image: {{ .Values.geocontrib.image }}
+            imagePullPolicy: {{ .Values.geocontrib.pullPolicy }}
+            env:
+              {{- with .Values.env_variables }}
+                {{- toYaml . | nindent 14 }}
+              {{- end }}
+              - name: REDIS_HOST
+                value: {{ include "geocontrib.fullname" . }}-redis-svc
+            resources:
+              {{- toYaml .Values.geocontrib.resources | nindent 14 }}
+            command:
+              - /bin/bash
+            args:
+              - -c
+              - cd ${APP_PATH} && sh src/docker/geocontrib/docker-entrypoint.d/01_install && python manage.py georchestra_user_sync ;
+          restartPolicy: Never
+  schedule: {{ .Values.userSync.schedule }}
+status: {}
+{{ end }}

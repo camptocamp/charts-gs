@@ -1,7 +1,7 @@
 apiVersion: v2
 name: geocontrib
 description: |
-  A Helm chart for deploying geocontrib (https://github.com/neogeo-technologies/geocontrib)
+  A Helm chart to deploy geocontrib (https://github.com/neogeo-technologies/geocontrib)
 type: application
-version: 1.3.5
+version: 1.4.0
 appVersion: "5.0.2"

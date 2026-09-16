@@ -1,11 +1,11 @@
 geocontrib:
-  image: neogeo/geocontrib:6.4.5
+  image: neogeo/geocontrib:6.6.2
   pullPolicy: IfNotPresent
   resources: {}
   timeout: 30
 
 frontend:
-  image: neogeo/geocontrib-front:6.4.5
+  image: neogeo/geocontrib-front:6.6.2
   pullPolicy: IfNotPresent
   resources: {}
 
@@ -18,7 +18,7 @@ celerybeat:
   resources: {}
 
 redis:
-  image: redis:7.4.7
+  image: redis:7.4.11
   pullPolicy: IfNotPresent
   resources: {}
 
@@ -180,3 +180,9 @@ env_variables:
       value: geocontrib/
     - name: USE_X_FORWARDED_HOST
       value: '1'
+
+userSync:
+  # Whether or not to activate a scheduled user synchronization, false by default
+  enabled: false
+  # Twice a day at 00:00 and 12:00
+  schedule: 0 0,12 * * *
