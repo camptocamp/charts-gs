@@ -1,11 +1,11 @@
 geocontrib:
-  image: neogeo/geocontrib:6.4.5
+  image: neogeo/geocontrib:6.6.2
   pullPolicy: IfNotPresent
   resources: {}
   timeout: 30
 
 frontend:
-  image: neogeo/geocontrib-front:6.4.5
+  image: neogeo/geocontrib-front:6.6.2
   pullPolicy: IfNotPresent
   resources: {}
 
@@ -18,7 +18,7 @@ celerybeat:
   resources: {}
 
 redis:
-  image: redis:7.4.7
+  image: redis:7.4.11
   pullPolicy: IfNotPresent
   resources: {}
 
@@ -58,125 +58,131 @@ config_front: |
 volumes:
   storage_class_name: default
   media:
-    #pv_name: media_pv
+    # pv_name: media_pv
     size: 2Gi
   static:
-    #pv_name: static_pv
+    # pv_name: static_pv
     size: 2Gi
 
 tolerations: []
 
 env_variables:
-    - name: ADMIN_USER_GROUPS
-      value: cn=SUPERUSER,ou=roles,dc=georchestra,dc=org;cn=ADMINISTRATOR,ou=roles,dc=georchestra,dc=org
-    - name: ALLOWED_HOSTS
-      value: geocontrib-frontend-svc,.datagrandest.fr
-    - name: APPLICATION_ABSTRACT
-      value: DataGrandEst
-    - name: APPLICATION_NAME
-      value: GéoContrib
-    - name: APP_ADMIN_EMAIL
-      value: admin-geocontrib@neogeo.fr
-    - name: APP_ADMIN_PWD
-      value: '12345678'
-    - name: APP_ADMIN_USER
-      value: admin
-    - name: BASE_URL
-      value: https://www.example.org
-    - name: DB_HOST
-      value: database
-    - name: DB_NAME
-      value: geocontrib
-    - name: DB_PORT
-      value: '5432'
-    - name: DB_PWD
-      value: geocontrib
-    - name: DB_USER
-      value: geocontrib
-    - name: DEBUG
-      value: 'False'
-    - name: DEFAULT_BASE_MAP_OPTIONS
-      value: |
-       '{"format": "image/png", "layers": "relief", "maxZoom":
-         20, "opacity": 1.0, "attribution": "\u00a9 les contributeurs d\u2019OpenStreetMap
-         - DataGrandEst", "transparent": true}'
-    - name: DEFAULT_BASE_MAP_SCHEMA_TYPE
-      value: wms
-    - name: DEFAULT_BASE_MAP_SERVICE
-      value: https://example.org/mapcache/wms
-    - name: DEFAULT_FROM_EMAIL
-      value: contact@geocontrib.org
-    - name: DEFAULT_MAP_VIEW_CENTER
-      value: '[48.68871,5.61989]'
-    - name: DEFAULT_MAP_VIEW_ZOOM
-      value: '7'
-    - name: DEFAULT_SENDING_FREQUENCY
-      value: instantly
-    - name: DISABLE_LOGIN_BUTTON
-      value: '1'
-    - name: DISPLAY_FORBIDDEN_PROJECTS
-      value: 'true'
-    - name: DISPLAY_FORBIDDEN_PROJECTS_DEFAULT
-      value: 'true'
-    - name: EMAIL_BACKEND
-      value: django.core.mail.backends.smtp.EmailBackend
-    - name: EMAIL_HOST
-      value: smtp
-    - name: EMAIL_HOST_PASSWORD
-      value: ''
-    - name: EMAIL_HOST_USER
-      value: ''
-    - name: EMAIL_PORT
-      value: '25'
-    - name: EMAIL_USE_TLS
-      value: '0'
-    - name: EXCLUDED_USER_GROUPS
-      value: ''
-    - name: EXCLUDED_USER_NAMES
-      value: geoserver_privileged_user
-    - name: EXCLUSIVE_USER_GROUPS
-      value: ''
-    - name: FAVICON_PATH
-      value: https://example.org/portail/sites/default/files/favicon.ico
-    - name: HEADER_UID
-      value: HTTP_SEC_USERNAME
-    - name: IGNORED_PATHS
-      value: geocontrib:logout,
-    - name: LDAP_BINDDN
-      value: cn=admin,dc=georchestra,dc=org
-    - name: LDAP_PASSWD
-      value: secret
-    - name: LDAP_SEARCH_BASE
-      value: ou=users,dc=georchestra,dc=org
-    - name: LDAP_SEARCH_FILTER
-      value: (objectClass=person)
-    - name: LDAP_URI
-      value: ldap://ldap.georchestra-ldap:389
-    - name: LOGIN_URL
-      value: /cas/login
-    - name: LOGO_PATH
-      value: https://example.org/public/logos/logo_datagrandest_couleur.png
-    - name: LOG_LEVEL
-      value: INFO
-    - name: LOG_URL
-      value: /cas/login
-    - name: MAGIC_IS_AVAILABLE
-      value: 'true'
-    - name: PROJECT_COPY_RELATED_AUTHORIZATION
-      value: '0'
-    - name: PROTECTED_USER_NAMES
-      value: admin
-    - name: SECRET_KEY
-      value: z123456789012345678901234567890123456789012345678a
-    - name: SSO_MIDDLEWARE
-      value: plugin_georchestra.auth.middleware.RemoteUserMiddleware
-    - name: SSO_PLUGIN
-      value: plugin_georchestra
-    - name: TIME_SLEEP
-      value: '1'
-    - name: TIME_ZONE
-      value: Europe/Paris
-    - name: URL_PREFIX
-      value: geocontrib/
-    - name: USE_X_FORWARDED_HOST
-      value: '1'
+  - name: ADMIN_USER_GROUPS
+    value: cn=SUPERUSER,ou=roles,dc=georchestra,dc=org;cn=ADMINISTRATOR,ou=roles,dc=georchestra,dc=org
+  - name: ALLOWED_HOSTS
+    value: geocontrib-frontend-svc,.datagrandest.fr
+  - name: APPLICATION_ABSTRACT
+    value: DataGrandEst
+  - name: APPLICATION_NAME
+    value: GéoContrib
+  - name: APP_ADMIN_EMAIL
+    value: admin-geocontrib@neogeo.fr
+  - name: APP_ADMIN_PWD
+    value: '12345678'
+  - name: APP_ADMIN_USER
+    value: admin
+  - name: BASE_URL
+    value: https://www.example.org
+  - name: DB_HOST
+    value: database
+  - name: DB_NAME
+    value: geocontrib
+  - name: DB_PORT
+    value: '5432'
+  - name: DB_PWD
+    value: geocontrib
+  - name: DB_USER
+    value: geocontrib
+  - name: DEBUG
+    value: 'False'
+  - name: DEFAULT_BASE_MAP_OPTIONS
+    value: |
+     '{"format": "image/png", "layers": "relief", "maxZoom":
+       20, "opacity": 1.0, "attribution": "\u00a9 les contributeurs d\u2019OpenStreetMap
+       - DataGrandEst", "transparent": true}'
+  - name: DEFAULT_BASE_MAP_SCHEMA_TYPE
+    value: wms
+  - name: DEFAULT_BASE_MAP_SERVICE
+    value: https://example.org/mapcache/wms
+  - name: DEFAULT_FROM_EMAIL
+    value: contact@geocontrib.org
+  - name: DEFAULT_MAP_VIEW_CENTER
+    value: '[48.68871,5.61989]'
+  - name: DEFAULT_MAP_VIEW_ZOOM
+    value: '7'
+  - name: DEFAULT_SENDING_FREQUENCY
+    value: instantly
+  - name: DISABLE_LOGIN_BUTTON
+    value: '1'
+  - name: DISPLAY_FORBIDDEN_PROJECTS
+    value: 'true'
+  - name: DISPLAY_FORBIDDEN_PROJECTS_DEFAULT
+    value: 'true'
+  - name: EMAIL_BACKEND
+    value: django.core.mail.backends.smtp.EmailBackend
+  - name: EMAIL_HOST
+    value: smtp
+  - name: EMAIL_HOST_PASSWORD
+    value: ''
+  - name: EMAIL_HOST_USER
+    value: ''
+  - name: EMAIL_PORT
+    value: '25'
+  - name: EMAIL_USE_TLS
+    value: '0'
+  - name: EXCLUDED_USER_GROUPS
+    value: ''
+  - name: EXCLUDED_USER_NAMES
+    value: geoserver_privileged_user
+  - name: EXCLUSIVE_USER_GROUPS
+    value: ''
+  - name: FAVICON_PATH
+    value: https://example.org/portail/sites/default/files/favicon.ico
+  - name: HEADER_UID
+    value: HTTP_SEC_USERNAME
+  - name: IGNORED_PATHS
+    value: geocontrib:logout,
+  - name: LDAP_BINDDN
+    value: cn=admin,dc=georchestra,dc=org
+  - name: LDAP_PASSWD
+    value: secret
+  - name: LDAP_SEARCH_BASE
+    value: ou=users,dc=georchestra,dc=org
+  - name: LDAP_SEARCH_FILTER
+    value: (objectClass=person)
+  - name: LDAP_URI
+    value: ldap://ldap.georchestra-ldap:389
+  - name: LOGIN_URL
+    value: /cas/login
+  - name: LOGO_PATH
+    value: https://example.org/public/logos/logo_datagrandest_couleur.png
+  - name: LOG_LEVEL
+    value: INFO
+  - name: LOG_URL
+    value: /cas/login
+  - name: MAGIC_IS_AVAILABLE
+    value: 'true'
+  - name: PROJECT_COPY_RELATED_AUTHORIZATION
+    value: '0'
+  - name: PROTECTED_USER_NAMES
+    value: admin
+  - name: SECRET_KEY
+    value: z123456789012345678901234567890123456789012345678a
+  - name: SSO_MIDDLEWARE
+    value: plugin_georchestra.auth.middleware.RemoteUserMiddleware
+  - name: SSO_PLUGIN
+    value: plugin_georchestra
+  - name: TIME_SLEEP
+    value: '1'
+  - name: TIME_ZONE
+    value: Europe/Paris
+  - name: URL_PREFIX
+    value: geocontrib/
+  - name: USE_X_FORWARDED_HOST
+    value: '1'
+
+userSync:
+  # Whether or not to activate a scheduled user synchronization, false by default
+  enabled: false
+  # Twice a day at 00:00 and 12:00
+  schedule: 0 0,12 * * *
