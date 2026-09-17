@@ -9,7 +9,6 @@ metadata:
 spec:
   jobTemplate:
     metadata:
-      creationTimestamp: null
       name: {{ include "geocontrib.fullname" . }}-usersync-cronjob
     spec:
       template:
@@ -38,5 +37,4 @@ spec:
               - cd ${APP_PATH} && sh src/docker/geocontrib/docker-entrypoint.d/01_install && python manage.py georchestra_user_sync ;
           restartPolicy: Never
   schedule: {{ .Values.userSync.schedule }}
-status: {}
 {{ end }}
