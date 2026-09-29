@@ -5,6 +5,7 @@ metadata:
   labels:
     {{- include "sftp.labels" . | nindent 4 }}
 spec:
+  replicas: {{ .Values.sftp.replicaCount }}
   selector:
     matchLabels:
       {{- include "sftp.selectorLabels" . | nindent 6 }}

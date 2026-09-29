@@ -1,5 +1,7 @@
 ---
 sftp:
+  replicaCount: 1
+
   service:
     type: "ClusterIP"  # or NodePort or LoadBalancer
     port: 22
