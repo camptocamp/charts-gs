@@ -23,6 +23,8 @@ cadastrapp:
       # containing the private key allowed to clone the git repository above.
       #ssh_secret: mySshSecret
 
+nodeSelector: {}
+
 tolerations: []
 
 resources: {}
