@@ -2,7 +2,7 @@ cadastrapp:
   image: camptocamp/georchestra_cadastrapp:v1.9-1
   imagePullPolicy: IfNotPresent
   # If defined, this will be used to pull the docker image
-  #imagePullSecrets:
+  # imagePullSecrets:
   #  - name: myPullSecret
   env_variables:
     - name: JAVA_OPTIONS
@@ -21,7 +21,9 @@ cadastrapp:
       ref: "22.0"
       # the chart expects to have a k8s secret with an entry named "ssh-privatekey"
       # containing the private key allowed to clone the git repository above.
-      #ssh_secret: mySshSecret
+      # ssh_secret: mySshSecret
+
+nodeSelector: {}
 
 tolerations: []
 

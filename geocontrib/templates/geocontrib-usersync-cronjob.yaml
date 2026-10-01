@@ -35,6 +35,14 @@ spec:
             args:
               - -c
               - cd ${APP_PATH} && sh src/docker/geocontrib/docker-entrypoint.d/01_install && python manage.py georchestra_user_sync ;
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           restartPolicy: Never
   schedule: {{ .Values.userSync.schedule }}
 {{ end }}

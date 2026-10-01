@@ -3,5 +3,5 @@ name: geocontrib
 description: |
   A Helm chart to deploy geocontrib (https://github.com/neogeo-technologies/geocontrib)
 type: application
-version: 1.4.0
+version: 1.5.0
 appVersion: "5.0.2"

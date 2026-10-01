@@ -99,5 +99,9 @@ spec:
             secretName: {{ .Values.cadastrapp.datadir.git.ssh_secret }}
             defaultMode: 0400
         {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       tolerations:
         {{- toYaml .Values.tolerations | nindent 8 }}

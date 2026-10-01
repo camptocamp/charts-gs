@@ -52,6 +52,7 @@ volumeMounts:
 
 schedule: "*/15 * * * *"
 
+nodeSelector: {}
 tolerations: []
 affinity: {}
 resources: {}

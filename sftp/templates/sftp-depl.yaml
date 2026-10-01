@@ -65,6 +65,10 @@ spec:
       {{- if .Values.sftp.extraVolumes }}
       {{- .Values.sftp.extraVolumes | toYaml | nindent 6 }}
       {{- end }}
+      {{- if .Values.sftp.nodeSelector }}
+      nodeSelector:
+        {{- toYaml .Values.sftp.nodeSelector | nindent 8 }}
+      {{- end }}
       {{- if .Values.sftp.tolerations }}
       tolerations:
         {{- .Values.sftp.tolerations | toYaml | nindent 6 }}

@@ -64,6 +64,8 @@ volumes:
     # pv_name: static_pv
     size: 2Gi
 
+nodeSelector: {}
+
 tolerations: []
 
 env_variables:
