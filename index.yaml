@@ -385,6 +385,16 @@ entries:
   apache-nas:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2026-10-01T20:13:09.38082623Z"
+    description: A Helm chart for deploying a Apache-httpd server
+    digest: c5538469510a89e87ed823d140d2bda809e44cd6277ab34d01b88b5db1ca3253
+    name: apache-nas
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/apache-nas-1.8.0/apache-nas-1.8.0.tgz
+    version: 1.8.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2026-03-27T10:47:47.441488816Z"
     description: A Helm chart for deploying a Apache-httpd server
     digest: 6c8d0e42b4032fcfedda51222b33817242a85a42766d320dc44a35ddd48c39aa
@@ -1294,6 +1304,16 @@ entries:
     - apache-nas-0.1.0-main-062214b.tgz
     version: 0.1.0-main-062214b
   cadastrapp:
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2026-10-01T20:13:09.680312563Z"
+    description: A Helm chart for deploying geOrchestra's cadastrapp
+    digest: 8b4a3f627c07b05b954bcd086d3485ba528e919c2dbec756249c30711e5c7b1e
+    name: cadastrapp
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/cadastrapp-1.5.0/cadastrapp-1.5.0.tgz
+    version: 1.5.0
   - apiVersion: v2
     appVersion: 2.0.0
     created: "2025-07-15T08:58:23.955981357Z"
@@ -4392,6 +4412,16 @@ entries:
   geocontrib:
   - apiVersion: v2
     appVersion: 5.0.2
+    created: "2026-10-01T20:13:09.886824213Z"
+    description: 'A Helm chart to deploy geocontrib (https://github.com/neogeo-technologies/geocontrib) '
+    digest: 2fea069d738cd4bc6c686959db0e9a1b42de97b34e371394ebd711c6cceb0107
+    name: geocontrib
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geocontrib-1.5.0/geocontrib-1.5.0.tgz
+    version: 1.5.0
+  - apiVersion: v2
+    appVersion: 5.0.2
     created: "2026-09-17T07:56:28.855900272Z"
     description: 'A Helm chart to deploy geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: ee9ecbf1cf74868f76b308ea79c404c9276e6ed6273e2c96b100f9c37af42a00
@@ -7287,6 +7317,16 @@ entries:
     - geoserver-datadir-sync-0.1.0-main-5234e50.tgz
     version: 0.1.0-main-5234e50
   geoserver-lb:
+  - apiVersion: v2
+    appVersion: 22.0.4
+    created: "2026-10-01T20:13:10.05455559Z"
+    description: A Helm chart for deploying geoserver loadbalanced
+    digest: 888d1251638bff4aa4c2cb926348760242cc3558f78dc2fb13bd043552164626
+    name: geoserver-lb
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geoserver-lb-1.11.0/geoserver-lb-1.11.0.tgz
+    version: 1.11.0
   - apiVersion: v2
     appVersion: 22.0.4
     created: "2026-09-08T14:58:33.83632029Z"
@@ -12051,6 +12091,16 @@ entries:
   sftp:
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2026-10-01T20:13:10.273456329Z"
+    description: A Helm chart for deploying a SFTP stack
+    digest: f68ae9f3969aa3ba1134c793f1456113595498e4b680df2472159ff67b6a8640
+    name: sftp
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/sftp-1.9.0/sftp-1.9.0.tgz
+    version: 1.9.0
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2026-09-29T08:19:13.878361952Z"
     description: A Helm chart for deploying a SFTP stack
     digest: 4e6de84c50b092c9560682df8b7adb5f9485198cc62fa3f2c8cc662255b91956
@@ -13442,6 +13492,16 @@ entries:
   vrt-bot:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2026-10-01T20:13:10.444361924Z"
+    description: A Helm chart for deploying vrt-bot
+    digest: 1ea4245684007e1c43c7c4d94d710480d743601d1823fca854935208c4246dd8
+    name: vrt-bot
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/vrt-bot-1.4.0/vrt-bot-1.4.0.tgz
+    version: 1.4.0
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2026-06-16T08:20:16.043726868Z"
     description: A Helm chart for deploying vrt-bot
     digest: 35748fae4b395a47b5b10c5012b6b464d516a4d036958c45e2d0a3c14f6c7536
@@ -14781,4 +14841,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2026-09-29T08:19:13.881766931Z"
+generated: "2026-10-01T20:13:10.448646377Z"
