@@ -60,3 +60,28 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Backend healthcheck path, honoring the URL_PREFIX env variable
+*/}}
+{{- define "geocontrib.healthPath" -}}
+{{- $prefix := "" -}}
+{{- range .Values.env_variables }}
+{{- if eq .name "URL_PREFIX" }}{{ $prefix = .value | default "" | trimPrefix "/" }}{{ end }}
+{{- end -}}
+/{{ $prefix }}api/flat-pages/
+{{- end }}
+
+{{/*
+Host header for backend healthchecks: first entry of the ALLOWED_HOSTS env
+variable, so Django accepts the probe request. Falls back to localhost
+(part of Django's default ALLOWED_HOSTS)
+*/}}
+{{- define "geocontrib.healthHost" -}}
+{{- $host := "" -}}
+{{- range .Values.env_variables }}
+{{- if and (eq .name "ALLOWED_HOSTS") .value }}{{ $host = splitList "," .value | first | trim | trimPrefix "." }}{{ end }}
+{{- end -}}
+{{- if or (not $host) (eq $host "*") }}{{ $host = "localhost" }}{{ end -}}
+{{- $host -}}
+{{- end }}
