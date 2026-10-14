@@ -26,14 +26,29 @@ spec:
             initialDelaySeconds: 210
             tcpSocket:
               port: 5000
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            httpGet:
+              path: {{ include "geocontrib.healthPath" . }}
+              port: 5000
+              httpHeaders:
+                - name: Host
+                  value: {{ include "geocontrib.healthHost" . | quote }}
           startupProbe:
             # try for 7 minutes until give up
             failureThreshold: 14
             periodSeconds: 30
             successThreshold: 1
-            timeoutSeconds: 1
-            tcpSocket:
+            timeoutSeconds: 5
+            httpGet:
+              path: {{ include "geocontrib.healthPath" . }}
               port: 5000
+              httpHeaders:
+                - name: Host
+                  value: {{ include "geocontrib.healthHost" . | quote }}
           {{- with .Values.env_variables }}
           env:
             {{- toYaml . | nindent 12 }}

@@ -20,12 +20,31 @@ spec:
           imagePullPolicy: {{ .Values.redis.pullPolicy }}
           resources:
             {{- toYaml .Values.redis.resources | nindent 12 }}
+          startupProbe:
+            failureThreshold: 30
+            periodSeconds: 2
+            timeoutSeconds: 2
+            exec:
+              command:
+                - sh
+                - -c
+                - redis-cli ping | grep -q PONG
           livenessProbe:
-            tcpSocket:
-              port: 6379
+            periodSeconds: 10
+            timeoutSeconds: 2
+            exec:
+              command:
+                - sh
+                - -c
+                - redis-cli ping | grep -q PONG
           readinessProbe:
-            tcpSocket:
-              port: 6379
+            periodSeconds: 5
+            timeoutSeconds: 2
+            exec:
+              command:
+                - sh
+                - -c
+                - redis-cli ping | grep -q PONG
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
