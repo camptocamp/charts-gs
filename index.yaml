@@ -4412,6 +4412,16 @@ entries:
   geocontrib:
   - apiVersion: v2
     appVersion: 5.0.2
+    created: "2026-10-14T13:51:28.500623187Z"
+    description: 'A Helm chart to deploy geocontrib (https://github.com/neogeo-technologies/geocontrib) '
+    digest: 7beffec798a3586b99b12fba61f5f23f0a7f5a2796318a8ba36965d9a090bd47
+    name: geocontrib
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/geocontrib-1.6.0/geocontrib-1.6.0.tgz
+    version: 1.6.0
+  - apiVersion: v2
+    appVersion: 5.0.2
     created: "2026-10-01T20:13:09.886824213Z"
     description: 'A Helm chart to deploy geocontrib (https://github.com/neogeo-technologies/geocontrib) '
     digest: 2fea069d738cd4bc6c686959db0e9a1b42de97b34e371394ebd711c6cceb0107
@@ -14841,4 +14851,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-01T20:13:10.448646377Z"
+generated: "2026-10-14T13:51:28.504216407Z"
