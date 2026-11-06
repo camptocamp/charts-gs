@@ -2663,6 +2663,27 @@ entries:
   datagrandest-chatbot:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2026-11-06T16:05:44.997833792Z"
+    dependencies:
+    - alias: phoenix
+      condition: phoenix.enabled
+      name: phoenix-helm
+      repository: oci://registry-1.docker.io/arizephoenix
+      version: 2.0.35
+    - alias: database
+      condition: database.builtin
+      name: postgresql
+      repository: oci://ghcr.io/camptocamp/charts-gs
+      version: 15.5.2
+    description: A Helm chart for deploying DataGrandEst chatbot
+    digest: 98155d6df70ac0cdecb55e50ed514741de73eca9dd9d3bde31c9b70fe5756f2c
+    name: datagrandest-chatbot
+    type: application
+    urls:
+    - https://github.com/camptocamp/charts-gs/releases/download/datagrandest-chatbot-0.8.0/datagrandest-chatbot-0.8.0.tgz
+    version: 0.8.0
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2026-07-10T13:35:43.533015604Z"
     dependencies:
     - alias: phoenix
@@ -14851,4 +14872,4 @@ entries:
     urls:
     - https://github.com/camptocamp/charts-gs/releases/download/wireproxy-0.1.0/wireproxy-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-14T13:51:28.504216407Z"
+generated: "2026-11-06T16:05:44.999778255Z"
