@@ -34,6 +34,12 @@ backend:
       temperature: "0.0"
       maxTokens: "4000"
     evalJudgeModel: "mistralai:mistral-large-latest"
+    lineage:
+      enable: true
+      pipeline_version: "v3"
+      lexical:
+        enable: false
+        fields: []
     phoenix:
       apiKey: "changethis"
     mistralAI:
